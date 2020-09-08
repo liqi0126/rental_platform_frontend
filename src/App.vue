@@ -3,6 +3,7 @@
     <div id="nav">
       <v-nav></v-nav>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -15,7 +16,7 @@
 </style>
 
 <script>
-import nav from './component/nav'
+import nav from './components/nav'
 export default {
   components: {
     'v-nav': nav
