@@ -42,12 +42,12 @@ export default {
     }
   },
   methods: {
-    // <!--提交注册-->
+    // <!--登陆-->
     submitForm (formName) {
       console.log(formName)
-      Axios.post('api/v1/login', {
+      Axios.post('/api/v1/login/', {
         data: {
-          username: this.ruleForm.username,
+          email: this.ruleForm.username,
           password: this.ruleForm.pass
         }
       })
