@@ -16,6 +16,11 @@ const routes: Array<RouteConfig> = [
     path: '/user/:userId',
     name: 'user',
     component: () => import('../views/user.vue')
+  },
+  {
+    path: '/equipment/:equipmentId',
+    name: 'equipment',
+    component: () => import('../views/equipment.vue')
   }
 ]
 
