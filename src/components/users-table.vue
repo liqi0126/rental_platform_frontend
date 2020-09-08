@@ -1,7 +1,9 @@
+// writen by xyh
 <template>
   <div>
     <el-card class="title-card">所有用户</el-card>
     <el-table :data="userList"
+              @row-click='enterUser'
               stripe
               id="users-table"
               class="table">
@@ -69,6 +71,11 @@ export default {
       .catch((error) => {
         alert('error:' + error)
       })
+  },
+  methods: {
+    enterUser: function (row) {
+      this.$router.push({ name: 'user', params: { userId: row.id } })
+    }
   }
 }
 </script>

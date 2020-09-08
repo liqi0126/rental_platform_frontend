@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <el-card class='title-card'>所有设备</el-card>
