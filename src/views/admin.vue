@@ -14,9 +14,11 @@ export default {
     }
   },
   created: function () {
-    Axios.get('api/v1/users')
+    Axios.get('api/v1/users', {})
       .then((response) => {
         this.userLists = response.data
+        alert(this.userLists)
+        console.log(this.userLists)
       })
       .catch((error) => {
         alert(error)
