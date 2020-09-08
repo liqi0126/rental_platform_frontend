@@ -1,4 +1,3 @@
-// writen by xyh
 <template>
   <div>
     <el-menu default-active="2"
