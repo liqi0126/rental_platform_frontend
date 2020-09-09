@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import newRentApplicationCard from '../components/new-rent-application-card.vue'
+import newRentApplicationCard from '../components/create-card/new-rent-application-card.vue'
 export default {
   data: function () {
     return {
