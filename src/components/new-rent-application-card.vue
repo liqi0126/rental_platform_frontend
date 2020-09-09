@@ -4,26 +4,23 @@
     <el-card class='card'>
       <el-form class="form"
                label-width="100px">
-        <el-form-item label='设备名'>
-          <el-input v-model="data.name"></el-input>
-        </el-form-item>
         <el-form-item label='描述'>
           <el-input v-model="data.description"
                     type='textarea'></el-input>
         </el-form-item>
-        <el-form-item label='地址'>
-          <el-input v-model="data.address"></el-input>
-        </el-form-item>
-        <el-form-item label='Email'>
-          <el-input v-model="data.email"></el-input>
-        </el-form-item>
-        <el-form-item label='电话号码'>
-          <el-input v-model="data.phone"></el-input>
+        <el-form-item label="租期">
+          <el-date-picker v-model="date"
+                          type="datetimerange"
+                          range-separator="至"
+                          start-placeholder="开始日期"
+                          end-placeholder="结束日期"
+                          value-format="yyyy-MM-dd HH:mm:ss">
+          </el-date-picker>
         </el-form-item>
       </el-form>
       <el-button class='button'
                  type="primary"
-                 @click="createEquipment">提交</el-button>
+                 @click="createRentApplication">提交申请</el-button>
     </el-card>
   </div>
 </template>
@@ -52,29 +49,31 @@
 import axios from 'axios'
 export default {
   props: {
-    id: Number
+    equipmentId: Number
   },
   data: function () {
     return {
       diseditable: true,
+      date: [],
       data: {
-        name: '',
-        address: '',
-        email: '',
-        phone: null,
         description: '',
-        owner: 3
+        hirer: 2,
+        equipment: this.equipmentId,
+        lease_term_begin: '',
+        lease_term_end: ''
       }
     }
   },
   methods: {
-    enterUser: function () {
-      this.$router.push({ name: 'user', params: { userId: this.data.owner } })
-    },
-    createEquipment: function () {
-      axios.post('/api/v1/equipment', this.data)
+    createRentApplication: function () {
+      this.data.lease_term_begin = this.date[0]
+      this.data.lease_term_end = this.date[1]
+      console.log(this.date)
+      console.log(this.data)
+      axios.post('/api/v1/rent-application', this.data)
         .then((response) => {
-          this.$message(response.data.equipment + '创建成功！')
+          console.log(response)
+          this.$message('申请成功！')
         })
         .catch((error) => {
           console.log(error.response)
