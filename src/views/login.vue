@@ -3,22 +3,22 @@
     <div class="register-wrapper">
       <div id="register">
         <p class="title">登录</p>
-        <el-form :model="ruleForm"
-                 ref="ruleForm"
+        <el-form :model="userData"
+                 ref="userData"
                  label-width="0"
-                 class="demo-ruleForm">
+                 class="demo-userData">
           <el-form-item prop="name">
-            <el-input v-model="ruleForm.username"
+            <el-input v-model="userData.username"
                       placeholder="请输入用户名"></el-input>
           </el-form-item>
           <el-form-item prop="pass">
             <el-input type="password"
-                      v-model="ruleForm.pass"
+                      v-model="userData.pass"
                       placeholder="输入密码"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary"
-                       @click="submitForm(ruleForm)"
+                       @click="submitForm(userData)"
                        style="width:100%;">登录</el-button>
             <p class="login"
                @click="gotoLogon">还没有账号？立即注册</p>
@@ -29,53 +29,42 @@
   </div>
 </template>
 
+
 <script>
 import Axios from 'axios'
 export default {
   name: 'Login',
   data () {
     return {
-      ruleForm: {
+      userData: {
         username: '',
         pass: ''
       }
     }
   },
   methods: {
-    // <!--登陆-->
-    submitForm (formName) {
-      console.log(formName)
-      const data = {
-        email: this.ruleForm.username,
-        password: this.ruleForm.pass
-      }
-      Axios.post('/rest-auth/login/', data
 
-      )
-      Axios.post('api/v1/login/', {
-        data: {
-          email: this.ruleForm.username,
-          password: this.ruleForm.pass
-        }
+    // <!--登陆-->
+    submitForm () {
+      const data = {
+        email: this.userData.username,
+        password: this.userData.pass
+      }
+      Axios({
+        url: 'api/v1/rest-auth/login/',
+        // 'api/v1/admin/login/'
+        method: 'post',
+        data: data
       })
-        .then((response) => {
-          console.log(response.data)
-          setTimeout(() => {
-            alert('注册成功')
-          }, 400)
-        })
-        .catch((error) => {
-          alert('error:' + error)
-        })
     },
     // <!--进入注册页-->
-    gotoLogon () {
+    gotoLogon() {
       this.$router.push({
-        path: '/logon'
-      })
+        path: "/logon"
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -96,7 +85,7 @@ export default {
 }
 .register-wrapper {
   position: fixed;
-  top: 0;
+  top: 100px;
   right: 0;
   left: 0;
   bottom: 0;
@@ -104,7 +93,7 @@ export default {
 #register {
   max-width: 340px;
   margin: 60px auto;
-  background: #fff;
+  background: rgb(228, 226, 226);
   padding: 20px 40px;
   border-radius: 10px;
   position: relative;
@@ -144,8 +133,8 @@ export default {
   text-align: center;
 }
 .el-button--primary:focus {
-  background: #409eff;
-  border-color: #409eff;
+  background: #409EFF;
+  border-color: #409EFF;
   color: #fff;
 }
 </style>
