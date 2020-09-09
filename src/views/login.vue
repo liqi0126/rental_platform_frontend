@@ -3,23 +3,6 @@
     <div class="register-wrapper"> 
       <div id="register">
         <p class="title">登录</p>
-<<<<<<< Updated upstream
-        <el-form
-          :model="ruleForm"
-          ref="ruleForm"
-          label-width="0"
-          class="demo-ruleForm"
-        >
-        <el-form-item prop="name">
-            <el-input v-model="ruleForm.username" placeholder="请输入用户名"></el-input>
-        </el-form-item>  
-        <el-form-item prop="pass">
-            <el-input type="password" v-model="ruleForm.pass" placeholder="输入密码"></el-input>
-        </el-form-item>
-        <el-form-item>
-        <el-button type="primary" @click="submitForm(ruleForm)" style="width:100%;">登录</el-button>
-        <p class="login" @click="gotoLogon">还没有账号？立即注册</p>
-=======
         <el-form :model="userData"
                  ref="userData"
                  label-width="0"
@@ -39,7 +22,6 @@
                        style="width:100%;">登录</el-button>
             <p class="login"
                @click="gotoLogon">还没有账号？立即注册</p>
->>>>>>> Stashed changes
           </el-form-item>
         </el-form>
       </div>
@@ -51,15 +33,6 @@
 <script> 
 import Axios from 'axios'
 export default {
-<<<<<<< Updated upstream
-  name: "Login", 
-  data() {
-    return {  
-      ruleForm: {
-        username: "",
-        pass: ""
-      },
-=======
   name: 'Login',
   data () {
     return {
@@ -67,31 +40,11 @@ export default {
         username: '',
         pass: ''
       }
->>>>>>> Stashed changes
     }
   }, 
   methods: {
-<<<<<<< Updated upstream
-    // <!--提交注册-->
-    submitForm(formName) {
-        console.log(formName)
-        Axios.post('api/v1/login', {
-            data: {
-                username: this.ruleForm.username,
-                password: this.ruleForm.pass,
-            }
-        })
-=======
+    
     // <!--登陆-->
-<<<<<<< Updated upstream
-    submitForm (formName) {
-      console.log(formName)
-      Axios.post('api/v1/login/', {
-        data: {
-          email: this.ruleForm.username,
-          password: this.ruleForm.pass
-        }
-=======
     submitForm () {
       const data = {
         email: this.userData.username,
@@ -102,18 +55,7 @@ export default {
         // 'api/v1/admin/login/'
         method: 'post',
         data: data
->>>>>>> Stashed changes
       })
->>>>>>> Stashed changes
-        .then((response) => {
-            console.log(response.data)
-            setTimeout(() => {
-                alert('注册成功')
-            }, 400);
-        })
-        .catch((error) => {
-            alert('error:' + error)
-        })
     },
     // <!--进入注册页-->
     gotoLogon() {
