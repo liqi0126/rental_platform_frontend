@@ -96,13 +96,17 @@ export default {
         data: userData
       })
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           if (response.status === 200){
             console.log("注册成功")
             this.getCurrentUserData()
           }
         })
         .catch((error) => {
+          if (error.response.status === 403){
+            this.$message('该邮箱已被注册');
+          }
+          console.log(error.response.status)
           console.log(error.response)
         })
     },
@@ -112,11 +116,7 @@ export default {
           method: 'get',
         })
           .then((response) => {
-            if (response.status === 200){
-              console.log("成功获取当前用户信息")
-              console.log(response.data)
-            }
-
+            console.log(response.data)
           })
           .catch((error) => {
             console.log(error.response)

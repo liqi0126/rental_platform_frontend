@@ -56,11 +56,19 @@ export default {
         method: 'post',
         data: data
       })
+        .then((response) => {
+          console.log(response.data)
+
+          })
+          .catch((error) => {
+            
+            console.log(error.response.data)
+          })
     },
     // <!--进入注册页-->
     gotoLogon() {
       this.$router.push({
-        path: "/logon"
+        path: "/registration"
       });
     }
   }
