@@ -1,6 +1,6 @@
 <template>
   <el-button type="danger"
-             @click="del">删除
+             @click="change">提交修改
   </el-button>
 </template>
 
@@ -9,14 +9,17 @@ import Axios from 'axios'
 export default {
   props: {
     id: Number,
-    target: String
+    target: String,
+    data: Object
   },
   methods: {
-    del: function () {
-      Axios.delete('api/v1/' + this.target + '/' + this.id)
+    change: function () {
+      console.log(this.data)
+      Axios.patch('/api/v1/' + this.target + '/' + this.id, this.data)
         .then(() => {
-          this.$message('删除成功')
+          this.$message('修改成功')
           this.$router.push({ name: 'admin' })
+          location.reload()
         })
         .catch((error) => {
           console.log(error.response)

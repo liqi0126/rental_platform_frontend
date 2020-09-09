@@ -1,6 +1,6 @@
 <template>
   <el-button type="danger"
-             @click="del">删除
+             @click="rej">删除
   </el-button>
 </template>
 
@@ -13,9 +13,9 @@ export default {
   },
   methods: {
     del: function () {
-      Axios.delete('api/v1/' + this.target + '/' + this.id)
+      Axios.post('api/v1/' + this.target + '/' + this.id + '/reject')
         .then(() => {
-          this.$message('删除成功')
+          this.$message('拒绝成功')
           this.$router.push({ name: 'admin' })
         })
         .catch((error) => {

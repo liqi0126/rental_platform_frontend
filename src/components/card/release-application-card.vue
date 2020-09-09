@@ -24,6 +24,11 @@
           <el-input v-model="data.status"
                     :disabled="diseditable"></el-input>
         </el-form-item>
+        <el-form-item label='评价'>
+          <el-input v-model="data.comments"
+                    type='textarea'
+                    :disabled="diseditable"></el-input>
+        </el-form-item>
         <el-form-item label='设备ID'>
           <el-input v-model="data.equipment"
                     :disabled="diseditable"
@@ -33,8 +38,10 @@
                      @click="enterEquipment(row)">查看拥有者</el-button>
         </el-form-item>
       </el-form>
-      <el-button class='button'
-                 type="primary">提交修改</el-button>
+      <change-button :id="id"
+                     :data="data"
+                     class="button"
+                     target="release-application"></change-button>
     </el-card>
   </div>
 </template>
@@ -61,16 +68,20 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
+import changeButton from '../button/change-button'
 export default {
+  components: {
+    'change-button': changeButton
+  },
   props: {
     id: Number
   },
   data: function () {
     return {
-      diseditable: true,
+      diseditable: false,
       data: {
         id: 0,
-        name: '',
+        comments: '',
         created_at: '',
         description: '',
         equipment: '',

@@ -12,10 +12,10 @@
                        label="ID"
                        width="40">
       </el-table-column>
-      <!-- <el-table-column prop="username"
+      <el-table-column prop="username"
                        label="用户名"
                        width="180">
-      </el-table-column> -->
+      </el-table-column>
       <el-table-column prop="created_at"
                        label="创建时间"
                        width="180">
@@ -67,7 +67,8 @@ export default {
     // 获取用户列表
     Axios.get('api/v1/users', {})
       .then((response) => {
-        this.userList = response.data
+        this.userList = response.data.results
+        console.log(this.userList)
       })
       .catch((error) => {
         alert('error:' + error)

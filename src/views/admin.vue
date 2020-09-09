@@ -16,10 +16,6 @@ import renterApplicationTable from '../components/table/renter-application-table
 import rentApplicationTable from '../components/table/rent-application-table'
 import releaseApplicationTable from '../components/table/release-application-table'
 export default {
-  data: function () {
-    return {
-    }
-  },
   components: {
     'user-table': userTable,
     'equipment-table': equipmentTable,

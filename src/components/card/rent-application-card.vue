@@ -64,8 +64,10 @@
                      style="margin-left:20px;">查看租借者</el-button>
         </el-form-item>
       </el-form>
-      <el-button class='button'
-                 type="primary">提交修改</el-button>
+      <change-button :id="id"
+                     :data="data"
+                     class="button"
+                     target="rent-application"></change-button>
     </el-card>
   </div>
 </template>
@@ -91,7 +93,11 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
+import changeButton from '../button/change-button'
 export default {
+  components: {
+    'change-button': changeButton
+  },
   props: {
     id: Number
   },
@@ -114,6 +120,7 @@ export default {
     }
   },
   created: function () {
+    if (this.id === -1) return
     axios.get('/api/v1/rent-application/' + this.id, {})
       .then((response) => {
         this.data = response.data

@@ -62,7 +62,7 @@ export default {
     // 获取用户列表
     Axios.get('api/v1/renter-application', {})
       .then((response) => {
-        this.renterApplicationList = response.data
+        this.renterApplicationList = response.data.results
       })
       .catch((error) => {
         alert('error:' + error)
