@@ -63,7 +63,7 @@ export default {
       } else if (value !== this.UserData.pass) {
         callback(new Error('两次输入密码不一致!'))
       } else {
-        callback();
+        callback()
       }
     }
 
@@ -71,12 +71,12 @@ export default {
       UserData: {
         email: '',
         pass: '',
-        checkPass: '',
+        checkPass: ''
       },
       rules: {
         pass: [{ validator: validatePass, trigger: 'change' }],
         checkPass: [{ validator: validatePass2, trigger: 'change' }],
-        email: [{ validator: checkEmail, trigger: 'change' }],
+        email: [{ validator: checkEmail, trigger: 'change' }]
       },
       flag: true
     }
@@ -87,7 +87,7 @@ export default {
       const userData = {
         password1: this.UserData.pass,
         password2: this.UserData.checkPass,
-        email: this.UserData.email,
+        email: this.UserData.email
       }
       console.log(userData)
       Axios({
@@ -97,48 +97,48 @@ export default {
       })
         .then((response) => {
           // console.log(response.data)
-          if (response.status === 200){
-            console.log("注册成功")
+          if (response.status === 200) {
+            console.log('注册成功')
             this.getCurrentUserData()
           }
         })
         .catch((error) => {
-          if (error.response.status === 403){
-            this.$message('该邮箱已被注册');
+          if (error.response.status === 403) {
+            this.$message('该邮箱已被注册')
           }
           console.log(error.response.status)
           console.log(error.response)
         })
     },
-    getCurrentUserData(){
-        Axios({
-          url: 'api/v1/rest-auth/user',
-          method: 'get',
+    getCurrentUserData () {
+      Axios({
+        url: 'api/v1/rest-auth/user',
+        method: 'get'
+      })
+        .then((response) => {
+          console.log(response.data)
         })
-          .then((response) => {
-            console.log(response.data)
-          })
-          .catch((error) => {
-            console.log(error.response)
-          })
+        .catch((error) => {
+          console.log(error.response)
+        })
     },
     // <!--进入登录页-->
-    gotoLogin() {
+    gotoLogin () {
       this.$router.push({
-        path: "/login"
-      });
+        path: '/login'
+      })
     },
     // 验证手机号
-    checkMobile(str) {
+    checkMobile (str) {
       const re = /^1\d{10}$/
       if (re.test(str)) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
-    }
   }
+}
 </script>
 
 <style scoped>
@@ -207,8 +207,8 @@ export default {
   text-align: center;
 }
 .el-button--primary:focus {
-  background: #409EFF;
-  border-color: #409EFF;
+  background: #409eff;
+  border-color: #409eff;
   color: #fff;
 }
 </style>

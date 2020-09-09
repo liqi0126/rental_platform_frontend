@@ -29,7 +29,6 @@
   </div>
 </template>
 
-
 <script>
 import Axios from 'axios'
 export default {
@@ -58,21 +57,19 @@ export default {
       })
         .then((response) => {
           console.log(response.data)
-
-          })
-          .catch((error) => {
-            
-            console.log(error.response.data)
-          })
+        })
+        .catch((error) => {
+          console.log(error.response.data)
+        })
     },
     // <!--进入注册页-->
-    gotoLogon() {
+    gotoLogon () {
       this.$router.push({
-        path: "/registration"
-      });
+        path: '/registration'
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -141,8 +138,8 @@ export default {
   text-align: center;
 }
 .el-button--primary:focus {
-  background: #409EFF;
-  border-color: #409EFF;
+  background: #409eff;
+  border-color: #409eff;
   color: #fff;
 }
 </style>

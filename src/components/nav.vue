@@ -70,7 +70,6 @@
   </div>
 </template>
 
-
 <style scoped>
 </style>
 
@@ -81,22 +80,22 @@ export default {
       hasLogin: false,
       activeIndex: '',
       inputSearch: '',
-      select: "1"
-    };
+      select: '1'
+    }
   },
   methods: {
     handleSelect (key, keyPath) {
       if (key === null) return
-      console.log(key, keyPath);
+      console.log(key, keyPath)
     },
     goRouter (path) {
       this.$router.go(path)
     },
     logout () {
-      console.log("logout")
+      console.log('logout')
     },
     search () {
-      console.log("search")
+      console.log('search')
       console.log(this.select)
       console.log(this.inputSearch)
     }
