@@ -1,34 +1,30 @@
 // writen by xyh
 <template>
   <div>
-    <el-card class='title-card'>所有设备</el-card>
-    <el-table :data="equipmentList"
+    <el-card class="title-card">所有租借者申请</el-card>
+    <el-table :data="renterApplicationList"
               stripe
-              @row-click="enterEquipment"
-              id="equipment-table"
-              class="table">
+              id="users-table"
+              class="table"
+              height=600>
       <el-table-column prop="id"
                        label="ID"
                        width="40">
       </el-table-column>
-      <el-table-column prop="name"
-                       label="设备名"
-                       width="180">
-      </el-table-column>
       <el-table-column prop="created_at"
-                       label="上架时间"
+                       label="创建时间"
                        width="180">
       </el-table-column>
-      <el-table-column prop="address"
-                       label="地址"
+      <el-table-column prop="description"
+                       label="描述"
                        width="180">
       </el-table-column>
-      <el-table-column prop="email"
-                       label="Email"
+      <el-table-column prop="comments"
+                       label="评价"
                        width="180">
       </el-table-column>
-      <el-table-column prop="phone"
-                       label="电话号码"
+      <el-table-column prop="applicant"
+                       label="applicant"
                        width="180">
       </el-table-column>
       <el-table-column prop="status"
@@ -59,22 +55,18 @@ import Axios from 'axios'
 export default {
   data: function () {
     return {
-      equipmentList: []
+      renterApplicationList: []
     }
   },
   created: function () {
-    // 获取设备列表
-    Axios.get('api/v1/equipment', {})
+    // 获取用户列表
+    Axios.get('api/v1/renter-application', {})
       .then((response) => {
-        this.equipmentList = response.data
-      }).catch((error) => {
+        this.renterApplicationList = response.data.results
+      })
+      .catch((error) => {
         alert('error:' + error)
       })
-  },
-  methods: {
-    enterEquipment: function (row) {
-      this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
-    }
   }
 }
 </script>

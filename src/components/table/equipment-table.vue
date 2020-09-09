@@ -1,22 +1,23 @@
 // writen by xyh
 <template>
   <div>
-    <el-card class="title-card">所有用户</el-card>
-    <el-table :data="userList"
-              @row-click='enterUser'
+    <el-card class='title-card'>所有设备</el-card>
+    <el-table :data="equipmentList"
               stripe
-              id="users-table"
-              class="table">
+              @row-click="enterEquipment"
+              id="equipment-table"
+              class="table"
+              height=600>
       <el-table-column prop="id"
                        label="ID"
                        width="40">
       </el-table-column>
-      <el-table-column prop="username"
-                       label="用户名"
+      <el-table-column prop="name"
+                       label="设备名"
                        width="180">
       </el-table-column>
       <el-table-column prop="created_at"
-                       label="创建时间"
+                       label="上架时间"
                        width="180">
       </el-table-column>
       <el-table-column prop="address"
@@ -31,8 +32,8 @@
                        label="电话号码"
                        width="180">
       </el-table-column>
-      <el-table-column prop="is_renter"
-                       label="是否是租借者"
+      <el-table-column prop="status"
+                       label="状态"
                        width="180">
       </el-table-column>
     </el-table>
@@ -50,7 +51,6 @@
   position: relative;
   margin: 0 auto;
   width: 60%;
-  max-height: 600px;
 }
 </style>
 
@@ -59,22 +59,21 @@ import Axios from 'axios'
 export default {
   data: function () {
     return {
-      userList: []
+      equipmentList: []
     }
   },
   created: function () {
-    // 获取用户列表
-    Axios.get('api/v1/users', {})
+    // 获取设备列表
+    Axios.get('api/v1/equipment')
       .then((response) => {
-        this.userList = response.data
-      })
-      .catch((error) => {
+        this.equipmentList = response.data.results
+      }).catch((error) => {
         alert('error:' + error)
       })
   },
   methods: {
-    enterUser: function (row) {
-      this.$router.push({ name: 'user', params: { userId: row.id } })
+    enterEquipment: function (row) {
+      this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
     }
   }
 }

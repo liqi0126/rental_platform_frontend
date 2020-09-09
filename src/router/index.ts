@@ -46,6 +46,36 @@ const routes: Array<RouteConfig> = [
     path: '/analysis',
     name: 'anslysis',
     component: () => import('../views/analysis.vue')
+  },
+  {
+    path: '/logon',
+    name: 'logon',
+    component: () => import('../views/logon.vue')
+  },
+  {
+    path: '/create-equipment',
+    name: 'create-equipment',
+    component: () => import('../views/create-equipment.vue')
+  },
+  {
+    path: '/create-renter-application',
+    name: 'create-renter-application',
+    component: () => import('../views/create-renter-application.vue')
+  },
+  {
+    path: '/create-rent-application/:equipmentId',
+    name: 'create-rent-application',
+    component: () => import('../views/create-rent-application.vue')
+  },
+  {
+    path: '/release-application/:releaseApplicationId',
+    name: 'release-application',
+    component: () => import('../views/release-application.vue')
+  },
+  {
+    path: '/create-release-application/:equipmentId',
+    name: 'release-application',
+    component: () => import('../views/create-release-application.vue')
   }
 ]
 

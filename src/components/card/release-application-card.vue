@@ -8,10 +8,6 @@
           <el-input v-model="id"
                     :disabled="true"></el-input>
         </el-form-item>
-        <el-form-item label='设备名'>
-          <el-input v-model="data.name"
-                    :disabled="diseditable"></el-input>
-        </el-form-item>
         <el-form-item label='拥有者ID'>
           <el-input v-model="data.owner"
                     :disabled="diseditable"
@@ -24,34 +20,28 @@
           <el-input v-model="data.created_at"
                     :disabled="diseditable"></el-input>
         </el-form-item>
-        <el-form-item label='地址'>
-          <el-input v-model="data.address"
-                    :disabled="diseditable"></el-input>
-        </el-form-item>
         <el-form-item label='状态'>
           <el-input v-model="data.status"
                     :disabled="diseditable"></el-input>
         </el-form-item>
-        <el-form-item label='租期'>
-          <el-input v-model="data.lease_term_begin"
-                    :disabled="diseditable"
-                    style="width:48%"></el-input>
-          到
-          <el-input v-model="data.lease_term_end"
-                    :disabled="diseditable"
-                    style="width:48%"></el-input>
-        </el-form-item>
-        <el-form-item label='Email'>
-          <el-input v-model="data.email"
+        <el-form-item label='评价'>
+          <el-input v-model="data.comments"
+                    type='textarea'
                     :disabled="diseditable"></el-input>
         </el-form-item>
-        <el-form-item label='电话号码'>
-          <el-input v-model="data.phone"
-                    :disabled="true"></el-input>
+        <el-form-item label='设备ID'>
+          <el-input v-model="data.equipment"
+                    :disabled="diseditable"
+                    style="width:80%;"></el-input>
+          <el-button type="primary"
+                     style="margin-left:20px;"
+                     @click="enterEquipment(row)">查看拥有者</el-button>
         </el-form-item>
       </el-form>
-      <el-button class='button'
-                 type="primary">提交修改</el-button>
+      <change-button :id="id"
+                     :data="data"
+                     class="button"
+                     target="release-application"></change-button>
     </el-card>
   </div>
 </template>
@@ -63,9 +53,10 @@
   position: relative;
 }
 .card {
+  margin-top: 40px;
   width: 60%;
   position: relative;
-  margin: auto;
+  margin: 20px auto;
 }
 .form {
   position: relative;
@@ -77,43 +68,44 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
+import changeButton from '../button/change-button'
 export default {
+  components: {
+    'change-button': changeButton
+  },
   props: {
     id: Number
   },
   data: function () {
     return {
-      diseditable: true,
+      diseditable: false,
       data: {
         id: 0,
-        name: '',
+        comments: '',
         created_at: '',
-        address: '',
-        email: '',
-        phone: null,
         description: '',
-        status: 'UNR',
-        lease_term_begin: null,
-        lease_term_end: null,
-        user_comments: null,
-        owner: 0,
-        current_tenant: null
+        equipment: '',
+        status: '',
+        owner: 0
       }
     }
   },
   created: function () {
-    if (this.id === -1) return
-    axios.get('/api/v1/equipment/' + this.id, {})
+    axios.get('/api/v1/release-application/' + this.id)
       .then((response) => {
         this.data = response.data
       })
       .catch((error) => {
+        console.log(error.response)
         alert(error)
       })
   },
   methods: {
     enterUser: function () {
       this.$router.push({ name: 'user', params: { userId: this.data.owner } })
+    },
+    enterEquipment: function (row) {
+      this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
     }
   }
 }

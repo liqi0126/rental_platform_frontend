@@ -31,8 +31,10 @@
                     :disabled="diseditable"></el-input>
         </el-form-item>
       </el-form>
-      <el-button class='button'
-                 type="primary">提交修改</el-button>
+      <change-button :id="id"
+                     :data="data"
+                     class="button"
+                     target="equipment"></change-button>
     </el-card>
   </div>
 </template>
@@ -58,7 +60,11 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
+import changeButton from '../button/change-button'
 export default {
+  components: {
+    'change-button': changeButton
+  },
   props: {
     id: Number
   },
@@ -67,8 +73,8 @@ export default {
       diseditable: true,
       data: {
         id: 1,
-        created_at: '2020-09-09T10:07:21.597849+08:00',
-        description: ' 五花大绑青剑湖我都不急',
+        created_at: '',
+        description: '',
         status: 'ACC',
         comments: '',
         applicant: 2
@@ -76,6 +82,7 @@ export default {
     }
   },
   created: function () {
+    if (this.id === -1) return
     axios.get('/api/v1/renter-application/' + this.id, {})
       .then((response) => {
         this.data = response.data
