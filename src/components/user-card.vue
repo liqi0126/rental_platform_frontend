@@ -131,13 +131,14 @@ export default {
         created_at: '',
         address: '',
         phone: '',
-        is_renter: true,
+        is_renter: false,
         groups: [],
         user_permissions: []
       }
     }
   },
   created: function () {
+    if (this.id === -1) return
     axios.get('/api/v1/users/' + this.id, {})
       .then((response) => {
         this.data = response.data

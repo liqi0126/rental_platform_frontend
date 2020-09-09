@@ -23,6 +23,16 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/equipment.vue')
   },
   {
+    path: '/rent-application/:rentApplicationId',
+    name: 'rent-application',
+    component: () => import('../views/rent-application.vue')
+  },
+  {
+    path: '/renter-application/:renterApplicationId',
+    name: 'renter-application',
+    component: () => import('../views/renter-application.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../views/login.vue')
