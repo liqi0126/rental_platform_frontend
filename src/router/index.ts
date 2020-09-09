@@ -48,11 +48,6 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/analysis.vue')
   },
   {
-    path: '/logon',
-    name: 'logon',
-    component: () => import('../views/logon.vue')
-  },
-  {
     path: '/create-equipment',
     name: 'create-equipment',
     component: () => import('../views/create-equipment.vue')
