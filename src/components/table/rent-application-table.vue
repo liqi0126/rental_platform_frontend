@@ -6,6 +6,7 @@
               stripe
               id="users-table"
               class="table"
+              @row-click="enter"
               height=600>
       <el-table-column prop="id"
                        label="ID"
@@ -75,6 +76,11 @@ export default {
       .catch((error) => {
         alert('error:' + error)
       })
+  },
+  methods: {
+    enter: function (row) {
+      this.$router.push({ name: 'rent-application', params: { rentApplicationId: row.id } })
+    }
   }
 }
 </script>
