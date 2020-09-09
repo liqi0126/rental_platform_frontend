@@ -1,9 +1,10 @@
-
+// writen by xyh
 <template>
   <div>
     <el-card class='title-card'>所有设备</el-card>
     <el-table :data="equipmentList"
               stripe
+              @row-click="enterEquipment"
               id="equipment-table"
               class="table">
       <el-table-column prop="id"
@@ -69,6 +70,11 @@ export default {
       }).catch((error) => {
         alert('error:' + error)
       })
+  },
+  methods: {
+    enterEquipment: function (row) {
+      this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
+    }
   }
 }
 </script>

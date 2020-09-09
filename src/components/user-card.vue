@@ -14,6 +14,7 @@
         </el-form-item>
         <el-form-item label='设备'>
           <el-table :data="data.owned_equipments"
+                    @row-click="enterEquipment"
                     stripe
                     id="equipment-table"
                     class="table">
@@ -144,6 +145,11 @@ export default {
       .catch((error) => {
         alert(error)
       })
+  },
+  methods: {
+    enterEquipment: function (row) {
+      this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
+    }
   }
 }
 </script>

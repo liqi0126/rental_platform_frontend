@@ -45,12 +45,13 @@ export default {
     // <!--登陆-->
     submitForm (formName) {
       console.log(formName)
-      Axios.post('/api/v1/login/', {
-        data: {
-          email: this.ruleForm.username,
-          password: this.ruleForm.pass
-        }
-      })
+      const data = {
+        email: this.ruleForm.username,
+        password: this.ruleForm.pass
+      }
+      Axios.post('/rest-auth/login/', data
+
+      )
         .then((response) => {
           console.log(response.data)
           setTimeout(() => {

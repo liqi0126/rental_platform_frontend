@@ -112,7 +112,7 @@ export default {
   },
   methods: {
     enterUser: function () {
-      this.$route.push({ name: 'user', params: { userId: this.data.owner } })
+      this.$router.push({ name: 'user', params: { userId: this.data.owner } })
     }
   }
 }
