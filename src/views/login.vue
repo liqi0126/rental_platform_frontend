@@ -39,6 +39,7 @@ export default {
     }
   }, 
   methods: {
+<<<<<<< Updated upstream
     // <!--提交注册-->
     submitForm(formName) {
         console.log(formName)
@@ -48,6 +49,17 @@ export default {
                 password: this.ruleForm.pass,
             }
         })
+=======
+    // <!--登陆-->
+    submitForm (formName) {
+      console.log(formName)
+      Axios.post('api/v1/login/', {
+        data: {
+          email: this.ruleForm.username,
+          password: this.ruleForm.pass
+        }
+      })
+>>>>>>> Stashed changes
         .then((response) => {
             console.log(response.data)
             setTimeout(() => {
