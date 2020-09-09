@@ -63,9 +63,10 @@
   position: relative;
 }
 .card {
+  margin-top: 40px;
   width: 60%;
   position: relative;
-  margin: auto;
+  margin: 20px auto;
 }
 .form {
   position: relative;
