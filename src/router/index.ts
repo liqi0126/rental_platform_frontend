@@ -41,11 +41,6 @@ const routes: Array<RouteConfig> = [
     path: '/logon',
     name: 'logon',
     component: () => import('../views/logon.vue')
-  },
-  {
-    path: '/create-equipment',
-    name: 'create-equipment',
-    component: () => import('../views/create-equipment.vue')
   }
 ]
 
