@@ -3,6 +3,7 @@
     <div class="register-wrapper"> 
       <div id="register">
         <p class="title">注册</p>
+<<<<<<< Updated upstream
         <el-form
           :model="ruleForm2"
           status-icon
@@ -34,12 +35,42 @@
             <el-button type="primary" @click="submitForm(ruleForm2)" style="width:100%;">注册</el-button>
         <p class="login" @click="gotoLogin">已有账号？立即登录</p>
         </el-form-item>
+=======
+        <el-form :model="UserData"
+                 status-icon
+                 :rules="rules"
+                 ref="UserData"
+                 label-width="0"
+                 class="demo-ruleForm">
+          <el-form-item prop="email">
+            <el-input v-model="UserData.email"
+                      placeholder="请输入电子邮箱"></el-input>
+          </el-form-item>
+          <el-form-item prop="pass">
+            <el-input type="password"
+                      v-model="UserData.pass"
+                      placeholder="输入密码"></el-input>
+          </el-form-item>
+          <el-form-item prop="checkPass">
+            <el-input type="password"
+                      v-model="UserData.checkPass"
+                      placeholder="确认密码"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary"
+                       @click="submitForm"
+                       style="width:100%;">注册</el-button>
+            <p class="login"
+               @click="gotoLogin">已有账号？立即登录</p>
+          </el-form-item>
+>>>>>>> Stashed changes
         </el-form>
       </div>
     </div>
   </div>
 </template>
 
+<<<<<<< Updated upstream
 
 <script> 
 import Axios from 'axios'
@@ -64,6 +95,13 @@ export default {
         callback()
       }
     }
+=======
+<script>
+import Axios from 'axios'
+export default {
+  name: 'Register',
+  data () {
+>>>>>>> Stashed changes
     // <!--电子邮箱是否为空-->
     let checkEmail = (rule, value, callback) => {
       if (value === '') {
@@ -73,6 +111,7 @@ export default {
       }
     }
     // <!--验证密码-->
+<<<<<<< Updated upstream
     let validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"))
@@ -89,9 +128,24 @@ export default {
         callback(new Error("请再次输入密码"));
       } else if (value !== this.ruleForm2.pass) {
         callback(new Error("两次输入密码不一致!"));
+=======
+    const validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } 
+      callback()
+    }
+    // <!--二次验证密码-->
+    const validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.UserData.pass) {
+        callback(new Error('两次输入密码不一致!'))
+>>>>>>> Stashed changes
       } else {
         callback();
       }
+<<<<<<< Updated upstream
     };
     // <!--用户名是否为空-->
     let validateUsername = (rule, value, callback) => {
@@ -111,21 +165,31 @@ export default {
         checkPass: "",
         is_enter: false,     
         smscode: ""
+=======
+    }
+
+    return {
+      UserData: {
+        email: '',
+        pass: '',
+        checkPass: '',
+>>>>>>> Stashed changes
       },
-      rules2: {
-        username: [{ validator: validateUsername, trigger: 'change' }],
+      rules: {
         pass: [{ validator: validatePass, trigger: 'change' }],
         checkPass: [{ validator: validatePass2, trigger: 'change' }],
         email: [{ validator: checkEmail, trigger: 'change' }],
+<<<<<<< Updated upstream
         tel: [{ validator: checkTel, trigger: 'change' }],
         smscode: [{ validator: checkSmscode, trigger: 'change' }],
+=======
+>>>>>>> Stashed changes
       },
-      buttonText: '发送验证码',
-      isDisabled: false, // 是否禁止点击发送验证码按钮
       flag: true
     }
   }, 
   methods: {
+<<<<<<< Updated upstream
     // <!--发送验证码-->
     sendCode () {
       let tel = this.ruleForm2.tel
@@ -171,6 +235,47 @@ export default {
       .catch((error) => {
         alert('error:' + error)
       })
+=======
+    // <!--提交注册-->
+    submitForm () {
+      const userData = {
+        password1: this.UserData.pass,
+        password2: this.UserData.checkPass,
+        email: this.UserData.email,
+      }
+      console.log(userData)
+      Axios({
+        url: 'api/v1/rest-auth/registration/',
+        method: 'post',
+        data: userData
+      })
+        .then((response) => {
+          console.log(response.data)
+          if (response.status === 200){
+            console.log("注册成功")
+            this.getCurrentUserData()
+          }
+        })
+        .catch((error) => {
+          console.log(error.response)
+        })
+    },
+    getCurrentUserData(){
+        Axios({
+          url: 'api/v1/rest-auth/user',
+          method: 'get',
+        })
+          .then((response) => {
+            if (response.status === 200){
+              console.log("成功获取当前用户信息")
+              console.log(response.data)  
+            }
+            
+          })
+          .catch((error) => {
+            console.log(error.response)
+          })
+>>>>>>> Stashed changes
     },
     // <!--进入登录页-->
     gotoLogin() {
@@ -187,8 +292,12 @@ export default {
         return false;
       }
     }
+    }
   }
+<<<<<<< Updated upstream
 };
+=======
+>>>>>>> Stashed changes
 </script>
 
 <style scoped>
@@ -209,7 +318,7 @@ export default {
 }
 .register-wrapper {
   position: fixed;
-  top: 0;
+  top: 100px;
   right: 0;
   left: 0;
   bottom: 0;
@@ -217,7 +326,7 @@ export default {
 #register {
   max-width: 340px;
   margin: 60px auto;
-  background: #fff;
+  background: rgb(228, 226, 226);
   padding: 20px 40px;
   border-radius: 10px;
   position: relative;

@@ -3,6 +3,7 @@
     <div class="register-wrapper"> 
       <div id="register">
         <p class="title">登录</p>
+<<<<<<< Updated upstream
         <el-form
           :model="ruleForm"
           ref="ruleForm"
@@ -18,6 +19,27 @@
         <el-form-item>
         <el-button type="primary" @click="submitForm(ruleForm)" style="width:100%;">登录</el-button>
         <p class="login" @click="gotoLogon">还没有账号？立即注册</p>
+=======
+        <el-form :model="userData"
+                 ref="userData"
+                 label-width="0"
+                 class="demo-userData">
+          <el-form-item prop="name">
+            <el-input v-model="userData.username"
+                      placeholder="请输入用户名"></el-input>
+          </el-form-item>
+          <el-form-item prop="pass">
+            <el-input type="password"
+                      v-model="userData.pass"
+                      placeholder="输入密码"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary"
+                       @click="submitForm(userData)"
+                       style="width:100%;">登录</el-button>
+            <p class="login"
+               @click="gotoLogon">还没有账号？立即注册</p>
+>>>>>>> Stashed changes
           </el-form-item>
         </el-form>
       </div>
@@ -29,6 +51,7 @@
 <script> 
 import Axios from 'axios'
 export default {
+<<<<<<< Updated upstream
   name: "Login", 
   data() {
     return {  
@@ -36,6 +59,15 @@ export default {
         username: "",
         pass: ""
       },
+=======
+  name: 'Login',
+  data () {
+    return {
+      userData: {
+        username: '',
+        pass: ''
+      }
+>>>>>>> Stashed changes
     }
   }, 
   methods: {
@@ -51,6 +83,7 @@ export default {
         })
 =======
     // <!--登陆-->
+<<<<<<< Updated upstream
     submitForm (formName) {
       console.log(formName)
       Axios.post('api/v1/login/', {
@@ -58,6 +91,18 @@ export default {
           email: this.ruleForm.username,
           password: this.ruleForm.pass
         }
+=======
+    submitForm () {
+      const data = {
+        email: this.userData.username,
+        password: this.userData.pass
+      }
+      Axios({
+        url: 'api/v1/rest-auth/login/',
+        // 'api/v1/admin/login/'
+        method: 'post',
+        data: data
+>>>>>>> Stashed changes
       })
 >>>>>>> Stashed changes
         .then((response) => {
@@ -98,7 +143,7 @@ export default {
 }
 .register-wrapper {
   position: fixed;
-  top: 0;
+  top: 100px;
   right: 0;
   left: 0;
   bottom: 0;
@@ -106,7 +151,7 @@ export default {
 #register {
   max-width: 340px;
   margin: 60px auto;
-  background: #fff;
+  background: rgb(228, 226, 226);
   padding: 20px 40px;
   border-radius: 10px;
   position: relative;
