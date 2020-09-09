@@ -79,9 +79,6 @@ export default {
       console.log(this.select)
       console.log(this.inputSearch)
     }
-  },
-  mounted: {
-    
   }
 }
 </script>
