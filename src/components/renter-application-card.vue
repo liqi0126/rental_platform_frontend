@@ -76,6 +76,7 @@ export default {
     }
   },
   created: function () {
+    if (this.id === -1) return
     axios.get('/api/v1/renter-application/' + this.id, {})
       .then((response) => {
         this.data = response.data
