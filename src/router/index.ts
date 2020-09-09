@@ -7,7 +7,20 @@ const routes: Array<RouteConfig> = [
   {
     path: '/admin',
     name: 'admin',
-    component: () => import('../views/admin.vue')
+    component: () => import('../views/admin.vue'),
+    meta: {
+      title: '管理者界面'
+    }
+  },
+  {
+    path: '/user/:userId',
+    name: 'user',
+    component: () => import('../views/user.vue')
+  },
+  {
+    path: '/equipment/:equipmentId',
+    name: 'equipment',
+    component: () => import('../views/equipment.vue')
   },
   {
     path: '/login',
