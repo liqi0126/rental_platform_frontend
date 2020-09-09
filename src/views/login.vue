@@ -52,6 +52,12 @@ export default {
       Axios.post('/rest-auth/login/', data
 
       )
+      Axios.post('api/v1/login/', {
+        data: {
+          email: this.ruleForm.username,
+          password: this.ruleForm.pass
+        }
+      })
         .then((response) => {
           console.log(response.data)
           setTimeout(() => {
