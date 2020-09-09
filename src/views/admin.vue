@@ -3,8 +3,8 @@
   <div>
     <user-table></user-table>
     <equipment-table></equipment-table>
-    <renter-application-table></renter-application-table>
-    <rent-application-table></rent-application-table>
+    <renter-application-table :id="-1"></renter-application-table>
+    <rent-application-table :id="-1"></rent-application-table>
     <release-application-table :id="-1"></release-application-table>
   </div>
 </template>

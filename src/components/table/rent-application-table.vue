@@ -62,6 +62,9 @@
 <script>
 import Axios from 'axios'
 export default {
+  props: {
+    id: Number
+  },
   data: function () {
     return {
       rentApplicationList: []
@@ -69,13 +72,23 @@ export default {
   },
   created: function () {
     // 获取用户列表
-    Axios.get('api/v1/rent-application', {})
-      .then((response) => {
-        this.rentApplicationList = response.data.results
-      })
-      .catch((error) => {
-        alert('error:' + error)
-      })
+    if (this.id === -1) {
+      Axios.get('api/v1/rent-application', {})
+        .then((response) => {
+          this.rentApplicationList = response.data.results
+        })
+        .catch((error) => {
+          alert('error:' + error)
+        })
+    } else {
+      Axios.get('api/v1/rent-application/userId/' + this.id, {})
+        .then((response) => {
+          this.rentApplicationList = response.data.results
+        })
+        .catch((error) => {
+          alert('error:' + error)
+        })
+    }
   },
   methods: {
     enter: function (row) {
