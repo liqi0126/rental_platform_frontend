@@ -47,6 +47,7 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
+import qs from 'qs'
 export default {
   props: {
     equipmentId: Number
@@ -70,7 +71,7 @@ export default {
       this.data.lease_term_end = this.date[1]
       console.log(this.date)
       console.log(this.data)
-      axios.post('/api/v1/rent-application', this.data)
+      axios.post('/api/v1/rent-application', qs.stringify(this.data))
         .then((response) => {
           console.log(response)
           this.$message('申请成功！')

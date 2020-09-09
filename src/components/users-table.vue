@@ -6,15 +6,16 @@
               @row-click='enterUser'
               stripe
               id="users-table"
-              class="table">
+              class="table"
+              height=600>
       <el-table-column prop="id"
                        label="ID"
                        width="40">
       </el-table-column>
-      <el-table-column prop="username"
+      <!-- <el-table-column prop="username"
                        label="用户名"
                        width="180">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column prop="created_at"
                        label="创建时间"
                        width="180">
