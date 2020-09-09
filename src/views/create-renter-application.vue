@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import newRenterApplicationCard from '../components/new-renter-application-card.vue'
+import newRenterApplicationCard from '../components/create-card/new-renter-application-card.vue'
 export default {
   components: {
     'new-renter-application-card': newRenterApplicationCard

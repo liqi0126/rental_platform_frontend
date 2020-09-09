@@ -56,6 +56,11 @@ const routes: Array<RouteConfig> = [
     path: '/create-rent-application/:equipmentId',
     name: 'create-rent-application',
     component: () => import('../views/create-rent-application.vue')
+  },
+  {
+    path: '/release-application/:releaseApplicationId',
+    name: 'release-application',
+    component: () => import('../views/release-application.vue')
   }
 ]
 

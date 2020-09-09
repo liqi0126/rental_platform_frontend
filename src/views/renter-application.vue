@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import renterApplicationCard from '../components/renter-application-card'
+import renterApplicationCard from '../components/card/renter-application-card'
 export default {
   components: {
     'renter-application-card': renterApplicationCard

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import userCard from '../components/user-card.vue'
+import userCard from '../components/card/user-card.vue'
 export default {
   components: {
     'user-card': userCard
