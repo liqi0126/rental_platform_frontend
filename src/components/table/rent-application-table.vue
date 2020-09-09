@@ -5,7 +5,8 @@
     <el-table :data="rentApplicationList"
               stripe
               id="users-table"
-              class="table">
+              class="table"
+              height=600>
       <el-table-column prop="id"
                        label="ID"
                        width="40">
@@ -69,7 +70,7 @@ export default {
     // 获取用户列表
     Axios.get('api/v1/rent-application', {})
       .then((response) => {
-        this.rentApplicationList = response.data
+        this.rentApplicationList = response.data.results
       })
       .catch((error) => {
         alert('error:' + error)

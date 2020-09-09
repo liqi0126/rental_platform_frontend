@@ -47,11 +47,12 @@
         </el-form-item>
         <el-form-item label='电话号码'>
           <el-input v-model="data.phone"
-                    :disabled="true"></el-input>
+                    :disabled="diseditable"></el-input>
         </el-form-item>
       </el-form>
-      <el-button class='button'
-                 type="primary">提交修改</el-button>
+      <change-button :id="id"
+                     :data="data"
+                     target="equipment"></change-button>
     </el-card>
   </div>
 </template>
@@ -78,13 +79,17 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
+import changeButton from '../button/change-button'
 export default {
+  components: {
+    'change-button': changeButton
+  },
   props: {
     id: Number
   },
   data: function () {
     return {
-      diseditable: true,
+      diseditable: false,
       data: {
         id: 0,
         name: '',

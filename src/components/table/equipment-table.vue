@@ -66,7 +66,7 @@ export default {
     // 获取设备列表
     Axios.get('api/v1/equipment')
       .then((response) => {
-        this.equipmentList = response.data
+        this.equipmentList = response.data.results
       }).catch((error) => {
         alert('error:' + error)
       })

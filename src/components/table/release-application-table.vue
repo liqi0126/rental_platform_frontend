@@ -74,7 +74,7 @@ export default {
     if (this.id === -1) {
       Axios.get('api/v1/release-application', {})
         .then((response) => {
-          this.rentApplicationList = response.data
+          this.rentApplicationList = response.data.results
         })
         .catch((error) => {
           alert('error:' + error)
@@ -82,7 +82,7 @@ export default {
     } else {
       Axios.get('api/v1/release-application/userId/' + this.id, {})
         .then((response) => {
-          this.rentApplicationList = response.data
+          this.rentApplicationList = response.data.results
         })
         .catch((error) => {
           alert('error:' + error)
