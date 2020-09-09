@@ -6,7 +6,8 @@
               stripe
               @row-click="enterEquipment"
               id="equipment-table"
-              class="table">
+              class="table"
+              height=600>
       <el-table-column prop="id"
                        label="ID"
                        width="40">
@@ -50,7 +51,6 @@
   position: relative;
   margin: 0 auto;
   width: 60%;
-  max-height: 600px;
 }
 </style>
 
@@ -64,7 +64,7 @@ export default {
   },
   created: function () {
     // 获取设备列表
-    Axios.get('api/v1/equipment', {})
+    Axios.get('api/v1/equipment')
       .then((response) => {
         this.equipmentList = response.data
       }).catch((error) => {

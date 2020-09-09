@@ -50,6 +50,7 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
+import qs from 'qs'
 export default {
   props: {
     id: Number
@@ -74,6 +75,7 @@ export default {
     createEquipment: function () {
       axios.post('/api/v1/equipment', this.data)
         .then((response) => {
+          console.log(response)
           this.$message(response.data.equipment + '创建成功！')
         })
         .catch((error) => {
