@@ -25,6 +25,14 @@ export default new Vuex.Store({
       localStorage.user = JSON.stringify(payload.user)
       state.isAdmin = payload.isAdmin
       localStorage.isAdmin = payload.isAdmin
+    },
+    resetState (state) {
+      state.userKey = null // 用户key
+      state.isAdmin = false
+      state.user = {}
+      localStorage.user = JSON.stringify({})
+      localStorage.isAdmin = false
+      localStorage.userKey = null
     }
     // 刷新页面后还原state
     // resetState(state, payload) {
@@ -86,7 +94,7 @@ export default new Vuex.Store({
       }
       return state.userKey
     },
-    getUser (state) {
+    getCurrentUser (state) {
       if (localStorage.user) {
         state.user = JSON.parse(localStorage.user)
       }

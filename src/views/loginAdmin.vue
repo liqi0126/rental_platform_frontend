@@ -72,6 +72,7 @@ export default {
       })
         .then((response) => {
           this.$store.commit('setCurrentUser', { user: response.data, isAdmin: true })
+          location.reload()
           this.$router.push('/admin')
         })
         .catch((error) => {
@@ -89,6 +90,11 @@ export default {
       this.$router.push({
         path: '/adminLogin'
       })
+    }
+  },
+  created () {
+    if (this.$store.getters.getUserKey !== 'null') {
+      this.$router.push('/admin')
     }
   }
 }

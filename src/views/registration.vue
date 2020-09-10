@@ -121,6 +121,11 @@ export default {
         return false
       }
     }
+  },
+  created () {
+    if (this.$store.getters.getUserKey !== 'null') {
+      this.$router.push('/admin')
+    }
   }
 }
 </script>

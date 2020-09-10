@@ -30,6 +30,11 @@ export default {
     'renter-application-table': renterApplicationTable,
     'rent-application-table': rentApplicationTable,
     'release-application-table': releaseApplicationTable
+  },
+  created () {
+    if (this.$store.getters.getUserKey === 'null') {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

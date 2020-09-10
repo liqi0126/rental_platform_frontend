@@ -74,6 +74,7 @@
 </style>
 
 <script>
+import Axios from 'axios'
 export default {
   data () {
     return {
@@ -93,11 +94,44 @@ export default {
     },
     logout () {
       console.log('logout')
+      Axios({
+        url: 'api/v1/rest-auth/logout/',
+        method: 'post',
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
+        .then((response) => {
+          console.log(response)
+          this.$store.commit('resetState')
+          location.reload()
+          this.$router.push('/login')
+        })
+        .catch((error) => {
+          this.$alert(error.request.response, '登出失败！')
+          console.log(error.request)
+        })
     },
     search () {
       console.log('search')
       console.log(this.select)
       console.log(this.inputSearch)
+    }
+  },
+  mounted () {
+    console.log('nav')
+    // console.log(this.$store.getters.getCurrentUser)
+    // console.log(this.$store.getters.getUserKey)
+    if (this.$store.getters.getUserKey !== 'null') {
+      this.hasLogin = true
+    }
+  },
+  created () {
+    console.log('nav')
+    // console.log(this.$store.getters.getCurrentUser)
+    // console.log(this.$store.getters.getUserKey)
+    if (this.$store.getters.getUserKey !== 'null') {
+      this.hasLogin = true
     }
   }
 }

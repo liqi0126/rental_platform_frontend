@@ -53,7 +53,6 @@ export default {
       }
       Axios({
         url: 'api/v1/rest-auth/login/',
-        // 'api/v1/admin/login/'
         method: 'post',
         data: data
       })
@@ -76,6 +75,7 @@ export default {
       })
         .then((response) => {
           this.$store.commit('setCurrentUser', { user: response.data, isAdmin: false })
+          location.reload()
           this.$router.push('/admin')
         })
         .catch((error) => {
@@ -94,7 +94,13 @@ export default {
         path: '/adminLogin'
       })
     }
+  },
+  created () {
+    if (this.$store.getters.getUserKey !== 'null') {
+      this.$router.push('/admin')
+    }
   }
+
 }
 </script>
 
