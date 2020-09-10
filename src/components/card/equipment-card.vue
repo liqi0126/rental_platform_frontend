@@ -29,8 +29,16 @@
                     :disabled="diseditable"></el-input>
         </el-form-item>
         <el-form-item label='状态'>
-          <el-input v-model="data.status"
-                    :disabled="diseditable"></el-input>
+          <!-- <el-input v-model="data.status"
+                    :disabled="diseditable"></el-input> -->
+          <el-select v-model="data.status" :disabled="diseditable">
+            <el-option
+              v-for="item in status_options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label='租期'>
           <el-input v-model="data.lease_term_begin"
@@ -104,7 +112,23 @@ export default {
         user_comments: null,
         owner: 0,
         current_tenant: null
-      }
+      },
+      status_options: [{
+        value: 'UNR',
+        label: 'Unreleased'
+      }, {
+        value: 'UNA',
+        label: 'Unapproved'
+      }, {
+        value: 'AVA',
+        label: 'Available'
+      }, {
+        value: 'REN',
+        label: 'Rented'
+      }, {
+        value: 'RET',
+        label: 'Returned'
+      }]
     }
   },
   created: function () {
