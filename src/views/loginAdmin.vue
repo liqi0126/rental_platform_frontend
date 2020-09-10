@@ -73,9 +73,7 @@ export default {
         .then((response) => {
           if (response.data.is_staff === false) {
             this.$alert('抱歉，您没有管理员权限')
-            // setTimeout(function () {
             this.logout()
-            // }, '2000')
           } else {
             this.$store.commit('setCurrentUser', { user: response.data, isAdmin: true })
             location.reload()
@@ -100,10 +98,7 @@ export default {
       })
         .then(() => {
           this.$store.commit('resetState')
-          location.reload()
-          setTimeout(function () {
-            this.$router.push('/login')
-          }, '1000')
+          this.$router.push('/login')
         })
         .catch((error) => {
           this.$alert(error.request.response, '登出失败！')
