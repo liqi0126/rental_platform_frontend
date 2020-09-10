@@ -2,7 +2,8 @@
   <div>
       <release-application-table :id="-1"
                                class="table"
-                               :pageSize="5"></release-application-table>
+                               height="700"
+                               :pageSize="10"></release-application-table>
   </div>
 </template>
 

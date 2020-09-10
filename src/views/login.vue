@@ -78,9 +78,7 @@ export default {
           // console.log(response.data)
           this.$store.commit('setCurrentUser', { user: response.data, isAdmin: false })
           location.reload()
-          setTimeout(function () {
-            this.$router.push('/index')
-          }, '1000')
+          this.$router.push('/index')
         })
         .catch((error) => {
           this.$alert(error.request.response, '登录失败！')

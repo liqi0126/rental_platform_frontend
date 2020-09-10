@@ -1,7 +1,8 @@
 <template>
   <div>
       <renter-application-table :id="-1"
-                              :pageSize="5"
+                              height="700"
+                              :pageSize="10"
                               class="table"></renter-application-table>
   </div>
 </template>

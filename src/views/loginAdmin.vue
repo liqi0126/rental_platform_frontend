@@ -20,6 +20,8 @@
             <el-button type="primary"
                        @click="submitForm(userData)"
                        style="width:100%;">登录</el-button>
+            <p class="login"
+               @click="gotoLogin">不是管理员？普通登录</p>
           </el-form-item>
         </el-form>
       </div>
@@ -41,6 +43,11 @@ export default {
     }
   },
   methods: {
+    gotoLogin () {
+      this.$router.push({
+        path: '/login'
+      })
+    },
     // <!--登陆-->
     submitForm () {
       const data = {
@@ -53,7 +60,6 @@ export default {
         data: data
       })
         .then((response) => {
-          console.log(response.data)
           this.$store.commit('setUserKey', response.data.key)
           this.getCurrentUserData()
         })
@@ -77,9 +83,7 @@ export default {
           } else {
             this.$store.commit('setCurrentUser', { user: response.data, isAdmin: true })
             location.reload()
-            setTimeout(function () {
-              this.$router.push('/index')
-            }, '1000')
+            this.$router.push('/index')
           }
         })
         .catch((error) => {

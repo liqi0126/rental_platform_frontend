@@ -1,7 +1,8 @@
 <template>
   <div>
       <user-table class="table"
-                :pageSize="5"></user-table>
+                height="700"
+                :pageSize="10"></user-table>
   </div>
 </template>
 

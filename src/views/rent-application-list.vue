@@ -2,7 +2,8 @@
   <div>
       <rent-application-table :id="-1"
                             class="table"
-                            :pageSize="5"></rent-application-table>
+                            height="700"
+                            :pageSize="10"></rent-application-table>
   </div>
 </template>
 

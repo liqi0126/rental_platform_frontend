@@ -168,12 +168,13 @@ export default {
         .then(() => {
           this.$store.commit('resetState')
           location.reload()
-          setTimeout(function () {
-            this.$router.push('/login')
-          }, '1000')
+          this.$router.push('/login')
         })
         .catch((error) => {
-          this.$alert(error.response.statusText, '登出失败！')
+          // this.$alert(error.response.statusText, '登出失败！')
+          this.$store.commit('resetState')
+          location.reload()
+          this.$router.push('/login')
           console.log(error.request)
         })
     },
@@ -183,12 +184,10 @@ export default {
       console.log(this.inputSearch)
     }
   },
-  created () {
+  mounted () {
     if (this.$store.getters.getUserKey !== 'null') {
       this.hasLogin = true
-      this.isAdmin = (this.$store.getters.isAdmin === 'true')
-      // console.log(this.hasLogin)
-      // console.log(this.isAdmin)
+      this.isAdmin = this.$store.getters.isAdmin
     }
   }
 }
