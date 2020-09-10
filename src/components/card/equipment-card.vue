@@ -1,6 +1,9 @@
 // writen by xyh
 <template>
   <div>
+    <el-card class="card">
+      设备详情页
+    </el-card>
     <el-card class='card'>
       <el-form class="form"
                label-width="100px">
