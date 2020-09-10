@@ -112,7 +112,9 @@ export default {
         params: {
           [this.select]: this.input,
           offset: (page - 1) * this.pageSize,
-          limit: this.pageSize
+          limit: this.pageSize,
+          // eslint-disable-next-line @typescript-eslint/camelcase
+          is_released: true
         }
       })
         .then((response) => {

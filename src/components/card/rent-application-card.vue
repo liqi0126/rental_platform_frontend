@@ -21,13 +21,13 @@
                     type='textarea'
                     :disabled="!(isAdmin||isborrower)"></el-input>
         </el-form-item>
-        <el-form-item label='出租者评价'>
+        <el-form-item label='出租者审批评价'>
           <el-input v-model="rent_data.comments"
                     type='textarea'
                     :disabled="!(isAdmin||isrenter)"></el-input>
         </el-form-item>
         <el-form-item label='租赁者评价'>
-          <el-input v-model="rent_data.comments"
+          <el-input v-model="rent_data.user_comments"
                     type='textarea'
                     :disabled="!(isAdmin||isborrower)"></el-input>
         </el-form-item>
