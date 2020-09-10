@@ -56,7 +56,7 @@ export default {
         data: data
       })
         .then((response) => {
-          this.$store.commit('setUserKey', { user: response.data.key, isAdmin: false })
+          this.$store.commit('setUserKey', response.data.key)
           this.getCurrentUserData()
         })
         .catch((error) => {
@@ -73,7 +73,7 @@ export default {
         }
       })
         .then((response) => {
-          this.$store.commit('setUser', response.data)
+          this.$store.commit('setCurrentUser', { user: response.data, isAdmin: false })
           this.$router.push('/admin')
         })
         .catch((error) => {

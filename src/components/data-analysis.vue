@@ -192,32 +192,32 @@ export default {
     return {
       // 用户信息
       users: [],
-      users_num: null,
-      users_active_num: null,
-      users_renter_num: null,
-      users_staff_num: null,
-      users_superUser_num: null,
+      users_num: 0,
+      users_active_num: 0,
+      users_renter_num: 0,
+      users_staff_num: 0,
+      users_superUser_num: 0,
       activeRate: 0, // 设备利用率
       // 设备信息
       equipments: [],
-      equipments_num: null,
-      equip_unrelased_num: null,
-      equip_unapproved_num: null,
-      equip_available_num: null,
-      equip_rented_num: null,
-      equip_returned_num: null,
+      equipments_num: 0,
+      equip_unrelased_num: 0,
+      equip_unapproved_num: 0,
+      equip_available_num: 0,
+      equip_rented_num: 0,
+      equip_returned_num: 0,
       utilizationRate: 0, // 设备利用率
       // 申请信息
       appli_release: [],
       appli_renter: [],
       appli_rent: [],
-      applications_num: null,
-      appli_release_num: null,
-      appli_renter_num: null,
-      appli_rent_num: null,
-      appli_unapproved_num: null,
-      appli_accepted_num: null,
-      appli_rejected_num: null,
+      applications_num: 0,
+      appli_release_num: 0,
+      appli_renter_num: 0,
+      appli_rent_num: 0,
+      appli_unapproved_num: 0,
+      appli_accepted_num: 0,
+      appli_rejected_num: 0,
       approvedRate: 0 // 设备利用率
     }
   },
@@ -229,10 +229,6 @@ export default {
   },
   methods: {
     getApplications () {
-      this.applications_num = 0
-      this.appli_unapproved_num = 0
-      this.appli_accepted_num = 0
-      this.appli_rejected_num = 0
       // release_application
       Axios({
         url: 'api/v1/release-application',
@@ -315,10 +311,6 @@ export default {
         })
     },
     analysisUsers () {
-      this.users_active_num = 0
-      this.users_renter_num = 0
-      this.users_staff_num = 0
-      this.users_superUser_num = 0
       for (const index in this.users) {
         const newUser = this.users[index]
         if (newUser.is_active === true) {
@@ -337,11 +329,6 @@ export default {
       if (this.users_num !== 0) { this.activeRate = parseInt((this.users_active_num / this.users_num) * 100) } else this.activeRate = 0
     },
     analysisEquipments () {
-      this.equip_unrelased_num = 0
-      this.equip_unapproved_num = 0
-      this.equip_available_num = 0
-      this.equip_rented_num = 0
-      this.equip_returned_num = 0
       for (const index in this.equipments) {
         const equip = this.equipments[index]
         if (equip.status === 'AVA') {
