@@ -1,6 +1,10 @@
 // writen by xyh
 <template>
   <div>
+    <el-card class="card"
+             style="font-size:24px;">
+      申请添加设备
+    </el-card>
     <el-card class='card'>
       <el-form class="form"
                label-width="100px">
@@ -50,7 +54,7 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
-import qs from 'qs'
+// import qs from 'qs'
 export default {
   props: {
     id: Number

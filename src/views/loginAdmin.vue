@@ -2,7 +2,7 @@
   <div>
     <div class="register-wrapper">
       <div id="register">
-        <p class="title">登录</p>
+        <p class="title">管理员登录</p>
         <el-form :model="userData"
                  ref="userData"
                  label-width="0"
@@ -20,10 +20,6 @@
             <el-button type="primary"
                        @click="submitForm(userData)"
                        style="width:100%;">登录</el-button>
-            <p class="login"
-               @click="gotoLogon">还没有账号？立即注册</p>
-            <p class="login"
-               @click="gotoAdminLogin">我是管理员？前往登录</p>
           </el-form-item>
         </el-form>
       </div>
@@ -52,14 +48,14 @@ export default {
         password: this.userData.pass
       }
       Axios({
-        url: 'api/v1/rest-auth/login/',
-        // 'api/v1/admin/login/'
+        url: 'api/v1/admin/login/',
         method: 'post',
         data: data
       })
         .then((response) => {
+          console.log(response.data)
           this.$store.commit('setUserKey', response.data.key)
-          this.getCurrentUserData()
+        //   this.getCurrentUserData()
         })
         .catch((error) => {
           this.$alert(error.request.response, '登录失败！')
@@ -75,7 +71,7 @@ export default {
         }
       })
         .then((response) => {
-          this.$store.commit('setCurrentUser', { user: response.data, isAdmin: false })
+          this.$store.commit('setCurrentUser', { user: response.data, isAdmin: true })
           this.$router.push('/admin')
         })
         .catch((error) => {
