@@ -51,31 +51,6 @@
         <el-menu-item index="5-1">申请添加设备</el-menu-item>
         <el-menu-item index="5-4">申请成为租赁者</el-menu-item>
       </el-submenu>
-      <el-menu-item style="float:right;"
-                    v-if="hasLogin">
-        <div>
-          <el-input placeholder="请输入搜索内容"
-                    v-model="inputSearch"
-                    class="input-with-select"
-                    style="width:430px;"
-                    size="medium">
-            <el-select v-model="select"
-                       slot="prepend"
-                       placeholder="设备"
-                       style="width:90px;">
-              <el-option label="设备"
-                         value="1"></el-option>
-              <el-option label="用户"
-                         value="2"></el-option>
-            </el-select>
-            <el-button index="6"
-                       slot="append"
-                       icon="el-icon-search"
-                       size="mini"
-                       @click="search"></el-button>
-          </el-input>
-        </div>
-      </el-menu-item>
       <el-menu-item style="margin-right:100px;float:right;font-size:19px;"
                     v-if="!hasLogin"><a href="/login">未登录</a></el-menu-item>
     </el-menu>
@@ -118,11 +93,8 @@ export default {
           break
         }
         case '4-1': {
-          // console.log('here')
-          // console.log(String(this.$store.getters.getCurrentUser.id))
           const path = '/user/' + String(this.$store.getters.getCurrentUser.id)
           this.$router.push(path)
-          // console.log(path)
           break
         }
         case '5-1': {
