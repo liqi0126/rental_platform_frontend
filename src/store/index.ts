@@ -57,7 +57,7 @@ export default new Vuex.Store({
     },
     isAdmin (state) {
       if (localStorage.isAdmin) {
-        state.isAdmin = localStorage.isAdmin
+        state.isAdmin = localStorage.isAdmin === 'true'
       }
       return state.isAdmin
     }

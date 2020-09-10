@@ -27,17 +27,17 @@
           <el-collapse accordion>
             <el-collapse-item title="设备"
                               name="1">
-              <equipment-table :id="id"></equipment-table>
+              <equipment-table :id="id"
+                               pageSize='5'
+                               height="400"></equipment-table>
             </el-collapse-item>
             <el-collapse-item title="租赁请求"
                               name="2">
-              <rent-application-table :id="id"></rent-application-table>
+              <rent-application-table :id="id"
+                                      pageSize='5'
+                                      height="400"></rent-application-table>
             </el-collapse-item>
           </el-collapse>
-        </el-form-item>
-        <el-form-item label='密码'
-                      v-if="(isOwner||isAdmin)">
-          <el-input v-model="data.password"></el-input>
         </el-form-item>
         <el-form-item label='创建时间'>
           <el-input v-model="data.created_at"
@@ -68,8 +68,9 @@
                        :disabled="!isAdmin">可登录</el-checkbox>
         </el-form-item>
       </el-form>
-      <el-button class='button'
-                 type="primary">提交修改</el-button>
+      <change-button :id="id"
+                     :data="data"
+                     target="user"></change-button>
     </el-card>
   </div>
 </template>
@@ -97,10 +98,12 @@
 import axios from 'axios'
 import equipmentTable from '../table/equipment-table'
 import rentApplicationTable from '../table/rent-application-table'
+import changeButton from '../button/change-button'
 export default {
   components: {
     'equipment-table': equipmentTable,
-    'rent-application-table': rentApplicationTable
+    'rent-application-table': rentApplicationTable,
+    'change-button': changeButton
   },
   props: {
     id: Number

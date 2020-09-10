@@ -44,7 +44,7 @@
       </el-form>
       <change-button :id="id"
                      :data="data"
-                     target="equipment"></change-button>
+                     target="renter-application"></change-button>
       <rej-button :id="id"
                   target="renter-application"></rej-button>
       <approve-button :id="id"

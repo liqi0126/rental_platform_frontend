@@ -58,10 +58,10 @@ export default {
   },
   methods: {
     createReleaseApplication: function () {
-      axios.post('/api/v1/release-application', this.data)
+      axios.post('/api/v1/release-application/', this.data)
         .then((response) => {
           console.log(response)
-          this.$message(response.data.equipment + '创建成功！')
+          this.$message('创建成功！')
         })
         .catch((error) => {
           console.log(error.response)
