@@ -78,7 +78,7 @@ export default {
             this.$store.commit('setCurrentUser', { user: response.data, isAdmin: true })
             location.reload()
             setTimeout(function () {
-              this.$router.push('/admin')
+              this.$router.push('/index')
             }, '1000')
           }
         })
@@ -119,7 +119,7 @@ export default {
   },
   created () {
     if (this.$store.getters.getUserKey !== 'null') {
-      this.$router.push('/admin')
+      this.$router.push('/index')
     }
   }
 }

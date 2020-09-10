@@ -13,6 +13,16 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
+    path: '/index',
+    name: 'index',
+    component: () => import('../views/index.vue')
+  },
+  {
+    path: '/userList',
+    name: 'userList',
+    component: () => import('../views/user-list.vue')
+  },
+  {
     path: '/user/:userId',
     name: 'user',
     component: () => import('../views/user.vue')
@@ -76,6 +86,21 @@ const routes: Array<RouteConfig> = [
     path: '/create-release-application/:equipmentId',
     name: 'creat-release-application',
     component: () => import('../views/create-release-application.vue')
+  },
+  {
+    path: '/renter-application-list',
+    name: 'renter-application-list',
+    component: () => import('../views/renter-application-list.vue')
+  },
+  {
+    path: '/rent-application-list',
+    name: 'rent-application-list',
+    component: () => import('../views/rent-application-list.vue')
+  },
+  {
+    path: '/release-application-list',
+    name: 'release-application-list',
+    component: () => import('../views/release-application-list.vue')
   }
 ]
 

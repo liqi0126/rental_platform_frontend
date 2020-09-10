@@ -75,10 +75,11 @@ export default {
         }
       })
         .then((response) => {
+          // console.log(response.data)
           this.$store.commit('setCurrentUser', { user: response.data, isAdmin: false })
           location.reload()
           setTimeout(function () {
-            this.$router.push('/admin')
+            this.$router.push('/index')
           }, '1000')
         })
         .catch((error) => {
@@ -100,7 +101,7 @@ export default {
   },
   created () {
     if (this.$store.getters.getUserKey !== 'null') {
-      this.$router.push('/admin')
+      this.$router.push('/index')
     }
   }
 

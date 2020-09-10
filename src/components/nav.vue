@@ -18,12 +18,19 @@
         </a>
       </div>
       <el-menu-item index="1"
-                    style="margin-left:50px;"
-                    v-if="hasLogin">设备列表</el-menu-item>
+                    style="margin-left:30px;"
+                    v-if="hasLogin === true">设备列表</el-menu-item>
       <el-menu-item index="2"
-                    v-if="hasLogin">用户列表</el-menu-item>
+                    v-if="hasLogin === true">用户列表</el-menu-item>
+      <el-submenu index="6"
+                  v-if="hasLogin === true && isAdmin === true">
+        <template slot="title">申请列表</template>
+        <el-menu-item index="6-1">租借者申请</el-menu-item>
+        <el-menu-item index="6-2">租借申请</el-menu-item>
+        <el-menu-item index="6-3">上架申请</el-menu-item>
+      </el-submenu>
       <el-menu-item index="3"
-                    v-if="hasLogin">平台信息</el-menu-item>
+                    v-if="hasLogin === true && isAdmin === true">平台信息</el-menu-item>
       <el-submenu index="4"
                   style="float:right;margin-right:100px;"
                   v-if="hasLogin">
@@ -34,20 +41,17 @@
           </div>
         </template>
         <el-menu-item index="4-1">个人中心</el-menu-item>
-        <el-menu-item index="4-2">我的申请</el-menu-item>
         <el-menu-item index="4-3"
                       @click="logout">退出登录</el-menu-item>
       </el-submenu>
       <el-submenu index="5"
-                  style="float:right;margin-right:20px;"
+                  style="float:right;"
                   v-if="hasLogin">
         <template slot="title">发布申请</template>
         <el-menu-item index="5-1">申请添加设备</el-menu-item>
-        <el-menu-item index="5-2">申请设备上线</el-menu-item>
-        <el-menu-item index="5-3">申请租赁设备</el-menu-item>
         <el-menu-item index="5-4">申请成为租赁者</el-menu-item>
       </el-submenu>
-      <el-menu-item style="float:right;margin-right:50px;"
+      <el-menu-item style="float:right;"
                     v-if="hasLogin">
         <div>
           <el-input placeholder="请输入搜索内容"
@@ -64,7 +68,7 @@
               <el-option label="用户"
                          value="2"></el-option>
             </el-select>
-            <el-button index="4"
+            <el-button index="6"
                        slot="append"
                        icon="el-icon-search"
                        size="mini"
@@ -87,9 +91,10 @@ export default {
   data () {
     return {
       hasLogin: false,
-      activeIndex: '',
+      activeIndex: '1',
       inputSearch: '',
-      select: '1'
+      select: '1',
+      isAdmin: false
     }
   },
   methods: {
@@ -97,29 +102,52 @@ export default {
       if (key === null) return
       console.log(key)
       switch (key) {
+        case '1': {
+          this.activeIndex = '1'
+          this.$router.push('/index')
+          break
+        }
+        case '2': {
+          this.activeIndex = '2'
+          this.$router.push('/userList')
+          break
+        }
         case '3': {
-          console.log('平台信息界面')
+          this.activeIndex = '3'
           this.$router.push('/analysis')
           break
         }
+        case '4-1': {
+          // console.log('here')
+          // console.log(String(this.$store.getters.getCurrentUser.id))
+          const path = '/user/' + String(this.$store.getters.getCurrentUser.id)
+          this.$router.push(path)
+          // console.log(path)
+          break
+        }
         case '5-1': {
-          console.log('申请添加设备')
+          this.activeIndex = '5'
           this.$router.push('/create-equipment')
           break
         }
-        case '5-2': {
-          console.log('申请设备上线')
-          this.$router.push('/admin')
-          break
-        }
-        case '5-3': {
-          console.log('申请租赁设备')
-          this.$router.push('/admin')
-          break
-        }
         case '5-4': {
-          console.log('申请成为租赁者')
+          this.activeIndex = '5'
           this.$router.push('/create-renter-application')
+          break
+        }
+        case '6-1': {
+          this.activeIndex = '6'
+          this.$router.push('/renter-application-list')
+          break
+        }
+        case '6-2': {
+          this.activeIndex = '6'
+          this.$router.push('/rent-application-list')
+          break
+        }
+        case '6-3': {
+          this.activeIndex = '6'
+          this.$router.push('/release-application-list')
           break
         }
       }
@@ -157,6 +185,9 @@ export default {
   created () {
     if (this.$store.getters.getUserKey !== 'null') {
       this.hasLogin = true
+      this.isAdmin = (this.$store.getters.isAdmin === 'true')
+      // console.log(this.hasLogin)
+      // console.log(this.isAdmin)
     }
   }
 }

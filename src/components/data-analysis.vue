@@ -277,7 +277,7 @@ export default {
     },
     getUsers () {
       Axios({
-        url: 'api/v1/users',
+        url: 'api/v1/user',
         method: 'get'
       })
         .then((response) => {

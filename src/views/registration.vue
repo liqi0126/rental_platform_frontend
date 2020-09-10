@@ -123,7 +123,7 @@ export default {
   },
   created () {
     if (this.$store.getters.getUserKey !== 'null') {
-      this.$router.push('/admin')
+      this.$router.push('/index')
     }
   }
 }
