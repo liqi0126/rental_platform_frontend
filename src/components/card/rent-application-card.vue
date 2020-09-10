@@ -74,17 +74,23 @@
       </el-form>
       <change-button :id="id"
                      :data="rent_data"
-                     target="rent-application"></change-button>
+                     target="rent-application"
+                     v-if="isAdmin||isHirer"></change-button>
       <rej-button :id="id"
-                  target="rent-application"></rej-button>
+                  target="rent-application"
+                  v-if="isAdmin||isRenter"></rej-button>
       <approve-button :id="id"
-                      target="rent-application"></approve-button>
+                      target="rent-application"
+                      v-if="isAdmin||isRenter"></approve-button>
       <rent-return-button :id="id"
-                          target="rent-application"></rent-return-button>
+                          target="rent-application"
+                          v-if="isHirer||isAdmin"></rent-return-button>
       <rent-return-confirm-button :id="id"
-                                  target="rent-application"></rent-return-confirm-button>
+                                  target="rent-application"
+                                  v-if="isAdmin||isRenter"></rent-return-confirm-button>
       <del-button :id="id"
-                  target="rent-application"></del-button>
+                  target="rent-application"
+                  v-if="isAdmin||(isHirer&&rent_data.status==='UNA')"></del-button>
     </el-card>
   </div>
 </template>
