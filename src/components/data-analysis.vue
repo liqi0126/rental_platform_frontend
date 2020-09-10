@@ -6,7 +6,8 @@
         <div style="text-align:center;">
           <el-progress type="circle"
                       :percentage="activeRate"
-                      :width=126></el-progress>
+                      :width=126
+                      color="#76DA93"></el-progress>
           <h3>
             用户活跃率
           </h3>
@@ -26,7 +27,8 @@
         <div style="text-align:center;">
           <el-progress type="circle"
                       :percentage="approvedRate"
-                      :width=126></el-progress>
+                      :width=126
+                      color="#F18E24"></el-progress>
           <h3>
             申请通过率
           </h3>
