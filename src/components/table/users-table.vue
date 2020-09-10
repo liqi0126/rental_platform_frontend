@@ -2,6 +2,8 @@
 <template>
   <div>
     <el-card class="title-card">所有用户</el-card>
+    <search-filter :options="options"
+                   @search="searchAndFilter"></search-filter>
     <el-card class="table-card">
       <el-table :data="userList"
                 @row-click='enterUser'
@@ -57,15 +59,25 @@
 
 <script>
 import Axios from 'axios'
+import searchAndFilter from '../search&filter'
 export default {
+  components: {
+    'search-filter': searchAndFilter
+  },
   data: function () {
     return {
-      userList: []
+      userList: [],
+      options: [
+        { value: 'search', label: '全部搜索' },
+        { value: 'first_name', label: '名筛选' },
+        { value: 'last_name', label: '姓筛选' },
+        { value: 'address', label: '地址筛选' }
+      ]
     }
   },
   created: function () {
     // 获取用户列表
-    Axios.get('api/v1/users', {})
+    Axios.get('api/v1/user', {})
       .then((response) => {
         this.userList = response.data.results
         console.log(this.userList)
@@ -77,6 +89,19 @@ export default {
   methods: {
     enterUser: function (row) {
       this.$router.push({ name: 'user', params: { userId: row.id } })
+    },
+    searchAndFilter: function (select, input) {
+      console.log(select)
+      console.log(input)
+      Axios.get('/api/v1/user', { params: { [select]: input } })
+        .then((response) => {
+          this.userList = response.data.results
+          console.log(this.userList)
+        })
+        .catch((error) => {
+          console.log(error.response)
+          alert('error:' + error)
+        })
     }
   }
 }

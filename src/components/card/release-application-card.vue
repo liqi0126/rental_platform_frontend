@@ -14,7 +14,7 @@
         </el-form-item>
         <el-form-item label='拥有者ID'>
           <el-input v-model="data.owner"
-                    :disabled="diseditable"
+                    :disabled="true"
                     style="width:80%;"></el-input>
           <el-button type="primary"
                      style="margin-left:20px;"
@@ -22,24 +22,24 @@
         </el-form-item>
         <el-form-item label='创建时间'>
           <el-input v-model="data.created_at"
-                    :disabled="diseditable"></el-input>
+                    :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label='状态'>
           <!-- <el-input v-model="data.status"
                     :disabled="diseditable"></el-input> -->
-          <el-select v-model="data.status" :disabled="diseditable">
-            <el-option
-              v-for="item in status_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
+          <el-select v-model="data.status"
+                     :disabled="!isAdmin">
+            <el-option v-for="item in status_options"
+                       :key="item.value"
+                       :label="item.label"
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label='评价'>
           <el-input v-model="data.comments"
                     type='textarea'
-                    :disabled="diseditable"></el-input>
+                    :disabled="!(isAdmin||isOwner)"></el-input>
         </el-form-item>
         <el-form-item label='设备ID'>
           <el-input v-model="data.equipment"
@@ -52,13 +52,17 @@
       </el-form>
       <change-button :id="id"
                      :data="data"
-                     target="release-application"></change-button>
+                     target="release-application"
+                     v-if="(isAdmin||isOwner)"></change-button>
       <rej-button :id="id"
-                  target="release-application"></rej-button>
+                  target="release-application"
+                  v-if="isAdmin"></rej-button>
       <approve-button :id="id"
-                      target="release-application"></approve-button>
+                      target="release-application"
+                      v-if="isAdmin"></approve-button>
       <del-button :id="id"
-                  target="release-application"></del-button>
+                  target="release-application"
+                  v-if="(isAdmin||isOwner)"></del-button>
     </el-card>
   </div>
 </template>

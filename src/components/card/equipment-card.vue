@@ -25,7 +25,7 @@
         </el-form-item>
         <el-form-item label='创建时间'>
           <el-input v-model="data.created_at"
-                    :disabled="diseditable"></el-input>
+                    :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label='地址'>
           <el-input v-model="data.address"
@@ -106,8 +106,6 @@ export default {
   },
   data: function () {
     return {
-      isOwner: (this.id === this.$store.state.user.id),
-      isAdmin: this.$store.state.isAdmin,
       data: {
         id: 0,
         name: '',
@@ -122,7 +120,11 @@ export default {
         user_comments: null,
         owner: 0,
         current_tenant: null
+
       },
+      isOwner: false,
+      isAdmin: this.$store.state.isAdmin,
+
       status_options: [{
         value: 'UNR',
         label: 'Unreleased'
@@ -146,6 +148,7 @@ export default {
     axios.get('/api/v1/equipment/' + this.id, {})
       .then((response) => {
         this.data = response.data
+        this.isOwner = (this.data.owner === this.$store.state.user.id)
       })
       .catch((error) => {
         alert(error)

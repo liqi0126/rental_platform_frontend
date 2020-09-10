@@ -2,6 +2,8 @@
 <template>
   <div>
     <el-card class="title-card">所有租借者申请</el-card>
+    <search-filter :options="options"
+                   @search="searchAndFilter"></search-filter>
     <el-card class="table-card">
       <el-table :data="renterApplicationList"
                 stripe
@@ -49,20 +51,25 @@
   margin: 0 auto;
   max-height: 600px;
 }
-.table-card {
-  margin-bottom: 40px;
-}
 </style>
 
 <script>
 import Axios from 'axios'
+import searchAndFilter from '../search&filter'
 export default {
+  components: {
+    'search-filter': searchAndFilter
+  },
   props: {
     id: Number
   },
   data: function () {
     return {
-      renterApplicationList: []
+      renterApplicationList: [],
+      options: [
+        { value: 'search', label: '全部搜索' },
+        { value: 'status', label: '筛选：状态' }
+      ]
     }
   },
   created: function () {
@@ -88,6 +95,27 @@ export default {
   methods: {
     enter: function (row) {
       this.$router.push({ name: 'renter-application', params: { renterApplicationId: row.id } })
+    },
+    searchAndFilter: function (select, input) {
+      console.log(select)
+      console.log(input)
+      if (this.id === -1) {
+        Axios.get('/api/v1/renter-application/', { params: { [select]: input } })
+          .then((response) => {
+            this.renterApplicationList = response.data.results
+            console.log(response)
+          }).catch((error) => {
+            alert('error:' + error)
+          })
+      } else {
+        Axios.get('/api/v1/renter-application/userId/' + this.id, { params: { [select]: input } })
+          .then((response) => {
+            this.renterApplicationLis = response.data.results
+          }).catch((error) => {
+            console.log(error.response)
+            alert('error:' + error)
+          })
+      }
     }
   }
 }
