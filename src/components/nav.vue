@@ -93,11 +93,8 @@ export default {
           break
         }
         case '4-1': {
-          // console.log('here')
-          // console.log(String(this.$store.getters.getCurrentUser.id))
           const path = '/user/' + String(this.$store.getters.getCurrentUser.id)
           this.$router.push(path)
-          // console.log(path)
           break
         }
         case '5-1': {
