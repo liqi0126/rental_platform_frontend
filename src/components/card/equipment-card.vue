@@ -93,6 +93,9 @@
       <rent-return-confirm-button :id="rentAppId"
                                   target="rent-application"
                                   v-if="(isAdmin||isOwner)&&my_data.status==='RET'"></rent-return-confirm-button>
+      <el-button v-if="(isAdmin||isOwner)&&my_data.status=='AVA'"
+                 @click="withDrawEquipment"
+                 type='warning'>下架</el-button>
 
     </el-card>
   </div>
@@ -187,6 +190,7 @@ export default {
         this.rentApplicationList = this.my_data.rent_applications
         this.getRentApp()
         this.isOwner = (this.my_data.owner === this.$store.getters.getCurrentUser.id)
+        this.isBorrower = (this.my_data.borrower === this.$store.getters.getCurrentUser.id)
       })
       .catch((error) => {
         alert(error)
@@ -207,17 +211,27 @@ export default {
     },
     getRentApp: function () {
       for (const item of this.rentApplicationList) {
-        console.log(item)
         if (item.applying === true) {
           this.applying = true
           this.rentAppId = item.id
           this.borrower = item.borrower
           this.my_data.lease_term_end = item.lease_term_end
           this.my_data.lease_term_begin = item.lease_term_begin
-
+          console.log(item)
           return
         }
       }
+    },
+    withDrawEquipment: function () {
+      axios.post('/api/v1/equipment/' + this.id + '/withdraw/')
+        .then(() => {
+          this.$message('下架成功')
+          location.reload()
+        })
+        .catch((error) => {
+          alert('ERROR:' + error)
+          console.log(error.response)
+        })
     }
   }
 }
