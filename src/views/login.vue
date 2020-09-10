@@ -34,6 +34,7 @@
 <script>
 import Axios from 'axios'
 export default {
+
   name: 'Login',
   data () {
     return {
@@ -44,7 +45,6 @@ export default {
     }
   },
   methods: {
-
     // <!--登陆-->
     submitForm () {
       const data = {
@@ -76,7 +76,9 @@ export default {
         .then((response) => {
           this.$store.commit('setCurrentUser', { user: response.data, isAdmin: false })
           location.reload()
-          this.$router.push('/admin')
+          setTimeout(function () {
+            this.$router.push('/admin')
+          }, '1000')
         })
         .catch((error) => {
           this.$alert(error.request.response, '登录失败！')

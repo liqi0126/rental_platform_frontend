@@ -105,7 +105,9 @@ export default {
           console.log(response)
           this.$store.commit('resetState')
           location.reload()
-          this.$router.push('/login')
+          setTimeout(function () {
+            this.$router.push('/login')
+          }, '1000')
         })
         .catch((error) => {
           this.$alert(error.request.response, '登出失败！')

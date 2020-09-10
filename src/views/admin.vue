@@ -32,9 +32,11 @@ export default {
     'release-application-table': releaseApplicationTable
   },
   created () {
+    console.log(this.$store.getters.getCurrentUser)
     if (this.$store.getters.getUserKey === 'null') {
       this.$router.push('/login')
     }
+    // location.reload()
   }
 }
 </script>

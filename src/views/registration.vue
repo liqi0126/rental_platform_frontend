@@ -98,7 +98,6 @@ export default {
         .then((response) => {
           this.$message('确认邮箱已发送')
           this.$router.push('/login')
-          // console.log(response)
         })
         .catch((error) => {
           this.$alert(error.request.response, '注册失败！')

@@ -35,7 +35,8 @@ export default {
     return {
       userData: {
         username: '',
-        pass: ''
+        pass: '',
+        token: ''
       }
     }
   },
@@ -43,19 +44,37 @@ export default {
 
     // <!--登陆-->
     submitForm () {
+      Axios({
+        url: 'api/v1/csrf-token/',
+        method: 'get'
+      })
+        .then((response) => {
+          console.log(response.data)
+          this.token = response.data.token
+          this.loginUser()
+        })
+        .catch((error) => {
+          this.$alert(error.request.response, '登录失败！')
+          console.log(error.request)
+        })
+    },
+    loginUser () {
       const data = {
-        email: this.userData.username,
+        username: this.userData.username,
         password: this.userData.pass
       }
       Axios({
         url: 'api/v1/admin/login/',
         method: 'post',
-        data: data
+        data: data,
+        headers: {
+          'X-CSRFToken': this.token
+        }
       })
         .then((response) => {
           console.log(response.data)
           this.$store.commit('setUserKey', response.data.key)
-        //   this.getCurrentUserData()
+          this.getCurrentUserData()
         })
         .catch((error) => {
           this.$alert(error.request.response, '登录失败！')
