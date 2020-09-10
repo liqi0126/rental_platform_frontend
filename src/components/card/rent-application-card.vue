@@ -21,14 +21,10 @@
                     type='textarea'
                     :disabled="!(isAdmin||isHirer)"></el-input>
         </el-form-item>
-        <el-form-item label='是否正在执行'>
-          <el-checkbox v-model="rent_data.applying"
-                       :disabled="diseditable"></el-checkbox>
-        </el-form-item>
         <el-form-item label='评价'>
           <el-input v-model="rent_data.comments"
                     type='textarea'
-                    :disabled="!(isAdmin||isHirer)"></el-input>
+                    :disabled="!(isAdmin)"></el-input>
         </el-form-item>
         <el-form-item label='状态'>
           <!-- <el-input v-model="data.status"

@@ -130,7 +130,7 @@ export default {
     logout () {
       console.log('logout')
       Axios({
-        url: 'api/v1/rest-auth/logout/',
+        url: '/api/v1/rest-auth/logout/',
         method: 'post',
         headers: {
           Authorization: 'Token ' + this.$store.getters.getUserKey

@@ -62,7 +62,7 @@
         </el-form-item>
       </el-form>
       <change-button :id="id"
-                     :my_data="my_data"
+                     :data="my_data"
                      target="equipment"
                      v-if="(isAdmin||isOwner)"></change-button>
       <del-button :id="id"

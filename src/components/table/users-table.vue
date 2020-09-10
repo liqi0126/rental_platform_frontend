@@ -14,9 +14,13 @@
                        label="ID"
                        width="40">
       </el-table-column>
-      <el-table-column prop="username"
-                       label="用户名"
-                       width="180">
+      <el-table-column prop="last_name"
+                       label="姓"
+                       width="40">
+      </el-table-column>
+      <el-table-column prop="first_name"
+                       label="名"
+                       width="80">
       </el-table-column>
       <el-table-column prop="created_at"
                        label="创建时间"

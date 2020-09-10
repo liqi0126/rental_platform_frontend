@@ -81,7 +81,7 @@ export default {
       axios.post('/api/v1/equipment/', this.data)
         .then((response) => {
           console.log(response)
-          this.$message(response.data.equipment + '创建成功！')
+          this.$message('创建成功！')
         })
         .catch((error) => {
           console.log(error.response)
