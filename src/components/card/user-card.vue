@@ -23,19 +23,44 @@
                     :disabled="!(isOwner||isAdmin)"
                     style="width:45%;"></el-input>
         </el-form-item>
-        <el-form-item label='设备'>
+        <el-form-item label='设备及请求'>
           <el-collapse accordion>
             <el-collapse-item title="设备"
                               name="1">
               <equipment-table :id="id"
-                               pageSize='5'
-                               height="400"></equipment-table>
+                               pageSize=5
+                               height=400></equipment-table>
             </el-collapse-item>
             <el-collapse-item title="租赁请求"
                               name="2">
               <rent-application-table :id="id"
-                                      pageSize='5'
-                                      height="400"></rent-application-table>
+                                      pageSize=5
+                                      height=400></rent-application-table>
+            </el-collapse-item>
+            <el-collapse-item title="租赁者请求"
+                              name="3">
+              <renter-application-table :id="id"
+                                        pageSize=5
+                                        height=400></renter-application-table>
+            </el-collapse-item>
+            <el-collapse-item title="上架请求"
+                              name="4">
+              <release-application-table :id="id"
+                                         pageSize=5
+                                         height=400></release-application-table>
+            </el-collapse-item>
+            <el-collapse-item title="收到的租赁请求"
+                              name="5">
+              <received-rent-application-table :userId="id"
+                                               pageSize=5
+                                               height=400></received-rent-application-table>
+
+            </el-collapse-item>
+            <el-collapse-item title="租借的设备"
+                              name="6">
+              <rented-equipment-table :userId="id"
+                                      pageSize=5
+                                      height=400></rented-equipment-table>
             </el-collapse-item>
           </el-collapse>
         </el-form-item>
@@ -71,6 +96,9 @@
       <change-button :id="id"
                      :data="data"
                      target="user"></change-button>
+      <del-button :id="id"
+                  target="user"
+                  v-if="isAdmin"></del-button>
     </el-card>
   </div>
 </template>
@@ -98,12 +126,22 @@
 import axios from 'axios'
 import equipmentTable from '../table/equipment-table'
 import rentApplicationTable from '../table/rent-application-table'
+import renterApplicationTable from '../table/renter-application-table'
+import releaseApplicationTable from '../table/release-application-table'
+import receivedRentApplicationTable from '../table/received-rent-application-table'
+import rentedEquipmentTable from '../table/rented-equipment-table'
 import changeButton from '../button/change-button'
+import delButton from '../button/del-button'
 export default {
   components: {
     'equipment-table': equipmentTable,
     'rent-application-table': rentApplicationTable,
-    'change-button': changeButton
+    'renter-application-table': renterApplicationTable,
+    'release-application-table': releaseApplicationTable,
+    'received-rent-application-table': receivedRentApplicationTable,
+    'rented-equipment-table': rentedEquipmentTable,
+    'change-button': changeButton,
+    'del-button': delButton
   },
   props: {
     id: Number

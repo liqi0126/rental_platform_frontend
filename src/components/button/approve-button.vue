@@ -6,6 +6,7 @@
 
 <script>
 import Axios from 'axios'
+import qs from 'qs'
 export default {
   props: {
     id: Number,
@@ -15,16 +16,16 @@ export default {
   methods: {
     approve: function () {
       console.log(this.comments)
+      const data = { comments: this.comments }
       Axios({
         url: '/api/v1/' + this.target + '/' + this.id + '/approve/',
         method: 'post',
-        data: {
-          comments: this.comments
-        }
+        data: qs.stringify(data)
       })
         .then((response) => {
           this.$message('通过成功')
           console.log(response)
+          location.reload()
           // this.$router.push({ name: 'admin' })
           // location.reload()
         })

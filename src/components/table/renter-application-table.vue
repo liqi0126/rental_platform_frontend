@@ -131,16 +131,16 @@ export default {
             alert('error:' + error)
           })
       } else {
-        Axios.get('/api/v1/renter-application', {
+        Axios.get('/api/v1/renter-application/', {
           params: {
             [this.select]: this.input,
             offset: (page - 1) * this.pageSize,
             limit: this.pageSize,
-            id: this.id
+            applicant: this.id
           }
         })
           .then((response) => {
-            this.renterApplicationLis = response.data.results
+            this.renterApplicationList = response.data.results
             this.data = response.data
           }).catch((error) => {
             console.log(error.response)

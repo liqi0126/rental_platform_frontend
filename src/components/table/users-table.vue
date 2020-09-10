@@ -38,10 +38,10 @@
                        label="电话号码"
                        width="180">
       </el-table-column>
-      <el-table-column prop="is_renter"
+      <!-- <el-table-column prop="is_renter"
                        label="是否是租借者"
                        width="180">
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     <el-pagination background
                    layout="prev, pager, next"

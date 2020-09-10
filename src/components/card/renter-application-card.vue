@@ -46,10 +46,12 @@
                      :data="data"
                      target="renter-application"></change-button>
       <rej-button :id="id"
-                  target="renter-application"></rej-button>
+                  target="renter-application"
+                  v-if="data.status==='UNA'||data.status==='ACC'"></rej-button>
       <approve-button :id="id"
                       :comments="data.comments"
-                      target="renter-application"></approve-button>
+                      target="renter-application"
+                      v-if="data.status==='UNA'||data.status==='REJ'"></approve-button>
       <del-button :id="id"
                   target="renter-application"></del-button>
     </el-card>

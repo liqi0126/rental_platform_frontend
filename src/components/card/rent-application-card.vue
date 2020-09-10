@@ -84,7 +84,7 @@
                       v-if="isAdmin||isRenter"></approve-button>
       <rent-return-button :id="id"
                           target="rent-application"
-                          v-if="isHirer||isAdmin"></rent-return-button>
+                          v-if="(isHirer||isAdmin)&&rent_data.status==='ACC'"></rent-return-button>
       <rent-return-confirm-button :id="id"
                                   target="rent-application"
                                   v-if="isAdmin||isRenter"></rent-return-confirm-button>

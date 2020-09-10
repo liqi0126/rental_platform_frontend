@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     ret: function () {
-      Axios.post('/api/v1/rent-application/' + this.id + '/return')
+      Axios.post('/api/v1/rent-application/' + this.id + '/return/')
         .then(() => {
           this.$message('归还成功')
           location.reload()

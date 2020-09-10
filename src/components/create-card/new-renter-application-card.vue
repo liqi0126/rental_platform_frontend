@@ -47,7 +47,7 @@ export default {
     return {
       diseditable: true,
       data: {
-        applicant: this.$store.state.user.id,
+        applicant: this.$store.getters.getCurrentUser.id,
         description: ''
       }
     }

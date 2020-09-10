@@ -16,7 +16,7 @@ export default {
       Axios.delete('/api/v1/' + this.target + '/' + this.id)
         .then(() => {
           this.$message('删除成功')
-          this.$router.push({ name: 'admin' })
+          this.$router.push({ name: 'index' })
         })
         .catch((error) => {
           console.log(error.response)

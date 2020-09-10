@@ -62,7 +62,7 @@ export default {
       date: [],
       data: {
         description: '',
-        hirer: this.$store.state.user.id,
+        borrower: this.$store.state.user.id,
         equipment: this.equipmentId,
         lease_term_begin: '',
         lease_term_end: ''

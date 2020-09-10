@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     confirm: function () {
-      Axios.post('/api/v1/rent-application/' + this.id + '/return/confirm')
+      Axios.post('/api/v1/rent-application/' + this.id + '/return/confirm/')
         .then(() => {
           this.$message('归还确认成功')
           location.reload()

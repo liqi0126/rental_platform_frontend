@@ -24,7 +24,7 @@ export default {
       Axios.patch('/api/v1/' + this.target + '/' + this.id + '/', newData)
         .then((response) => {
           this.$message('修改成功')
-          this.$router.push({ name: 'admin' })
+          // this.$router.push({ name: 'admin' })
           location.reload()
         })
         .catch((error) => {

@@ -43,6 +43,14 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label='当前租借者'>
+          <el-input v-model="my_data.borrower"
+                    :disabled="true"
+                    style="width:80%;"></el-input>
+          <el-button type="primary"
+                     style="margin-left:20px;"
+                     @click="enterBorrower(row)">查看租借者</el-button>
+        </el-form-item>
         <el-form-item label='租期'>
           <el-input v-model="my_data.lease_term_begin"
                     :disabled="!(isAdmin)"
@@ -126,7 +134,8 @@ export default {
         lease_term_end: null,
         user_comments: null,
         owner: 0,
-        current_tenant: null
+        current_tenant: null,
+        borrower: -1
 
       },
       isOwner: false,
@@ -170,6 +179,9 @@ export default {
     },
     enterRent: function () {
       this.$router.push({ name: 'create-rent-application', params: { equipmentId: this.id } })
+    },
+    enterBorrower: function () {
+      this.$router.push({ name: 'user', params: { userId: this.my_data.owner } })
     }
   }
 }

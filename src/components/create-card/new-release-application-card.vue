@@ -42,7 +42,7 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
-// import qs from 'qs'
+import qs from 'qs'
 export default {
   props: {
     id: Number
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     createReleaseApplication: function () {
-      axios.post('/api/v1/release-application/', this.data)
+      axios.post('/api/v1/release-application/', qs.stringify(this.data))
         .then((response) => {
           console.log(response)
           this.$message('创建成功！')
