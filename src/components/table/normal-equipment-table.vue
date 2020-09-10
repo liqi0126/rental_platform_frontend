@@ -112,16 +112,25 @@ export default {
         params: {
           [this.select]: this.input,
           offset: (page - 1) * this.pageSize,
-          limit: this.pageSize,
-          status: 'AVA'
+          limit: this.pageSize
         }
       })
         .then((response) => {
           this.data = response.data
           this.equipmentList = response.data.results
+          this.filterEquipment()
         }).catch((error) => {
           alert('error:' + error)
         })
+    },
+    filterEquipment: function () {
+      const newList = []
+      for (const item of this.equipmentList) {
+        if (item.status !== 'UNA' && item.status !== 'UNR') {
+          newList.push(item)
+        }
+      }
+      this.equipmentList = newList
     }
   }
 }
