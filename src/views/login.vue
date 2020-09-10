@@ -56,10 +56,29 @@ export default {
         data: data
       })
         .then((response) => {
-          console.log(response.data)
+          this.$store.commit('setUserKey', { user: response.data.key, isAdmin: false })
+          this.getCurrentUserData()
         })
         .catch((error) => {
-          console.log(error.response.data)
+          this.$alert(error.request.response, '登录失败！')
+          console.log(error.request)
+        })
+    },
+    getCurrentUserData () {
+      Axios({
+        url: 'api/v1/rest-auth/user',
+        method: 'get',
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
+        .then((response) => {
+          this.$store.commit('setUser', response.data)
+          this.$router.push('/admin')
+        })
+        .catch((error) => {
+          this.$alert(error.request.response, '登录失败！')
+          console.log(error.request)
         })
     },
     // <!--进入注册页-->

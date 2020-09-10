@@ -38,6 +38,7 @@
 
 <script>
 import Axios from 'axios'
+
 export default {
   name: 'Register',
   data () {
@@ -89,39 +90,22 @@ export default {
         password2: this.UserData.checkPass,
         email: this.UserData.email
       }
-      console.log(userData)
       Axios({
         url: 'api/v1/rest-auth/registration/',
         method: 'post',
         data: userData
       })
         .then((response) => {
-          // console.log(response.data)
-          if (response.status === 200) {
-            console.log('注册成功')
-            this.getCurrentUserData()
-          }
+          this.$message('确认邮箱已发送')
+          this.$router.push('/login')
+          // console.log(response)
         })
         .catch((error) => {
-          if (error.response.status === 403) {
-            this.$message('该邮箱已被注册')
-          }
-          console.log(error.response.status)
-          console.log(error.response)
+          this.$alert(error.request.response, '注册失败！')
+          console.log(error.request)
         })
     },
-    getCurrentUserData () {
-      Axios({
-        url: 'api/v1/rest-auth/user',
-        method: 'get'
-      })
-        .then((response) => {
-          console.log(response.data)
-        })
-        .catch((error) => {
-          console.log(error.response)
-        })
-    },
+
     // <!--进入登录页-->
     gotoLogin () {
       this.$router.push({
