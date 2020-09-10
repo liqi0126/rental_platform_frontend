@@ -31,6 +31,11 @@
           <el-input v-model="my_data.address"
                     :disabled="!(isAdmin||isOwner)"></el-input>
         </el-form-item>
+        <el-form-item label='描述'>
+          <el-input v-model="my_data.description"
+                    :disabled="!(isAdmin||isOwner)"
+                    type="textarea"></el-input>
+        </el-form-item>
         <el-form-item label='状态'>
           <!-- <el-input v-model="my_data.status"
                     :disabled="diseditable"></el-input> -->
@@ -82,6 +87,12 @@
       <el-button v-if="(isAdmin||isOwner)&&my_data.status=='UNR'"
                  type="primary"
                  @click="enterRelease">申请上架</el-button>
+      <rent-return-button :id="rentAppId"
+                          target="rent-application"
+                          v-if="(isBorrower||isAdmin)&&my_data.status==='REN'"></rent-return-button>
+      <rent-return-confirm-button :id="rentAppId"
+                                  target="rent-application"
+                                  v-if="(isAdmin||isOwner)&&my_data.status==='RET'"></rent-return-confirm-button>
 
     </el-card>
   </div>
@@ -111,10 +122,14 @@
 import axios from 'axios'
 import changeButton from '../button/change-button'
 import delButton from '../button/del-button'
+import rentReturnButton from '../button/rent-return-button'
+import rentReturnConfirmButton from '../button/rent-return-confirm-button'
 export default {
   components: {
     'change-button': changeButton,
-    'del-button': delButton
+    'del-button': delButton,
+    'rent-return-button': rentReturnButton,
+    'rent-return-confirm-button': rentReturnConfirmButton
   },
   props: {
     id: Number
@@ -156,7 +171,12 @@ export default {
       }, {
         value: 'RET',
         label: 'Returned'
-      }]
+      }],
+      rentApplicationList: [],
+      applying: false,
+      borrower: 0,
+      rentAppId: 0,
+      isBorrower: false
     }
   },
   created: function () {
@@ -164,6 +184,8 @@ export default {
     axios.get('/api/v1/equipment/' + this.id, {})
       .then((response) => {
         this.my_data = response.data
+        this.rentApplicationList = this.my_data.rent_applications
+        this.getRentApp()
         this.isOwner = (this.my_data.owner === this.$store.getters.getCurrentUser.id)
       })
       .catch((error) => {
@@ -182,6 +204,20 @@ export default {
     },
     enterBorrower: function () {
       this.$router.push({ name: 'user', params: { userId: this.my_data.owner } })
+    },
+    getRentApp: function () {
+      for (const item of this.rentApplicationList) {
+        console.log(item)
+        if (item.applying === true) {
+          this.applying = true
+          this.rentAppId = item.id
+          this.borrower = item.borrower
+          this.my_data.lease_term_end = item.lease_term_end
+          this.my_data.lease_term_begin = item.lease_term_begin
+
+          return
+        }
+      }
     }
   }
 }

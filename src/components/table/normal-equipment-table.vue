@@ -1,49 +1,51 @@
 // writen by xyh
 <template>
   <div>
-    <el-card class="title-card">所有租借申请</el-card>
+    <el-card class='title-card'>所有设备</el-card>
     <search-filter :options="options"
                    @search="searchAndFilter"></search-filter>
     <el-card class="table-card">
-      <el-table :data="rentApplicationList"
+      <el-table :data="equipmentList"
                 stripe
-                id="users-table"
+                @row-click="enterEquipment"
+                id="equipment-table"
                 class="table"
-                @row-click="enter"
                 :height="height">
         <el-table-column prop="id"
                          label="ID"
                          width="40">
         </el-table-column>
+        <el-table-column prop="name"
+                         label="设备名"
+                         width="180">
+        </el-table-column>
         <el-table-column prop="created_at"
-                         label="创建时间"
+                         label="上架时间"
                          width="180">
         </el-table-column>
-        <el-table-column prop="description"
-                         label="描述"
+        <el-table-column prop="address"
+                         label="地址"
                          width="180">
         </el-table-column>
-        <el-table-column prop="comments"
-                         label="评价"
+        <el-table-column prop="email"
+                         label="Email"
+                         width="180">
+        </el-table-column>
+        <el-table-column prop="phone"
+                         label="电话号码"
                          width="180">
         </el-table-column>
         <el-table-column prop="status"
                          label="状态"
                          width="180">
         </el-table-column>
-        <el-table-column prop="equipment"
-                         label="设备ID"
-                         width="180">
-        </el-table-column>
-        <el-table-column prop="renter"
-                         label="设备持有者ID"
-                         width="180">
-        </el-table-column>
-        <el-table-column prop="hirer"
-                         label="租借者"
-                         width="180">
-        </el-table-column>
       </el-table>
+      <el-pagination background
+                     layout="prev, pager, next"
+                     :total="data.count*10/pageSize"
+                     class="page-chooser"
+                     @current-change="changePage">
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -73,17 +75,19 @@ export default {
     'search-filter': searchAndFilter
   },
   props: {
-    userId: Number,
+    id: Number,
     pageSize: Number,
     height: Number
   },
   data: function () {
     return {
-      rentApplicationList: [],
+      equipmentList: [],
       options: [
         { value: 'search', label: '全部搜索' },
-        { value: 'equipment', label: '筛选：描述' },
-        { value: 'address', label: '筛选：评价' }
+        { value: 'equipment', label: '筛选：设备名' },
+        { value: 'address', label: '筛选：地址' },
+        { value: 'email', label: '筛选：邮箱' },
+        { value: 'phone', label: '筛选：电话' }
       ],
       select: 'search',
       input: '',
@@ -91,24 +95,30 @@ export default {
     }
   },
   created: function () {
-    this.changePage()
+    this.changePage(1)
+    console.log(new Date('2020-09-09T15:49:33.658115+08:00').getTime())
   },
   methods: {
-    enter: function (row) {
-      this.$router.push({ name: 'rent-application', params: { rentApplicationId: row.id } })
+    enterEquipment: function (row) {
+      this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
     },
     searchAndFilter: function (select, input) {
-      this.select = select
       this.input = input
+      this.select = select
       this.changePage(1)
     },
-    changePage: function () {
-      Axios.get('/api/v1/user/' + this.userId + '/', {
+    changePage: function (page) {
+      Axios.get('api/v1/equipment', {
+        params: {
+          [this.select]: this.input,
+          offset: (page - 1) * this.pageSize,
+          limit: this.pageSize,
+          status: 'AVA'
+        }
       })
         .then((response) => {
-          console.log(response)
-          this.rentApplicationList = response.data.received_rent_applications
           this.data = response.data
+          this.equipmentList = response.data.results
         }).catch((error) => {
           alert('error:' + error)
         })

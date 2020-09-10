@@ -95,24 +95,8 @@ export default {
     }
   },
   created: function () {
-    // 获取设备列表
-    // if (this.id === -1) {
-    //   Axios.get('api/v1/equipment')
-    //     .then((response) => {
-    //       this.equipmentList = response.data.results
-    //     }).catch((error) => {
-    //       alert('error:' + error)
-    //     })
-    // } else {
-    //   Axios.get('/api/v1/equipment', { params: { owner: this.id } })
-    //     .then((response) => {
-    //       this.equipmentList = response.data.results
-    //     }).catch((error) => {
-    //       console.log(error.response)
-    //       alert('error:' + error)
-    //     })
-    // }
     this.changePage(1)
+    console.log(new Date('2020-09-09T15:49:33.658115+08:00').getTime())
   },
   methods: {
     enterEquipment: function (row) {

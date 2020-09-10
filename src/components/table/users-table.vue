@@ -22,17 +22,17 @@
                        label="名"
                        width="80">
       </el-table-column>
-      <el-table-column prop="created_at"
+      <!-- <el-table-column prop="created_at"
                        label="创建时间"
                        width="180">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column prop="address"
                        label="地址"
-                       width="180">
+                       width="300">
       </el-table-column>
       <el-table-column prop="email"
                        label="Email"
-                       width="180">
+                       width="300">
       </el-table-column>
       <el-table-column prop="phone"
                        label="电话号码"

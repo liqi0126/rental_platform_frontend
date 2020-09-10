@@ -36,6 +36,11 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label='描述'>
+          <el-input v-model="data.description"
+                    type='textarea'
+                    :disabled="!(isAdmin||isOwner)"></el-input>
+        </el-form-item>
         <el-form-item label='评价'>
           <el-input v-model="data.comments"
                     type='textarea'
@@ -58,6 +63,7 @@
                   target="release-application"
                   v-if="isAdmin"></rej-button>
       <approve-button :id="id"
+                      :comments="data.comments"
                       target="release-application"
                       v-if="isAdmin"></approve-button>
       <del-button :id="id"

@@ -75,19 +75,15 @@
       <change-button :id="id"
                      :data="rent_data"
                      target="rent-application"
-                     v-if="isAdmin||isHirer"></change-button>
+                     v-if="isAdmin"></change-button>
       <rej-button :id="id"
                   target="rent-application"
-                  v-if="isAdmin||isRenter"></rej-button>
+                  v-if="(isAdmin||isRenter)&&rent_data.status==='UNA'"></rej-button>
       <approve-button :id="id"
                       target="rent-application"
-                      v-if="isAdmin||isRenter"></approve-button>
-      <rent-return-button :id="id"
-                          target="rent-application"
-                          v-if="(isHirer||isAdmin)&&rent_data.status==='ACC'"></rent-return-button>
-      <rent-return-confirm-button :id="id"
-                                  target="rent-application"
-                                  v-if="isAdmin||isRenter"></rent-return-confirm-button>
+                      :comments="rent_data.comments"
+                      v-if="(isAdmin||isRenter)&&rent_data.status==='UNA'"></approve-button>
+
       <del-button :id="id"
                   target="rent-application"
                   v-if="isAdmin||(isHirer&&rent_data.status==='UNA')"></del-button>
@@ -119,16 +115,13 @@ import axios from 'axios'
 import changeButton from '../button/change-button'
 import rejButton from '../button/rej-button'
 import approveButton from '../button/approve-button'
-import rentReturnButton from '../button/rent-return-button'
-import rentReturnConfirmButton from '../button/rent-return-confirm-button'
 import delButton from '../button/del-button'
 export default {
   components: {
     'change-button': changeButton,
     'rej-button': rejButton,
     'approve-button': approveButton,
-    'rent-return-button': rentReturnButton,
-    'rent-return-confirm-button': rentReturnConfirmButton,
+
     'del-button': delButton
   },
   props: {

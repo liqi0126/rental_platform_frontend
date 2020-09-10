@@ -24,6 +24,11 @@
                     :disabled="true"></el-input>
 
         </el-form-item>
+        <el-form-item label='描述'>
+          <el-input v-model="data.description"
+                    type='textarea'
+                    :disabled="!isAdmin"></el-input>
+        </el-form-item>
         <el-form-item label='评价'>
           <el-input v-model="data.comments"
                     type='textarea'

@@ -40,12 +40,6 @@
                          width="180">
         </el-table-column>
       </el-table>
-      <el-pagination background
-                     layout="prev, pager, next"
-                     :total="data.count*10/pageSize"
-                     class="page-chooser"
-                     @current-change="changePage">
-      </el-pagination>
     </el-card>
   </div>
 </template>
