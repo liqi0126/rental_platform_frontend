@@ -157,8 +157,9 @@ export default {
     },
     logout () {
       console.log('logout')
+      console.log(this.$store.getters.getUserKey)
       Axios({
-        url: 'api/v1/rest-auth/logout/',
+        url: '/api/v1/rest-auth/logout/',
         method: 'post',
         headers: {
           Authorization: 'Token ' + this.$store.getters.getUserKey
@@ -172,7 +173,7 @@ export default {
           }, '1000')
         })
         .catch((error) => {
-          this.$alert(error.request.response, '登出失败！')
+          this.$alert(error.response.statusText, '登出失败！')
           console.log(error.request)
         })
     },
