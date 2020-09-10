@@ -41,35 +41,16 @@ export default {
     }
   },
   methods: {
-
     // <!--登陆-->
     submitForm () {
-      Axios({
-        url: 'api/v1/csrf-token/',
-        method: 'get'
-      })
-        .then((response) => {
-          console.log(response.data)
-          this.token = response.data.token
-          this.loginUser()
-        })
-        .catch((error) => {
-          this.$alert(error.request.response, '登录失败！')
-          console.log(error.request)
-        })
-    },
-    loginUser () {
       const data = {
-        username: this.userData.username,
+        email: this.userData.username,
         password: this.userData.pass
       }
       Axios({
-        url: 'api/v1/admin/login/',
+        url: 'api/v1/rest-auth/login/',
         method: 'post',
-        data: data,
-        headers: {
-          'X-CSRFToken': this.token
-        }
+        data: data
       })
         .then((response) => {
           console.log(response.data)
@@ -90,12 +71,42 @@ export default {
         }
       })
         .then((response) => {
-          this.$store.commit('setCurrentUser', { user: response.data, isAdmin: true })
-          location.reload()
-          this.$router.push('/admin')
+          if (response.data.is_staff === false) {
+            this.$alert('抱歉，您没有管理员权限')
+            // setTimeout(function () {
+            this.logout()
+            // }, '2000')
+          } else {
+            this.$store.commit('setCurrentUser', { user: response.data, isAdmin: true })
+            location.reload()
+            setTimeout(function () {
+              this.$router.push('/admin')
+            }, '1000')
+          }
         })
         .catch((error) => {
           this.$alert(error.request.response, '登录失败！')
+          console.log(error.request)
+        })
+    },
+    logout () {
+      console.log('logout')
+      Axios({
+        url: 'api/v1/rest-auth/logout/',
+        method: 'post',
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
+        .then(() => {
+          this.$store.commit('resetState')
+          location.reload()
+          setTimeout(function () {
+            this.$router.push('/login')
+          }, '1000')
+        })
+        .catch((error) => {
+          this.$alert(error.request.response, '登出失败！')
           console.log(error.request)
         })
     },

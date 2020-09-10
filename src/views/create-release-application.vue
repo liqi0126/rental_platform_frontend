@@ -15,6 +15,11 @@ export default {
   },
   components: {
     'new-release-application-card': newreleaseApplicationCard
+  },
+  created () {
+    if (this.$store.getters.getUserKey === 'null') {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

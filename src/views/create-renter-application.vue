@@ -10,6 +10,11 @@ import newRenterApplicationCard from '../components/create-card/new-renter-appli
 export default {
   components: {
     'new-renter-application-card': newRenterApplicationCard
+  },
+  created () {
+    if (this.$store.getters.getUserKey === 'null') {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

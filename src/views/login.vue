@@ -57,6 +57,7 @@ export default {
         data: data
       })
         .then((response) => {
+          // console.log(response.data)
           this.$store.commit('setUserKey', response.data.key)
           this.getCurrentUserData()
         })

@@ -15,6 +15,11 @@ export default {
     return {
       id: parseInt(this.$route.params.equipmentId)
     }
+  },
+  created () {
+    if (this.$store.getters.getUserKey === 'null') {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

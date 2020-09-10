@@ -14,6 +14,11 @@ export default {
     return {
 
     }
+  },
+  created () {
+    if (this.$store.getters.getUserKey === 'null') {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

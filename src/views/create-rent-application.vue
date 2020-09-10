@@ -15,6 +15,11 @@ export default {
   },
   components: {
     'new-rent-application-card': newRentApplicationCard
+  },
+  created () {
+    if (this.$store.getters.getUserKey === 'null') {
+      this.$router.push('/login')
+    }
   }
 }
 </script>
