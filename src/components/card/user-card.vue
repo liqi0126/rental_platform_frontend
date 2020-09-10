@@ -12,9 +12,15 @@
           <el-input v-model="id"
                     :disabled="true"></el-input>
         </el-form-item>
-        <el-form-item label='用户名'>
-          <el-input v-model="data.username"
-                    :disabled="diseditable"></el-input>
+        <el-form-item label='姓名'>
+          姓
+          <el-input v-model="data.last_name"
+                    style="width:45%;"
+                    :disabled="!(isOwner||isAdmin)"></el-input>
+          名
+          <el-input v-model="data.first_name"
+                    :disabled="!(isOwner||isAdmin)"
+                    style="width:45%;"></el-input>
         </el-form-item>
         <el-form-item label='设备'>
           <equipment-table :id="id"></equipment-table>
@@ -54,12 +60,12 @@
           </el-table> -->
         </el-form-item>
         <el-form-item label='密码'
-                      v-if="!diseditable">
+                      v-if="(isOwner||isAdmin)">
           <el-input v-model="data.password"></el-input>
         </el-form-item>
         <el-form-item label='创建时间'>
           <el-input v-model="data.created_at"
-                    :disabled="diseditable"></el-input>
+                    :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label='上次登陆时间'>
           <el-input v-model="data.last_login"
@@ -67,23 +73,23 @@
         </el-form-item>
         <el-form-item label='地址'>
           <el-input v-model="data.address"
-                    :disabled="diseditable"></el-input>
+                    :disabled="!(isOwner||isAdmin)"></el-input>
         </el-form-item>
         <el-form-item label='Email'>
           <el-input v-model="data.email"
-                    :disabled="diseditable"></el-input>
+                    :disabled="!(isOwner||isAdmin)"></el-input>
         </el-form-item>
         <el-form-item label='电话号码'>
           <el-input v-model="data.phone"
-                    :disabled="true"></el-input>
+                    :disabled="!(isOwner||isAdmin)"></el-input>
         </el-form-item>
         <el-form-item label='属性'>
           <el-checkbox v-model="data.is_renter"
-                       :disabled="diseditable">是租借者</el-checkbox>
+                       :disabled="!isAdmin">是租借者</el-checkbox>
           <el-checkbox v-model="data.is_staff"
-                       :disabled="diseditable">是工作人员</el-checkbox>
+                       :disabled="!isAdmin">是工作人员</el-checkbox>
           <el-checkbox v-model="data.is_active"
-                       :disabled="diseditable">可登录</el-checkbox>
+                       :disabled="!isAdmin">可登录</el-checkbox>
         </el-form-item>
       </el-form>
       <el-button class='button'
@@ -123,14 +129,14 @@ export default {
   },
   data: function () {
     return {
-      diseditable: true,
+      isOwner: (this.id === this.$store.state.user.id),
+      isAdmin: this.$store.state.isAdmin,
       data: {
         id: 0,
         owned_equipments: [],
         password: '',
         last_login: null,
         is_superuser: false,
-        username: '',
         first_name: '',
         last_name: '',
         email: '',

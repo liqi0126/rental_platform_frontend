@@ -93,7 +93,8 @@ export default {
   },
   data: function () {
     return {
-      diseditable: false,
+      isOwner: (this.id === this.$store.state.user.id),
+      isAdmin: this.$store.state.isAdmin,
       data: {
         id: 0,
         comments: '',
