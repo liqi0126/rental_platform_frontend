@@ -42,7 +42,7 @@
       </el-table>
       <el-pagination background
                      layout="prev, pager, next"
-                     :total="data.count*2"
+                     :total="data.count*10/pageSize"
                      class="page-chooser"
                      @current-change="changePage">
       </el-pagination>
@@ -76,7 +76,8 @@ export default {
     'search-filter': searchAndFilter
   },
   props: {
-    id: Number
+    id: Number,
+    pageSize: Number
   },
   data: function () {
     return {
@@ -127,8 +128,8 @@ export default {
         Axios.get('api/v1/equipment', {
           params: {
             [this.select]: this.input,
-            offset: (page - 1) * 5,
-            limit: 5
+            offset: (page - 1) * this.pageSize,
+            limit: this.pageSize
           }
         })
           .then((response) => {
@@ -142,8 +143,8 @@ export default {
           params: {
             owner: this.id,
             [this.select]: this.input,
-            offset: (page - 1) * 5,
-            limit: 5
+            offset: (page - 1) * this.pageSize,
+            limit: this.pageSize
           }
         })
           .then((response) => {

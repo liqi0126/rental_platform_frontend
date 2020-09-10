@@ -1,14 +1,19 @@
 // write by xyh
 <template>
   <div>
-    <user-table class="table"></user-table>
-    <equipment-table class="table"></equipment-table>
+    <user-table class="table"
+                :pageSize="5"></user-table>
+    <equipment-table class="table"
+                     :pageSize="5"></equipment-table>
     <renter-application-table :id="-1"
+                              :pageSize="5"
                               class="table"></renter-application-table>
     <rent-application-table :id="-1"
-                            class="table"></rent-application-table>
+                            class="table"
+                            :pageSize="5"></rent-application-table>
     <release-application-table :id="-1"
-                               class="table"></release-application-table>
+                               class="table"
+                               :pageSize="5"></release-application-table>
   </div>
 </template>
 <style scoped>

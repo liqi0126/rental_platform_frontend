@@ -41,7 +41,7 @@
     </el-table>
     <el-pagination background
                    layout="prev, pager, next"
-                   :total="data.count*2"
+                   :total="data.count*10/pageSize"
                    class="page-chooser"
                    @current-change="changePage">
     </el-pagination>
@@ -71,6 +71,9 @@
 import Axios from 'axios'
 import searchAndFilter from '../search&filter'
 export default {
+  props: {
+    pageSize: Number
+  },
   components: {
     'search-filter': searchAndFilter
   },
@@ -112,7 +115,7 @@ export default {
       this.changePage(1)
     },
     changePage: function (page) {
-      Axios.get('/api/v1/user', { params: { [this.select]: this.input, offset: (page - 1) * 5, limit: 5 } })
+      Axios.get('/api/v1/user', { params: { [this.select]: this.input, offset: (page - 1) * this.pageSize, limit: this.pageSize } })
         .then((response) => {
           this.userList = response.data.results
           this.data = response.data
