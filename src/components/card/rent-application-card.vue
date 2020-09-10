@@ -19,7 +19,7 @@
         <el-form-item label='描述'>
           <el-input v-model="rent_data.description"
                     type='textarea'
-                    :disabled="!(isAdmin||isHirer)"></el-input>
+                    :disabled="!(isAdmin||isborrower)"></el-input>
         </el-form-item>
         <el-form-item label='评价'>
           <el-input v-model="rent_data.comments"
@@ -64,11 +64,11 @@
                      style="margin-left:20px;">查看拥有者</el-button>
         </el-form-item>
         <el-form-item label='租借者ID'>
-          <el-input v-model="rent_data.hirer"
+          <el-input v-model="rent_data.borrower"
                     :disabled="true"
                     style="width:80%;"></el-input>
           <el-button type='primary'
-                     @click="enterUser(rent_data.hirer)"
+                     @click="enterUser(rent_data.borrower)"
                      style="margin-left:20px;">查看租借者</el-button>
         </el-form-item>
       </el-form>
@@ -78,15 +78,15 @@
                      v-if="isAdmin"></change-button>
       <rej-button :id="id"
                   target="rent-application"
-                  v-if="(isAdmin||isRenter)&&rent_data.status==='UNA'"></rej-button>
+                  v-if="(isAdmin||isrenter)&&rent_data.status==='UNA'"></rej-button>
       <approve-button :id="id"
                       target="rent-application"
                       :comments="rent_data.comments"
-                      v-if="(isAdmin||isRenter)&&rent_data.status==='UNA'"></approve-button>
+                      v-if="(isAdmin||isrenter)&&rent_data.status==='UNA'"></approve-button>
 
       <del-button :id="id"
                   target="rent-application"
-                  v-if="isAdmin||(isHirer&&rent_data.status==='UNA')"></del-button>
+                  v-if="isAdmin||(isborrower&&rent_data.status==='UNA')"></del-button>
     </el-card>
   </div>
 </template>
@@ -141,7 +141,7 @@ export default {
         user_comments: null,
         equipment: 2,
         renter: 1,
-        hirer: 3
+        borrower: 3
       },
       status_options: [{
         value: 'UNA',
@@ -154,19 +154,19 @@ export default {
         label: 'Rejected'
       }],
       // eslint-disable-next-line eqeqeq
-      isRenter: false,
+      isrenter: false,
       // eslint-disable-next-line eqeqeq
-      isHirer: false,
+      isborrower: false,
       isAdmin: this.$store.getters.isAdmin
     }
   },
   created: function () {
-    if (this.id === -1) return
     axios.get('/api/v1/rent-application/' + this.id, {})
       .then((response) => {
         this.rent_data = response.data
-        this.isRenter = this.rent_data.renter === this.$store.getters.getCurrentUser.id
-        this.isHirer = this.rent_data.hirer === this.$store.getters.getCurrentUser.id
+        this.isrenter = this.rent_data.renter === this.$store.getters.getCurrentUser.id
+        this.isborrower = this.rent_data.borrower === this.$store.getters.getCurrentUser.id
+        console.log(this.isborrower)
       })
       .catch((error) => {
         alert(error)
