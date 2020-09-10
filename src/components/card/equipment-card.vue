@@ -73,6 +73,27 @@
           <el-input v-model="my_data.phone"
                     :disabled="!(isAdmin||isOwner)"></el-input>
         </el-form-item>
+        <el-form-item label='用户评价'>
+          <el-collapse v-model="activeNames" @change="handleChange">
+            <el-collapse-item title="展开">
+              <el-table
+                :data="commentsList"
+                stripe
+                style="width: 200%">
+                <el-table-column
+                  prop="borrower"
+                  label="用户"
+                  width="100%">
+                </el-table-column>
+                <el-table-column
+                  prop="comments"
+                  label="评价"
+                  width="500%">
+                </el-table-column>
+              </el-table>
+            </el-collapse-item>
+          </el-collapse>
+        </el-form-item>
       </el-form>
       <change-button :id="id"
                      :data="my_data"
@@ -93,7 +114,6 @@
       <rent-return-confirm-button :id="rentAppId"
                                   target="rent-application"
                                   v-if="(isAdmin||isOwner)&&my_data.status==='RET'"></rent-return-confirm-button>
-
     </el-card>
   </div>
 </template>
@@ -136,6 +156,7 @@ export default {
   },
   data: function () {
     return {
+      activeNames: ['1'],
       my_data: {
         id: 0,
         name: '',
@@ -151,7 +172,6 @@ export default {
         owner: 0,
         current_tenant: null,
         borrower: -1
-
       },
       isOwner: false,
       isAdmin: this.$store.getters.isAdmin,
@@ -173,19 +193,23 @@ export default {
         label: 'Returned'
       }],
       rentApplicationList: [],
+      commentsList: [],
       applying: false,
       borrower: 0,
       rentAppId: 0,
-      isBorrower: false
+      isBorrower: false,
+      new_comment: null
     }
   },
   created: function () {
     if (this.id === -1) return
     axios.get('/api/v1/equipment/' + this.id, {})
       .then((response) => {
+        console.log(response)
         this.my_data = response.data
         this.rentApplicationList = this.my_data.rent_applications
         this.getRentApp()
+        this.getCommentsList()
         this.isOwner = (this.my_data.owner === this.$store.getters.getCurrentUser.id)
       })
       .catch((error) => {
@@ -193,6 +217,9 @@ export default {
       })
   },
   methods: {
+    handleChange (val) {
+      console.log(val)
+    },
     enterUser: function () {
       this.$router.push({ name: 'user', params: { userId: this.my_data.owner } })
     },
@@ -205,16 +232,27 @@ export default {
     enterBorrower: function () {
       this.$router.push({ name: 'user', params: { userId: this.my_data.owner } })
     },
+    getCommentsList () {
+      for (const item of this.rentApplicationList) {
+        console.log(item.borrower)
+        console.log(item.user_comments)
+        // this.commentsList.push({ borrower: item.borrower, comments: item.user_comments })
+        if (item.status === 'ACC' && item.applying === true) {
+          if (item.user_comments === '' || item.user_comments === null) {
+            this.new_comment = '该用户暂无评价'
+          } else this.new_comment = item.user_comments
+          this.commentsList.push({ borrower: item.borrower, comments: this.new_comment })
+        }
+      }
+    },
     getRentApp: function () {
       for (const item of this.rentApplicationList) {
-        console.log(item)
         if (item.applying === true) {
           this.applying = true
           this.rentAppId = item.id
           this.borrower = item.borrower
           this.my_data.lease_term_end = item.lease_term_end
           this.my_data.lease_term_begin = item.lease_term_begin
-
           return
         }
       }
