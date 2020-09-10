@@ -2,6 +2,8 @@
 <template>
   <div>
     <el-card class="title-card">所有上架申请</el-card>
+    <search-filter :options="options"
+                   @search="searchAndFilter"></search-filter>
     <el-card class="table-card">
       <el-table :data="rentApplicationList"
                 stripe
@@ -61,13 +63,21 @@
 
 <script>
 import Axios from 'axios'
+import searchAndFilter from '../search&filter'
 export default {
+  components: {
+    'search-filter': searchAndFilter
+  },
   props: {
     id: Number
   },
   data: function () {
     return {
-      rentApplicationList: []
+      rentApplicationList: [],
+      options: [
+        { value: 'search', label: '全部搜索' },
+        { value: 'description', label: '筛选：描述' }
+      ]
     }
   },
   created: function () {
@@ -93,6 +103,24 @@ export default {
   methods: {
     enter: function (row) {
       this.$router.push({ name: 'release-application', params: { releaseApplicationId: row.id } })
+    },
+    searchAndFilter: function (select, input) {
+      if (this.id === -1) {
+        Axios.get('api/v1/release-application', { params: { [select]: input } })
+          .then((response) => {
+            this.rentApplicationList = response.data.results
+          }).catch((error) => {
+            alert('error:' + error)
+          })
+      } else {
+        Axios.get('/api/v1/release-application/userId/' + this.id, { params: { [select]: input } })
+          .then((response) => {
+            this.rentApplicationList = response.data.results
+          }).catch((error) => {
+            console.log(error.response)
+            alert('error:' + error)
+          })
+      }
     }
   }
 }

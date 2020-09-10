@@ -68,7 +68,7 @@ export default {
         email: '',
         phone: null,
         description: '',
-        owner: 3
+        owner: this.$store.state.user.id
       }
     }
   },

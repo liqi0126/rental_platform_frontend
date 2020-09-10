@@ -5,6 +5,7 @@
              style="font-size:24px;">
       用户详情页
     </el-card>
+
     <el-card class='card'>
       <el-form class="form"
                label-width="100px">
