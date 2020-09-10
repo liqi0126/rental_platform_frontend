@@ -4,43 +4,48 @@
     <el-card class="title-card">所有用户</el-card>
     <search-filter :options="options"
                    @search="searchAndFilter"></search-filter>
-    <el-card class="table-card">
-      <el-table :data="userList"
-                @row-click='enterUser'
-                stripe
-                id="users-table"
-                class="table"
-                height=600>
-        <el-table-column prop="id"
-                         label="ID"
-                         width="40">
-        </el-table-column>
-        <el-table-column prop="username"
-                         label="用户名"
-                         width="180">
-        </el-table-column>
-        <el-table-column prop="created_at"
-                         label="创建时间"
-                         width="180">
-        </el-table-column>
-        <el-table-column prop="address"
-                         label="地址"
-                         width="180">
-        </el-table-column>
-        <el-table-column prop="email"
-                         label="Email"
-                         width="180">
-        </el-table-column>
-        <el-table-column prop="phone"
-                         label="电话号码"
-                         width="180">
-        </el-table-column>
-        <el-table-column prop="is_renter"
-                         label="是否是租借者"
-                         width="180">
-        </el-table-column>
-      </el-table>
-    </el-card>
+    <el-table :data="userList"
+              @row-click='enterUser'
+              stripe
+              id="users-table"
+              class="table"
+              height=400>
+      <el-table-column prop="id"
+                       label="ID"
+                       width="40">
+      </el-table-column>
+      <el-table-column prop="username"
+                       label="用户名"
+                       width="180">
+      </el-table-column>
+      <el-table-column prop="created_at"
+                       label="创建时间"
+                       width="180">
+      </el-table-column>
+      <el-table-column prop="address"
+                       label="地址"
+                       width="180">
+      </el-table-column>
+      <el-table-column prop="email"
+                       label="Email"
+                       width="180">
+      </el-table-column>
+      <el-table-column prop="phone"
+                       label="电话号码"
+                       width="180">
+      </el-table-column>
+      <el-table-column prop="is_renter"
+                       label="是否是租借者"
+                       width="180">
+      </el-table-column>
+    </el-table>
+    <el-pagination background
+                   layout="prev, pager, next"
+                   :total="data.count*2"
+                   class="page-chooser"
+                   @current-change="changePage">
+    </el-pagination>
+
   </div>
 </template>
 
@@ -55,6 +60,11 @@
   margin: 0 auto;
   max-height: 600px;
 }
+.page-chooser {
+  position: relative;
+  margin: 10px auto;
+  left: 40%;
+}
 </style>
 
 <script>
@@ -66,36 +76,46 @@ export default {
   },
   data: function () {
     return {
+      data: { count: 0 },
       userList: [],
+      select: 'search',
+      input: '',
       options: [
         { value: 'search', label: '全部搜索' },
-        { value: 'first_name', label: '名筛选' },
-        { value: 'last_name', label: '姓筛选' },
-        { value: 'address', label: '地址筛选' }
+        { value: 'first_name', label: '筛选：名' },
+        { value: 'last_name', label: '筛选：姓' },
+        { value: 'address', label: '筛选：地址' },
+        { value: 'email', label: '筛选：邮箱' },
+        { value: 'phone', label: '筛选：电话' }
       ]
     }
   },
   created: function () {
     // 获取用户列表
-    Axios.get('api/v1/user', {})
-      .then((response) => {
-        this.userList = response.data.results
-        console.log(this.userList)
-      })
-      .catch((error) => {
-        alert('error:' + error)
-      })
+    // Axios.get('api/v1/user', {})
+    //   .then((response) => {
+    //     this.userList = response.data.results
+    //     console.log(this.userList)
+    //   })
+    //   .catch((error) => {
+    //     alert('error:' + error)
+    //   })
+    this.changePage(1)
   },
   methods: {
     enterUser: function (row) {
       this.$router.push({ name: 'user', params: { userId: row.id } })
     },
     searchAndFilter: function (select, input) {
-      console.log(select)
-      console.log(input)
-      Axios.get('/api/v1/user', { params: { [select]: input } })
+      this.select = select
+      this.input = input
+      this.changePage(1)
+    },
+    changePage: function (page) {
+      Axios.get('/api/v1/user', { params: { [this.select]: this.input, offset: (page - 1) * 5, limit: 5 } })
         .then((response) => {
           this.userList = response.data.results
+          this.data = response.data
           console.log(this.userList)
         })
         .catch((error) => {

@@ -10,7 +10,7 @@
                 id="users-table"
                 class="table"
                 @row-click="enter"
-                height=600>
+                height=400>
         <el-table-column prop="id"
                          label="ID"
                          width="40">
@@ -36,6 +36,12 @@
                          width="180">
         </el-table-column>
       </el-table>
+      <el-pagination background
+                     layout="prev, pager, next"
+                     :total="data.count*2"
+                     class="page-chooser"
+                     @current-change="changePage">
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -51,6 +57,11 @@
   margin: 0 auto;
   max-height: 600px;
 }
+.page-chooser {
+  position: relative;
+  margin: 10px auto;
+  left: 40%;
+}
 </style>
 
 <script>
@@ -65,52 +76,71 @@ export default {
   },
   data: function () {
     return {
+      data: { count: 0 },
       renterApplicationList: [],
       options: [
-        { value: 'search', label: '全部搜索' },
-        { value: 'status', label: '筛选：状态' }
+        { value: 'search', label: '全部搜索' }
       ]
     }
   },
   created: function () {
     // 获取用户列表
-    if (this.id === -1) {
-      Axios.get('api/v1/renter-application', {})
-        .then((response) => {
-          this.renterApplicationList = response.data.results
-        })
-        .catch((error) => {
-          alert('error:' + error)
-        })
-    } else {
-      Axios.get('api/v1/renter-application/userId/' + this.id, {})
-        .then((response) => {
-          this.renterApplicationList = response.data.results
-        })
-        .catch((error) => {
-          alert('error:' + error)
-        })
-    }
+    // if (this.id === -1) {
+    //   Axios.get('api/v1/renter-application', {})
+    //     .then((response) => {
+    //       this.renterApplicationList = response.data.results
+    //     })
+    //     .catch((error) => {
+    //       alert('error:' + error)
+    //     })
+    // } else {
+    //   Axios.get('api/v1/renter-application/userId/' + this.id, {})
+    //     .then((response) => {
+    //       this.renterApplicationList = response.data.results
+    //     })
+    //     .catch((error) => {
+    //       alert('error:' + error)
+    //     })
+    // }
+    this.changePage(1)
   },
   methods: {
     enter: function (row) {
       this.$router.push({ name: 'renter-application', params: { renterApplicationId: row.id } })
     },
     searchAndFilter: function (select, input) {
-      console.log(select)
-      console.log(input)
+      this.select = select
+      this.input = input
+      this.changePage(1)
+    },
+    changePage: function (page) {
       if (this.id === -1) {
-        Axios.get('/api/v1/renter-application/', { params: { [select]: input } })
+        Axios.get('/api/v1/renter-application/', {
+          params: {
+            [this.select]: this.input,
+            offset: (page - 1) * 5,
+            limit: 5
+          }
+        })
           .then((response) => {
             this.renterApplicationList = response.data.results
+            this.data = response.data
             console.log(response)
           }).catch((error) => {
             alert('error:' + error)
           })
       } else {
-        Axios.get('/api/v1/renter-application/userId/' + this.id, { params: { [select]: input } })
+        Axios.get('/api/v1/renter-application', {
+          params: {
+            [this.select]: this.input,
+            offset: (page - 1) * 5,
+            limit: 5,
+            id: this.id
+          }
+        })
           .then((response) => {
             this.renterApplicationLis = response.data.results
+            this.data = response.data
           }).catch((error) => {
             console.log(error.response)
             alert('error:' + error)

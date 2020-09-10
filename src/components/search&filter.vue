@@ -3,6 +3,7 @@
     <el-input placeholder="请输入内容"
               v-model="input">
       <el-select v-model="select"
+                 class="select"
                  slot="prepend"
                  placeholder="请选择">
         <el-option v-for="item in options"
@@ -18,11 +19,8 @@
   </div>
 </template>
 <style scoped>
-.el-select .el-input {
+.select {
   width: 130px;
-}
-.input-with-select .el-input-group__prepend {
-  background-color: #fff;
 }
 </style>
 <script>

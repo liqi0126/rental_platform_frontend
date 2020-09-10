@@ -24,41 +24,16 @@
                     style="width:45%;"></el-input>
         </el-form-item>
         <el-form-item label='设备'>
-          <equipment-table :id="id"></equipment-table>
-          <!-- <el-table :data="data.owned_equipments"
-                    @row-click="enterEquipment"
-                    stripe
-                    id="equipment-table"
-                    class="table">
-            <el-table-column prop="id"
-                             label="ID"
-                             width="40">
-            </el-table-column>
-            <el-table-column prop="name"
-                             label="设备名"
-                             width="180">
-            </el-table-column>
-            <el-table-column prop="created_at"
-                             label="上架时间"
-                             width="180">
-            </el-table-column>
-            <el-table-column prop="address"
-                             label="地址"
-                             width="180">
-            </el-table-column>
-            <el-table-column prop="email"
-                             label="Email"
-                             width="180">
-            </el-table-column>
-            <el-table-column prop="phone"
-                             label="电话号码"
-                             width="180">
-            </el-table-column>
-            <el-table-column prop="status"
-                             label="状态"
-                             width="180">
-            </el-table-column>
-          </el-table> -->
+          <el-collapse accordion>
+            <el-collapse-item title="设备"
+                              name="1">
+              <equipment-table :id="id"></equipment-table>
+            </el-collapse-item>
+            <el-collapse-item title="租赁请求"
+                              name="2">
+              <rent-application-table :id="id"></rent-application-table>
+            </el-collapse-item>
+          </el-collapse>
         </el-form-item>
         <el-form-item label='密码'
                       v-if="(isOwner||isAdmin)">
@@ -121,9 +96,11 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
 import equipmentTable from '../table/equipment-table'
+import rentApplicationTable from '../table/rent-application-table'
 export default {
   components: {
-    'equipment-table': equipmentTable
+    'equipment-table': equipmentTable,
+    'rent-application-table': rentApplicationTable
   },
   props: {
     id: Number
@@ -155,7 +132,7 @@ export default {
   },
   created: function () {
     if (this.id === -1) return
-    axios.get('/api/v1/users/' + this.id, {})
+    axios.get('/api/v1/user/' + this.id, {})
       .then((response) => {
         this.data = response.data
       })
