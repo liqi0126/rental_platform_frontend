@@ -6,16 +6,19 @@
 
 <script>
 import Axios from 'axios'
+import qs from 'qs'
 export default {
   props: {
-    id: Number
+    id: Number,
+    comments: String
   },
   methods: {
     ret: function () {
-      Axios.post('/api/v1/rent-application/' + this.id + '/return/')
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      Axios.post('/api/v1/rent-application/' + this.id + '/return/', qs.stringify({ user_comments: this.comments }))
         .then(() => {
-          this.$message('归还成功')
           location.reload()
+          this.$message('归还成功')
         })
         .catch((error) => {
           console.log(error.response)

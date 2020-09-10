@@ -41,7 +41,7 @@
                     type='textarea'
                     :disabled="!(isAdmin||isOwner)"></el-input>
         </el-form-item>
-        <el-form-item label='评价'>
+        <el-form-item label='出租者评价'>
           <el-input v-model="data.comments"
                     type='textarea'
                     :disabled="!(isAdmin||isOwner)"></el-input>
