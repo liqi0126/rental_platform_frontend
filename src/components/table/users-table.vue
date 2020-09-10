@@ -68,7 +68,6 @@ export default {
     Axios.get('api/v1/users', {})
       .then((response) => {
         this.userList = response.data.results
-        console.log(this.userList)
       })
       .catch((error) => {
         alert('error:' + error)

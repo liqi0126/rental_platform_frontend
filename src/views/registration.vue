@@ -95,7 +95,7 @@ export default {
         method: 'post',
         data: userData
       })
-        .then((response) => {
+        .then(() => {
           this.$message('确认邮箱已发送')
           this.$router.push('/login')
         })
