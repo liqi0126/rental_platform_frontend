@@ -49,6 +49,8 @@
                   target="renter-application"></rej-button>
       <approve-button :id="id"
                       target="renter-application"></approve-button>
+      <del-button :id="id"
+                  target="renter-application"></del-button>
     </el-card>
   </div>
 </template>
@@ -77,11 +79,13 @@ import axios from 'axios'
 import changeButton from '../button/change-button'
 import rejButton from '../button/rej-button'
 import approveButton from '../button/approve-button'
+import delButton from '../button/del-button'
 export default {
   components: {
     'change-button': changeButton,
     'rej-button': rejButton,
-    'approve-button': approveButton
+    'approve-button': approveButton,
+    'del-button': delButton
   },
   props: {
     id: Number

@@ -87,6 +87,8 @@
                           target="rent-application"></rent-return-button>
       <rent-return-confirm-button :id="id"
                                   target="rent-application"></rent-return-confirm-button>
+      <del-button :id="id"
+                  target="rent-application"></del-button>
     </el-card>
   </div>
 </template>
@@ -117,13 +119,15 @@ import rejButton from '../button/rej-button'
 import approveButton from '../button/approve-button'
 import rentReturnButton from '../button/rent-return-button'
 import rentReturnConfirmButton from '../button/rent-return-confirm-button'
+import delButton from '../button/del-button'
 export default {
   components: {
     'change-button': changeButton,
     'rej-button': rejButton,
     'approve-button': approveButton,
     'rent-return-button': rentReturnButton,
-    'rent-return-confirm-button': rentReturnConfirmButton
+    'rent-return-confirm-button': rentReturnConfirmButton,
+    'del-button': delButton
   },
   props: {
     id: Number

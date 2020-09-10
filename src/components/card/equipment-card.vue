@@ -13,11 +13,11 @@
         </el-form-item>
         <el-form-item label='设备名'>
           <el-input v-model="data.name"
-                    :disabled="diseditable"></el-input>
+                    :disabled="!(isAdmin||isOwner)"></el-input>
         </el-form-item>
         <el-form-item label='拥有者ID'>
           <el-input v-model="data.owner"
-                    :disabled="diseditable"
+                    :disabled="!(isAdmin)"
                     style="width:80%;"></el-input>
           <el-button type="primary"
                      style="margin-left:20px;"
@@ -29,41 +29,45 @@
         </el-form-item>
         <el-form-item label='地址'>
           <el-input v-model="data.address"
-                    :disabled="diseditable"></el-input>
+                    :disabled="!(isAdmin||isOwner)"></el-input>
         </el-form-item>
         <el-form-item label='状态'>
           <!-- <el-input v-model="data.status"
                     :disabled="diseditable"></el-input> -->
-          <el-select v-model="data.status" :disabled="diseditable">
-            <el-option
-              v-for="item in status_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
+          <el-select v-model="data.status"
+                     :disabled="!(isAdmin)">
+            <el-option v-for="item in status_options"
+                       :key="item.value"
+                       :label="item.label"
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label='租期'>
           <el-input v-model="data.lease_term_begin"
-                    :disabled="diseditable"
+                    :disabled="!(isAdmin)"
                     style="width:48%"></el-input>
           到
           <el-input v-model="data.lease_term_end"
-                    :disabled="diseditable"
+                    :disabled="!(isAdmin)"
                     style="width:48%"></el-input>
         </el-form-item>
         <el-form-item label='Email'>
           <el-input v-model="data.email"
-                    :disabled="diseditable"></el-input>
+                    :disabled="!(isAdmin||isOwner)"></el-input>
         </el-form-item>
         <el-form-item label='电话号码'>
           <el-input v-model="data.phone"
-                    :disabled="diseditable"></el-input>
+                    :disabled="!(isAdmin||isOwner)"></el-input>
         </el-form-item>
       </el-form>
       <change-button :id="id"
                      :data="data"
-                     target="equipment"></change-button>
+                     target="equipment"
+                     v-if="(isAdmin||isOwner)"></change-button>
+      <del-button :id="id"
+                  target="equipment"
+                  v-if="(isAdmin||isOwner)"></del-button>
     </el-card>
   </div>
 </template>
@@ -91,16 +95,19 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
 import changeButton from '../button/change-button'
+import delButton from '../button/del-button'
 export default {
   components: {
-    'change-button': changeButton
+    'change-button': changeButton,
+    'del-button': delButton
   },
   props: {
     id: Number
   },
   data: function () {
     return {
-      diseditable: false,
+      isOwner: (this.id === this.$store.state.user.id),
+      isAdmin: this.$store.state.isAdmin,
       data: {
         id: 0,
         name: '',

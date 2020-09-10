@@ -1,5 +1,5 @@
 <template>
-  <el-button type="danger"
+  <el-button type="primary"
              @click="change">提交修改
   </el-button>
 </template>

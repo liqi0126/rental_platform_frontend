@@ -3,7 +3,7 @@
   <div>
     <el-card class="card"
              style="font-size:24px;">
-      设备归还申请
+      设备上架申请
     </el-card>
     <el-card class='card'>
       <el-form class="form"
@@ -57,6 +57,8 @@
                   target="release-application"></rej-button>
       <approve-button :id="id"
                       target="release-application"></approve-button>
+      <del-button :id="id"
+                  target="release-application"></del-button>
     </el-card>
   </div>
 </template>
@@ -86,18 +88,21 @@ import axios from 'axios'
 import changeButton from '../button/change-button'
 import rejButton from '../button/rej-button'
 import approveButton from '../button/approve-button'
+import delButton from '../button/del-button'
 export default {
   components: {
     'change-button': changeButton,
     'rej-button': rejButton,
-    'approve-button': approveButton
+    'approve-button': approveButton,
+    'del-button': delButton
   },
   props: {
     id: Number
   },
   data: function () {
     return {
-      diseditable: false,
+      isOwner: (this.id === this.$store.state.user.id),
+      isAdmin: this.$store.state.isAdmin,
       data: {
         id: 0,
         comments: '',
