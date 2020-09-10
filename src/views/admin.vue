@@ -14,7 +14,7 @@
 <style scoped>
 .table {
   width: 60%;
-  margin-bottom: 150px;
+  margin-bottom: 200px;
 }
 </style>
 <script>

@@ -10,7 +10,7 @@
                 id="users-table"
                 class="table"
                 @row-click="enter"
-                height=600>
+                height=400>
         <el-table-column prop="id"
                          label="ID"
                          width="40">
@@ -44,6 +44,12 @@
                          width="180">
         </el-table-column>
       </el-table>
+      <el-pagination background
+                     layout="prev, pager, next"
+                     :total="data.count*2"
+                     class="page-chooser"
+                     @current-change="changePage">
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -58,6 +64,11 @@
   position: relative;
   margin: 0 auto;
   max-height: 600px;
+}
+.page-chooser {
+  position: relative;
+  margin: 10px auto;
+  left: 40%;
 }
 </style>
 
@@ -77,45 +88,69 @@ export default {
       options: [
         { value: 'search', label: '全部搜索' },
         { value: 'description', label: '筛选：描述' }
-      ]
+      ],
+      select: 'search',
+      input: '',
+      data: { count: 0 }
     }
   },
   created: function () {
     // 获取用户列表
-    if (this.id === -1) {
-      Axios.get('api/v1/release-application', {})
-        .then((response) => {
-          this.rentApplicationList = response.data.results
-        })
-        .catch((error) => {
-          alert('error:' + error)
-        })
-    } else {
-      Axios.get('api/v1/release-application/userId/' + this.id, {})
-        .then((response) => {
-          this.rentApplicationList = response.data.results
-        })
-        .catch((error) => {
-          alert('error:' + error)
-        })
-    }
+    // if (this.id === -1) {
+    //   Axios.get('api/v1/release-application', {})
+    //     .then((response) => {
+    //       this.rentApplicationList = response.data.results
+    //     })
+    //     .catch((error) => {
+    //       alert('error:' + error)
+    //     })
+    // } else {
+    //   Axios.get('api/v1/release-application/userId/' + this.id, {})
+    //     .then((response) => {
+    //       this.rentApplicationList = response.data.results
+    //     })
+    //     .catch((error) => {
+    //       alert('error:' + error)
+    //     })
+    // }
+    this.changePage(1)
   },
   methods: {
     enter: function (row) {
       this.$router.push({ name: 'release-application', params: { releaseApplicationId: row.id } })
     },
     searchAndFilter: function (select, input) {
+      this.select = select
+      this.input = input
+      this.changePage(1)
+    },
+    changePage: function (page) {
       if (this.id === -1) {
-        Axios.get('api/v1/release-application', { params: { [select]: input } })
+        Axios.get('api/v1/release-application', {
+          params: {
+            [this.select]: this.input,
+            offset: (page - 1) * 5,
+            limit: 5
+          }
+        })
           .then((response) => {
             this.rentApplicationList = response.data.results
+            this.data = response.data
           }).catch((error) => {
             alert('error:' + error)
           })
       } else {
-        Axios.get('/api/v1/release-application/userId/' + this.id, { params: { [select]: input } })
+        Axios.get('/api/v1/release-application/', {
+          params: {
+            [this.select]: this.input,
+            offset: (page - 1) * 5,
+            limit: 5,
+            id: this.id
+          }
+        })
           .then((response) => {
             this.rentApplicationList = response.data.results
+            this.data = response.data
           }).catch((error) => {
             console.log(error.response)
             alert('error:' + error)

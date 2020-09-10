@@ -10,7 +10,7 @@
                 @row-click="enterEquipment"
                 id="equipment-table"
                 class="table"
-                height=600>
+                height=400>
         <el-table-column prop="id"
                          label="ID"
                          width="40">
@@ -40,6 +40,12 @@
                          width="180">
         </el-table-column>
       </el-table>
+      <el-pagination background
+                     layout="prev, pager, next"
+                     :total="data.count*2"
+                     class="page-chooser"
+                     @current-change="changePage">
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -54,6 +60,11 @@
   position: relative;
   margin: 0 auto;
   max-height: 600px;
+}
+.page-chooser {
+  position: relative;
+  margin: 10px auto;
+  left: 40%;
 }
 </style>
 
@@ -73,44 +84,70 @@ export default {
       options: [
         { value: 'search', label: '全部搜索' },
         { value: 'equipment', label: '筛选：设备名' },
-        { value: 'address', label: '筛选：地址' }
-      ]
+        { value: 'address', label: '筛选：地址' },
+        { value: 'email', label: '筛选：邮箱' },
+        { value: 'phone', label: '筛选：电话' }
+      ],
+      select: 'search',
+      input: '',
+      data: { count: 0 }
     }
   },
   created: function () {
     // 获取设备列表
-    if (this.id === -1) {
-      Axios.get('api/v1/equipment')
-        .then((response) => {
-          this.equipmentList = response.data.results
-        }).catch((error) => {
-          alert('error:' + error)
-        })
-    } else {
-      Axios.get('/api/v1/equipment', { params: { owner: this.id } })
-        .then((response) => {
-          this.equipmentList = response.data.results
-        }).catch((error) => {
-          console.log(error.response)
-          alert('error:' + error)
-        })
-    }
+    // if (this.id === -1) {
+    //   Axios.get('api/v1/equipment')
+    //     .then((response) => {
+    //       this.equipmentList = response.data.results
+    //     }).catch((error) => {
+    //       alert('error:' + error)
+    //     })
+    // } else {
+    //   Axios.get('/api/v1/equipment', { params: { owner: this.id } })
+    //     .then((response) => {
+    //       this.equipmentList = response.data.results
+    //     }).catch((error) => {
+    //       console.log(error.response)
+    //       alert('error:' + error)
+    //     })
+    // }
+    this.changePage(1)
   },
   methods: {
     enterEquipment: function (row) {
       this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
     },
     searchAndFilter: function (select, input) {
+      this.input = input
+      this.select = select
+      this.changePage(1)
+    },
+    changePage: function (page) {
       if (this.id === -1) {
-        Axios.get('api/v1/equipment', { params: { [select]: input } })
+        Axios.get('api/v1/equipment', {
+          params: {
+            [this.select]: this.input,
+            offset: (page - 1) * 5,
+            limit: 5
+          }
+        })
           .then((response) => {
+            this.data = response.data
             this.equipmentList = response.data.results
           }).catch((error) => {
             alert('error:' + error)
           })
       } else {
-        Axios.get('/api/v1/equipment', { params: { owner: this.id, [select]: input } })
+        Axios.get('/api/v1/equipment', {
+          params: {
+            owner: this.id,
+            [this.select]: this.input,
+            offset: (page - 1) * 5,
+            limit: 5
+          }
+        })
           .then((response) => {
+            this.data = response.data
             this.equipmentList = response.data.results
           }).catch((error) => {
             console.log(error.response)
