@@ -1,6 +1,10 @@
 // writen by xyh
 <template>
   <div>
+    <el-card class="card"
+             style="font-size:24px;">
+      设备归还申请
+    </el-card>
     <el-card class='card'>
       <el-form class="form"
                label-width="100px">
