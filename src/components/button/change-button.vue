@@ -18,12 +18,12 @@ export default {
       Axios.patch('/api/v1/' + this.target + '/' + this.id, this.data)
         .then(() => {
           this.$message('修改成功')
-          this.$router.push({ name: 'admin' })
-          location.reload()
+          // this.$router.push({ name: 'admin' })
+          // location.reload()
         })
         .catch((error) => {
           console.log(error.response)
-          alert('ERROR:' + error)
+          console.log(error.request.response)
         })
     }
   }

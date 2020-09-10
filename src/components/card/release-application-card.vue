@@ -43,7 +43,7 @@
         </el-form-item>
         <el-form-item label='设备ID'>
           <el-input v-model="data.equipment"
-                    :disabled="diseditable"
+                    :disabled="true"
                     style="width:80%;"></el-input>
           <el-button type="primary"
                      style="margin-left:20px;"

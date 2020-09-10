@@ -10,7 +10,7 @@
                 id="users-table"
                 class="table"
                 @row-click="enter"
-                height=400>
+                :height="height">
         <el-table-column prop="id"
                          label="ID"
                          width="40">
@@ -55,7 +55,6 @@
 .table {
   position: relative;
   margin: 0 auto;
-  max-height: 600px;
 }
 .page-chooser {
   position: relative;
@@ -73,7 +72,8 @@ export default {
   },
   props: {
     id: Number,
-    pageSize: Number
+    pageSize: Number,
+    height: Number
   },
   data: function () {
     return {

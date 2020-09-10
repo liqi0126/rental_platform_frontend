@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     approve: function () {
-      Axios.post('/api/v1/' + this.target + '/' + this.id + '/approve')
+      Axios.post('/api/v1/' + this.target + '/' + this.id + '/approve/')
         .then(() => {
           this.$message('通过成功')
           // this.$router.push({ name: 'admin' })

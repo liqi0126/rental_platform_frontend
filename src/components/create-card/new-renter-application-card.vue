@@ -56,7 +56,7 @@ export default {
     createRenterApplication: function () {
       // axios.post('/api/v1/renter-application', this.data)
       Axios({
-        url: 'api/v1/renter-application',
+        url: 'api/v1/renter-application/',
         method: 'post',
         // data: 'applicant=3&description=123',
         data: qs.stringify(this.data),
