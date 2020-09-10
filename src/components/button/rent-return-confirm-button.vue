@@ -1,5 +1,5 @@
 <template>
-  <el-button type="danger"
+  <el-button type="success"
              @click="confirm">确认已归还
   </el-button>
 </template>

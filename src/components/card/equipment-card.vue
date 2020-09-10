@@ -34,12 +34,12 @@
         <el-form-item label='状态'>
           <!-- <el-input v-model="data.status"
                     :disabled="diseditable"></el-input> -->
-          <el-select v-model="data.status" :disabled="diseditable">
-            <el-option
-              v-for="item in status_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
+          <el-select v-model="data.status"
+                     :disabled="diseditable">
+            <el-option v-for="item in status_options"
+                       :key="item.value"
+                       :label="item.label"
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -64,6 +64,8 @@
       <change-button :id="id"
                      :data="data"
                      target="equipment"></change-button>
+      <del-button :id="id"
+                  target="equipment"></del-button>
     </el-card>
   </div>
 </template>
@@ -91,9 +93,11 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
 import changeButton from '../button/change-button'
+import delButton from '../button/del-button'
 export default {
   components: {
-    'change-button': changeButton
+    'change-button': changeButton,
+    'del-button': delButton
   },
   props: {
     id: Number

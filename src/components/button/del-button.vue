@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     del: function () {
-      Axios.delete('api/v1/' + this.target + '/' + this.id)
+      Axios.delete('/api/v1/' + this.target + '/' + this.id)
         .then(() => {
           this.$message('删除成功')
           this.$router.push({ name: 'admin' })

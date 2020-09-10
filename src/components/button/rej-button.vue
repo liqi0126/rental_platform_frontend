@@ -1,5 +1,5 @@
 <template>
-  <el-button type="danger"
+  <el-button type="warning"
              @click="rej">拒绝
   </el-button>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <el-button type="danger"
+  <el-button type="success"
              @click="approve">通过
   </el-button>
 </template>

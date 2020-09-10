@@ -3,7 +3,7 @@
   <div>
     <el-card class="card"
              style="font-size:24px;">
-      申请归还设备
+      申请上架设备
     </el-card>
     <el-card class='card'>
       <el-form class="form"

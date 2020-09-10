@@ -1,7 +1,7 @@
 // writen by xyh
 <template>
   <div>
-    <el-card class="title-card">所有归还申请</el-card>
+    <el-card class="title-card">所有上架申请</el-card>
     <el-card class="table-card">
       <el-table :data="rentApplicationList"
                 stripe
@@ -56,9 +56,6 @@
   position: relative;
   margin: 0 auto;
   max-height: 600px;
-}
-.table-card {
-  margin-bottom: 40px;
 }
 </style>
 
