@@ -25,8 +25,16 @@
                     :disabled="diseditable"></el-input>
         </el-form-item>
         <el-form-item label='状态'>
-          <el-input v-model="data.status"
-                    :disabled="diseditable"></el-input>
+          <!-- <el-input v-model="data.status"
+                    :disabled="diseditable"></el-input> -->
+          <el-select v-model="data.status" :disabled="diseditable">
+            <el-option
+              v-for="item in status_options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label='评价'>
           <el-input v-model="data.comments"
@@ -98,7 +106,17 @@ export default {
         equipment: '',
         status: '',
         owner: 0
-      }
+      },
+      status_options: [{
+        value: 'UNA',
+        label: 'Unapproved'
+      }, {
+        value: 'ACC',
+        label: 'Accepted'
+      }, {
+        value: 'REJ',
+        label: 'Rejected'
+      }]
     }
   },
   created: function () {
