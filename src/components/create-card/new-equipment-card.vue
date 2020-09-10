@@ -68,7 +68,7 @@ export default {
         email: '',
         phone: null,
         description: '',
-        owner: this.$store.state.user.id
+        owner: this.$store.getters.getCurrentUser.id
       }
     }
   },
@@ -77,10 +77,11 @@ export default {
       this.$router.push({ name: 'user', params: { userId: this.data.owner } })
     },
     createEquipment: function () {
-      axios.post('/api/v1/equipment', this.data)
+      console.log(this.$store.getters.getCurrentUser.id)
+      axios.post('/api/v1/equipment/', this.data)
         .then((response) => {
           console.log(response)
-          this.$message(response.data.equipment + '创建成功！')
+          this.$message('创建成功！')
         })
         .catch((error) => {
           console.log(error.response)

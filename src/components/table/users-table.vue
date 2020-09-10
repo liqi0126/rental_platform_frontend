@@ -9,14 +9,18 @@
               stripe
               id="users-table"
               class="table"
-              height=400>
+              :height="height">
       <el-table-column prop="id"
                        label="ID"
                        width="40">
       </el-table-column>
-      <el-table-column prop="username"
-                       label="用户名"
-                       width="180">
+      <el-table-column prop="last_name"
+                       label="姓"
+                       width="40">
+      </el-table-column>
+      <el-table-column prop="first_name"
+                       label="名"
+                       width="80">
       </el-table-column>
       <el-table-column prop="created_at"
                        label="创建时间"
@@ -58,7 +62,6 @@
 .table {
   position: relative;
   margin: 0 auto;
-  max-height: 600px;
 }
 .page-chooser {
   position: relative;
@@ -72,7 +75,8 @@ import Axios from 'axios'
 import searchAndFilter from '../search&filter'
 export default {
   props: {
-    pageSize: Number
+    pageSize: Number,
+    height: Number
   },
   components: {
     'search-filter': searchAndFilter
@@ -94,15 +98,6 @@ export default {
     }
   },
   created: function () {
-    // 获取用户列表
-    // Axios.get('api/v1/user', {})
-    //   .then((response) => {
-    //     this.userList = response.data.results
-    //     console.log(this.userList)
-    //   })
-    //   .catch((error) => {
-    //     alert('error:' + error)
-    //   })
     this.changePage(1)
   },
   methods: {

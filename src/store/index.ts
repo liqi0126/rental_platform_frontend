@@ -8,7 +8,7 @@ export default new Vuex.Store({
     // userId: null, // 用户id
     // userEmail: null, // 用户email
     userKey: null, // 用户key
-    isAdmin: true,
+    isAdmin: false,
     user: {
       id: 3
     }

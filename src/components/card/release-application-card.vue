@@ -43,7 +43,7 @@
         </el-form-item>
         <el-form-item label='设备ID'>
           <el-input v-model="data.equipment"
-                    :disabled="diseditable"
+                    :disabled="true"
                     style="width:80%;"></el-input>
           <el-button type="primary"
                      style="margin-left:20px;"
@@ -105,8 +105,8 @@ export default {
   },
   data: function () {
     return {
-      isOwner: (this.id === this.$store.state.user.id),
-      isAdmin: this.$store.state.isAdmin,
+      isOwner: (this.id === this.$store.getters.getCurrentUser.id),
+      isAdmin: this.$store.getters.isAdmin,
       data: {
         id: 0,
         comments: '',

@@ -2,7 +2,8 @@
 <template>
   <div>
     <user-table class="table"
-                :pageSize="5"></user-table>
+                :pageSize="5"
+                :height="400"></user-table>
     <equipment-table class="table"
                      :pageSize="5"></equipment-table>
     <renter-application-table :id="-1"

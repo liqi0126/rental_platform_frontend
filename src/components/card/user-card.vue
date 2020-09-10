@@ -107,8 +107,8 @@ export default {
   },
   data: function () {
     return {
-      isOwner: (this.id === this.$store.state.user.id),
-      isAdmin: this.$store.state.isAdmin,
+      isOwner: (this.id === this.$store.getters.getCurrentUser.id),
+      isAdmin: this.$store.getters.isAdmin,
       data: {
         id: 0,
         owned_equipments: [],

@@ -13,71 +13,67 @@
                     :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label='创建时间'>
-          <el-input v-model="data.created_at"
-                    :disabled="diseditable"></el-input>
+          <el-input v-model="rent_data.created_at"
+                    :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label='描述'>
-          <el-input v-model="data.description"
+          <el-input v-model="rent_data.description"
                     type='textarea'
-                    :disabled="diseditable"></el-input>
-        </el-form-item>
-        <el-form-item label='是否正在执行'>
-          <el-checkbox v-model="data.applying"
-                       :disabled="diseditable"></el-checkbox>
+                    :disabled="!(isAdmin||isHirer)"></el-input>
         </el-form-item>
         <el-form-item label='评价'>
-          <el-input v-model="data.comments"
+          <el-input v-model="rent_data.comments"
                     type='textarea'
-                    :disabled="diseditable"></el-input>
+                    :disabled="!(isAdmin)"></el-input>
         </el-form-item>
         <el-form-item label='状态'>
           <!-- <el-input v-model="data.status"
                     :disabled="diseditable"></el-input> -->
-          <el-select v-model="data.status" :disabled="diseditable">
-            <el-option
-              v-for="item in status_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
+          <el-select v-model="rent_data.status"
+                     :disabled="!isAdmin">
+            <el-option v-for="item in status_options"
+                       :key="item.value"
+                       :label="item.label"
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label='租期'>
-          <el-input v-model="data.lease_term_begin"
-                    :disabled="diseditable"
+          <el-input v-model="rent_data.lease_term_begin"
+                    :disabled="!isAdmin"
                     style="width:48%"></el-input>
           到
-          <el-input v-model="data.lease_term_end"
-                    :disabled="diseditable"
+          <el-input v-model="rent_data.lease_term_end"
+                    :disabled="!isAdmin"
                     style="width:48%"></el-input>
         </el-form-item>
         <el-form-item label='设备ID'>
-          <el-input v-model="data.equipment"
-                    :disabled="diseditable"
+          <el-input v-model="rent_data.equipment"
+                    :disabled="true"
                     style="width:80%;"></el-input>
           <el-button type='primary'
-                     @click="enterEquipment(data.equipment)"
+                     @click="enterEquipment(rent_data.equipment)"
                      style="margin-left:20px;">查看设备</el-button>
         </el-form-item>
         <el-form-item label='拥有者ID'>
-          <el-input v-model="data.renter"
-                    :disabled="diseditable"
+          <el-input v-model="rent_data.renter"
+                    :disabled="true"
                     style="width:80%;"></el-input>
           <el-button type='primary'
-                     @click="enterUser(data.renter)"
+                     @click="enterUser(rent_data.renter)"
                      style="margin-left:20px;">查看拥有者</el-button>
         </el-form-item>
         <el-form-item label='租借者ID'>
-          <el-input v-model="data.hirer"
-                    :disabled="diseditable"
+          <el-input v-model="rent_data.hirer"
+                    :disabled="true"
                     style="width:80%;"></el-input>
           <el-button type='primary'
-                     @click="enterUser(data.hirer)"
+                     @click="enterUser(rent_data.hirer)"
                      style="margin-left:20px;">查看租借者</el-button>
         </el-form-item>
       </el-form>
       <change-button :id="id"
-                     :data="data"
+                     :data="rent_data"
                      target="rent-application"></change-button>
       <rej-button :id="id"
                   target="rent-application"></rej-button>
@@ -135,8 +131,8 @@ export default {
   data: function () {
     return {
       diseditable: true,
-      data: {
-        created_at: '2020-09-09T10:05:27.845480+08:00',
+      rent_data: {
+        created_at: '',
         description: 'wdjq',
         status: 'REJ',
         comments: '',
@@ -157,14 +153,21 @@ export default {
       }, {
         value: 'REJ',
         label: 'Rejected'
-      }]
+      }],
+      // eslint-disable-next-line eqeqeq
+      isRenter: false,
+      // eslint-disable-next-line eqeqeq
+      isHirer: false,
+      isAdmin: this.$store.getters.isAdmin
     }
   },
   created: function () {
     if (this.id === -1) return
     axios.get('/api/v1/rent-application/' + this.id, {})
       .then((response) => {
-        this.data = response.data
+        this.rent_data = response.data
+        this.isRenter = this.rent_data.renter === this.$store.getters.getCurrentUser.id
+        this.isHirer = this.rent_data.hirer === this.$store.getters.getCurrentUser.id
       })
       .catch((error) => {
         alert(error)

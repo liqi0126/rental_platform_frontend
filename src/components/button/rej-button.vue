@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     rej: function () {
-      Axios.post('/api/v1/' + this.target + '/' + this.id + '/reject')
+      Axios.post('/api/v1/' + this.target + '/' + this.id + '/reject/')
         .then(() => {
           this.$message('拒绝成功')
           // this.$router.push({ name: 'admin' })

@@ -14,16 +14,22 @@ export default {
   },
   methods: {
     change: function () {
-      console.log(this.data)
-      Axios.patch('/api/v1/' + this.target + '/' + this.id, this.data)
-        .then(() => {
+      const newData = {}
+      for (const key in this.data) {
+        if (this.data[key]) {
+          newData[key] = this.data[key]
+        }
+      }
+
+      Axios.patch('/api/v1/' + this.target + '/' + this.id + '/', newData)
+        .then((response) => {
           this.$message('修改成功')
           this.$router.push({ name: 'admin' })
           location.reload()
         })
         .catch((error) => {
           console.log(error.response)
-          alert('ERROR:' + error)
+          console.log(error.request.response)
         })
     }
   }
