@@ -9,13 +9,12 @@ import Axios from 'axios'
 export default {
   props: {
     id: Number,
-    target: String,
-    data: Object
+    target: String
   },
   methods: {
     change: function () {
       console.log(this.data)
-      Axios.patch('/api/v1/' + this.target + '/' + this.id, this.data)
+      Axios.patch('/api/v1/' + this.target + '/' + this.id)
         .then(() => {
           this.$message('修改成功')
           this.$router.push({ name: 'admin' })

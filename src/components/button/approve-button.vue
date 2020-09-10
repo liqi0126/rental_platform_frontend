@@ -1,6 +1,6 @@
 <template>
   <el-button type="danger"
-             @click="del">删除
+             @click="approve">通过
   </el-button>
 </template>
 
@@ -12,11 +12,12 @@ export default {
     target: String
   },
   methods: {
-    del: function () {
-      Axios.delete('api/v1/' + this.target + '/' + this.id + '/approve')
+    approve: function () {
+      Axios.post('/api/v1/' + this.target + '/' + this.id + '/approve')
         .then(() => {
-          this.$message('删除成功')
-          this.$router.push({ name: 'admin' })
+          this.$message('通过成功')
+          // this.$router.push({ name: 'admin' })
+          location.reload()
         })
         .catch((error) => {
           console.log(error.response)

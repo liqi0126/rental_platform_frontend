@@ -44,8 +44,11 @@
       </el-form>
       <change-button :id="id"
                      :data="data"
-                     class="button"
                      target="release-application"></change-button>
+      <rej-button :id="id"
+                  target="release-application"></rej-button>
+      <approve-button :id="id"
+                      target="release-application"></approve-button>
     </el-card>
   </div>
 </template>
@@ -73,9 +76,13 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
 import changeButton from '../button/change-button'
+import rejButton from '../button/rej-button'
+import approveButton from '../button/approve-button'
 export default {
   components: {
-    'change-button': changeButton
+    'change-button': changeButton,
+    'rej-button': rejButton,
+    'approve-button': approveButton
   },
   props: {
     id: Number

@@ -1,6 +1,6 @@
 <template>
   <el-button type="danger"
-             @click="rej">归还
+             @click="ret">归还
   </el-button>
 </template>
 
@@ -11,8 +11,8 @@ export default {
     id: Number
   },
   methods: {
-    del: function () {
-      Axios.post('api/v1/rent-application/' + this.id + '/return')
+    ret: function () {
+      Axios.post('/api/v1/rent-application/' + this.id + '/return')
         .then(() => {
           this.$message('归还成功')
           location.reload()

@@ -70,8 +70,15 @@
       </el-form>
       <change-button :id="id"
                      :data="data"
-                     class="button"
                      target="rent-application"></change-button>
+      <rej-button :id="id"
+                  target="rent-application"></rej-button>
+      <approve-button :id="id"
+                      target="rent-application"></approve-button>
+      <rent-return-button :id="id"
+                          target="rent-application"></rent-return-button>
+      <rent-return-confirm-button :id="id"
+                                  target="rent-application"></rent-return-confirm-button>
     </el-card>
   </div>
 </template>
@@ -98,9 +105,17 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
 import changeButton from '../button/change-button'
+import rejButton from '../button/rej-button'
+import approveButton from '../button/approve-button'
+import rentReturnButton from '../button/rent-return-button'
+import rentReturnConfirmButton from '../button/rent-return-confirm-button'
 export default {
   components: {
-    'change-button': changeButton
+    'change-button': changeButton,
+    'rej-button': rejButton,
+    'approve-button': approveButton,
+    'rent-return-button': rentReturnButton,
+    'rent-return-confirm-button': rentReturnConfirmButton
   },
   props: {
     id: Number
