@@ -1,6 +1,6 @@
 <template>
   <el-button type="danger"
-             @click="rej">删除
+             @click="rej">拒绝
   </el-button>
 </template>
 
@@ -12,11 +12,12 @@ export default {
     target: String
   },
   methods: {
-    del: function () {
-      Axios.post('api/v1/' + this.target + '/' + this.id + '/reject')
+    rej: function () {
+      Axios.post('/api/v1/' + this.target + '/' + this.id + '/reject')
         .then(() => {
           this.$message('拒绝成功')
-          this.$router.push({ name: 'admin' })
+          // this.$router.push({ name: 'admin' })
+          location.reload()
         })
         .catch((error) => {
           console.log(error.response)
