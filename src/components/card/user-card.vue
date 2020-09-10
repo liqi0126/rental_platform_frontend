@@ -1,6 +1,10 @@
 // writen by xyh
 <template>
   <div>
+    <el-card class="card"
+             style="font-size:24px;">
+      用户详情页
+    </el-card>
     <el-card class='card'>
       <el-form class="form"
                label-width="100px">
@@ -13,7 +17,8 @@
                     :disabled="diseditable"></el-input>
         </el-form-item>
         <el-form-item label='设备'>
-          <el-table :data="data.owned_equipments"
+          <equipment-table :id="id"></equipment-table>
+          <!-- <el-table :data="data.owned_equipments"
                     @row-click="enterEquipment"
                     stripe
                     id="equipment-table"
@@ -46,7 +51,7 @@
                              label="状态"
                              width="180">
             </el-table-column>
-          </el-table>
+          </el-table> -->
         </el-form-item>
         <el-form-item label='密码'
                       v-if="!diseditable">
@@ -108,7 +113,11 @@
 <script>
 /* eslint-disable @typescript-eslint/camelcase */
 import axios from 'axios'
+import equipmentTable from '../table/equipment-table'
 export default {
+  components: {
+    'equipment-table': equipmentTable
+  },
   props: {
     id: Number
   },

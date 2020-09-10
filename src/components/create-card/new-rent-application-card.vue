@@ -1,6 +1,10 @@
 // writen by xyh
 <template>
   <div>
+    <el-card class="card"
+             style="font-size:24px;">
+      申请租借设备
+    </el-card>
     <el-card class='card'>
       <el-form class="form"
                label-width="100px">
