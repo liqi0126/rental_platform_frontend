@@ -52,7 +52,7 @@
                     style="width:80%;"></el-input>
           <el-button type="primary"
                      style="margin-left:20px;"
-                     @click="enterEquipment(row)">查看拥有者</el-button>
+                     @click="enterEquipment">查看设备</el-button>
         </el-form-item>
       </el-form>
       <change-button :id="id"
@@ -61,6 +61,7 @@
                      v-if="(isAdmin||isOwner)"></change-button>
       <rej-button :id="id"
                   target="release-application"
+                  :comments="data.comments"
                   v-if="isAdmin"></rej-button>
       <approve-button :id="id"
                       :comments="data.comments"
@@ -148,8 +149,8 @@ export default {
     enterUser: function () {
       this.$router.push({ name: 'user', params: { userId: this.data.owner } })
     },
-    enterEquipment: function (row) {
-      this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
+    enterEquipment: function () {
+      this.$router.push({ name: 'equipment', params: { equipmentId: this.data.equipment } })
     }
   }
 }

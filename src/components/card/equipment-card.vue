@@ -115,12 +115,12 @@
       <rent-return-button :id="rentAppId"
                           :comments="user_comments"
                           target="rent-application"
-                          v-if="(isBorrower||isAdmin)&&my_data.status==='REN'">
+                          v-if="(isBorrower||isAdmin)&&my_data.status==='ACC'">
 
       </rent-return-button>
       <rent-return-confirm-button :id="rentAppId"
                                   target="rent-application"
-                                  v-if="(isAdmin||isOwner)&&my_data.status==='RET'"></rent-return-confirm-button>
+                                  v-if="(isAdmin||isOwner)&&my_data.status==='REN'"></rent-return-confirm-button>
       <el-button v-if="(isAdmin||isOwner)&&my_data.status=='AVA'"
                  @click="withDrawEquipment"
                  type='warning'>下架</el-button>

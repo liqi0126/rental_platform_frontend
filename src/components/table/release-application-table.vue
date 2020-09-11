@@ -35,12 +35,8 @@
                          label="设备ID"
                          width="180">
         </el-table-column>
-        <el-table-column prop="renter"
+        <el-table-column prop="owner"
                          label="设备持有者ID"
-                         width="180">
-        </el-table-column>
-        <el-table-column prop="hirer"
-                         label="租借者"
                          width="180">
         </el-table-column>
       </el-table>
