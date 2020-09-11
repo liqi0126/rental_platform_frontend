@@ -1,7 +1,7 @@
 // writen by xyh
 <template>
   <div>
-    <el-card class="title-card">所有租借者申请</el-card>
+    <el-card class="title-card">所有成为出租者申请</el-card>
     <search-filter :options="options"
                    @search="searchAndFilter"></search-filter>
     <el-card class="table-card">

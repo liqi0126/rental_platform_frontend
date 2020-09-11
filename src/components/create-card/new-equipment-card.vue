@@ -80,6 +80,7 @@ export default {
       console.log(this.$store.getters.getCurrentUser.id)
       axios.post('/api/v1/equipment/', this.data)
         .then((response) => {
+          this.$router.push({ name: 'index' })
           console.log(response)
           this.$message('创建成功！')
         })

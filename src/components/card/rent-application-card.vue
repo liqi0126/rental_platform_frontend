@@ -26,10 +26,10 @@
                     type='textarea'
                     :disabled="!(isAdmin||isrenter)"></el-input>
         </el-form-item>
-        <el-form-item label='租赁者评价'>
+        <el-form-item label='租用者评价'>
           <el-input v-model="rent_data.user_comments"
                     type='textarea'
-                    :disabled="!(isAdmin||isborrower)"></el-input>
+                    :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label='状态'>
           <!-- <el-input v-model="data.status"

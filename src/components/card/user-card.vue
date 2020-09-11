@@ -37,7 +37,7 @@
                                       pageSize=5
                                       height=400></rent-application-table>
             </el-collapse-item>
-            <el-collapse-item title="租赁者请求"
+            <el-collapse-item title="申请成为出租者请求"
                               name="3">
               <renter-application-table :id="id"
                                         pageSize=5

@@ -60,6 +60,7 @@ export default {
     createReleaseApplication: function () {
       axios.post('/api/v1/release-application/', qs.stringify(this.data))
         .then((response) => {
+          this.$router.push({ name: 'index' })
           console.log(response)
           this.$message('创建成功！')
         })

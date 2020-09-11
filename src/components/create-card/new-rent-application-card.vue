@@ -77,6 +77,7 @@ export default {
       console.log(this.data)
       axios.post('/api/v1/rent-application/', qs.stringify(this.data))
         .then((response) => {
+          this.$router.push({ name: 'index' })
           console.log(response)
           this.$message('申请成功！')
         })

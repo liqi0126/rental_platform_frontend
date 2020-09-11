@@ -65,6 +65,7 @@ export default {
         }
       })
         .then((response) => {
+          this.$router.push({ name: 'index' })
           console.log(response)
           this.$message('申请成功，请等待管理员审批。')
         })

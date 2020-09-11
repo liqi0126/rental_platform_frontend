@@ -74,25 +74,29 @@
                     :disabled="!(isAdmin||isOwner)"></el-input>
         </el-form-item>
         <el-form-item label='用户评价'>
-          <el-collapse v-model="activeNames" @change="handleChange">
+          <el-collapse v-model="activeNames"
+                       @change="handleChange">
             <el-collapse-item title="展开">
-              <el-table
-                :data="commentsList"
-                stripe
-                style="width: 200%">
-                <el-table-column
-                  prop="borrower"
-                  label="用户"
-                  width="100%">
+              <el-table :data="commentsList"
+                        stripe
+                        style="width: 200%">
+                <el-table-column prop="borrower"
+                                 label="用户"
+                                 width="100%">
                 </el-table-column>
-                <el-table-column
-                  prop="comments"
-                  label="评价"
-                  width="500%">
+                <el-table-column prop="comments"
+                                 label="评价"
+                                 width="500%">
                 </el-table-column>
               </el-table>
             </el-collapse-item>
           </el-collapse>
+        </el-form-item>
+        <el-form-item>
+          <el-input placeholder="请输入归还评价"
+                    v-model="user_comments"
+                    type='textarea'
+                    v-if="(isBorrower||isAdmin)&&my_data.status==='REN'"></el-input>
         </el-form-item>
       </el-form>
       <change-button :id="id"
@@ -109,8 +113,11 @@
                  type="primary"
                  @click="enterRelease">申请上架</el-button>
       <rent-return-button :id="rentAppId"
+                          :comments="user_comments"
                           target="rent-application"
-                          v-if="(isBorrower||isAdmin)&&my_data.status==='REN'"></rent-return-button>
+                          v-if="(isBorrower||isAdmin)&&my_data.status==='REN'">
+
+      </rent-return-button>
       <rent-return-confirm-button :id="rentAppId"
                                   target="rent-application"
                                   v-if="(isAdmin||isOwner)&&my_data.status==='RET'"></rent-return-confirm-button>
@@ -179,7 +186,7 @@ export default {
       },
       isOwner: false,
       isAdmin: this.$store.getters.isAdmin,
-
+      user_comments: '',
       status_options: [{
         value: 'UNR',
         label: 'Unreleased'
@@ -265,8 +272,8 @@ export default {
     withDrawEquipment: function () {
       axios.post('/api/v1/equipment/' + this.id + '/withdraw/')
         .then(() => {
-          this.$message('下架成功')
           location.reload()
+          this.$message('下架成功')
         })
         .catch((error) => {
           alert('ERROR:' + error)

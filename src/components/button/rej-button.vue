@@ -15,9 +15,9 @@ export default {
     rej: function () {
       Axios.post('/api/v1/' + this.target + '/' + this.id + '/reject/')
         .then(() => {
+          location.reload()
           this.$message('拒绝成功')
           // this.$router.push({ name: 'admin' })
-          location.reload()
         })
         .catch((error) => {
           console.log(error.response)

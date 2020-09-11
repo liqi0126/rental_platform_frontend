@@ -24,7 +24,7 @@
                          width="180">
         </el-table-column>
         <el-table-column prop="comments"
-                         label="评价"
+                         label="审批评价"
                          width="180">
         </el-table-column>
         <el-table-column prop="status"
@@ -39,8 +39,8 @@
                          label="设备持有者ID"
                          width="180">
         </el-table-column>
-        <el-table-column prop="hirer"
-                         label="租借者"
+        <el-table-column prop="borrower"
+                         label="租借者ID"
                          width="180">
         </el-table-column>
       </el-table>

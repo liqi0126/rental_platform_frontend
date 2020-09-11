@@ -16,8 +16,8 @@ export default {
     confirm: function () {
       Axios.post('/api/v1/rent-application/' + this.id + '/return/confirm/', qs.stringify({ comments: this.comments }))
         .then(() => {
-          this.$message('归还确认成功')
           location.reload()
+          this.$message('归还确认成功')
         })
         .catch((error) => {
           console.log(error.response)

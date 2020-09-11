@@ -23,9 +23,10 @@ export default {
         data: qs.stringify(data)
       })
         .then((response) => {
+          location.reload()
           this.$message('通过成功')
           console.log(response)
-          // location.reload()
+
           // this.$router.push({ name: 'admin' })
           // location.reload()
         })
