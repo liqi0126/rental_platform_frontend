@@ -246,15 +246,10 @@ export default {
     },
     getCommentsList () {
       for (const item of this.rentApplicationList) {
-        console.log(item.borrower)
-        console.log(item.user_comments)
-        // this.commentsList.push({ borrower: item.borrower, comments: item.user_comments })
-        if (item.status === 'ACC' && item.applying === true) {
-          if (item.user_comments === '' || item.user_comments === null) {
-            this.new_comment = '该用户暂无评价'
-          } else this.new_comment = item.user_comments
-          this.commentsList.push({ borrower: item.borrower, comments: this.new_comment })
-        }
+        if (item.user_comments === '' || item.user_comments === null) {
+          this.new_comment = '该用户暂无评价'
+        } else this.new_comment = item.user_comments
+        this.commentsList.push({ borrower: item.borrower, comments: this.new_comment })
       }
     },
     getRentApp: function () {

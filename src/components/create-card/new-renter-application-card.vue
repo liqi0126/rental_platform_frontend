@@ -3,7 +3,7 @@
   <div>
     <el-card class="card"
              style="font-size:24px;">
-      申请成为租借者
+      申请成为出租者
     </el-card>
     <el-card class='card'>
       <el-form class="form"
