@@ -115,12 +115,12 @@
       <rent-return-button :id="rentAppId"
                           :comments="user_comments"
                           target="rent-application"
-                          v-if="(isBorrower||isAdmin)&&my_data.status==='ACC'">
+                          v-if="(isBorrower||isAdmin)&&my_data.status==='REN'">
 
       </rent-return-button>
       <rent-return-confirm-button :id="rentAppId"
                                   target="rent-application"
-                                  v-if="(isAdmin||isOwner)&&my_data.status==='REN'"></rent-return-confirm-button>
+                                  v-if="(isAdmin||isOwner)&&my_data.status==='RET'"></rent-return-confirm-button>
       <el-button v-if="(isAdmin||isOwner)&&my_data.status=='AVA'"
                  @click="withDrawEquipment"
                  type='warning'>下架</el-button>
@@ -246,15 +246,15 @@ export default {
     },
     getCommentsList () {
       for (const item of this.rentApplicationList) {
-        // console.log(item.borrower)
-        // console.log(item.user_comments)
+        console.log(item.borrower)
+        console.log(item.user_comments)
         // this.commentsList.push({ borrower: item.borrower, comments: item.user_comments })
-        // if (item.status === 'ACC' && item.applying === true) {
-        if (item.user_comments === '' || item.user_comments === null) {
-          this.new_comment = '该用户暂无评价'
-        } else this.new_comment = item.user_comments
-        this.commentsList.push({ borrower: item.borrower, comments: this.new_comment })
-        // }
+        if (item.status === 'ACC' && item.applying === true) {
+          if (item.user_comments === '' || item.user_comments === null) {
+            this.new_comment = '该用户暂无评价'
+          } else this.new_comment = item.user_comments
+          this.commentsList.push({ borrower: item.borrower, comments: this.new_comment })
+        }
       }
     },
     getRentApp: function () {
