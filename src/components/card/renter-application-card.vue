@@ -52,6 +52,7 @@
                      target="renter-application"></change-button>
       <rej-button :id="id"
                   target="renter-application"
+                  :comments="data.comments"
                   v-if="data.status==='UNA'||data.status==='ACC'"></rej-button>
       <approve-button :id="id"
                       :comments="data.comments"

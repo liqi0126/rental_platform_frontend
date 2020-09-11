@@ -83,6 +83,7 @@
                      v-if="isAdmin"></change-button>
       <rej-button :id="id"
                   target="rent-application"
+                  :comments="rent_data.comments"
                   v-if="(isAdmin||isrenter)&&rent_data.status==='UNA'"></rej-button>
       <approve-button :id="id"
                       target="rent-application"
