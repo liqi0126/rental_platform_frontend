@@ -2,18 +2,7 @@
   <div>
     <el-card class='card'
              style="margin-top:50px;">
-      <div style="float:left;margin-right:50px;margin-left:200px;">
-        <div style="text-align:center;">
-          <el-progress type="circle"
-                      :percentage="activeRate"
-                      :width=126
-                      color="#76DA93"></el-progress>
-          <h3>
-            用户活跃率
-          </h3>
-        </div>
-      </div>
-      <div style="float:left;margin-right:100px;margin-left:100px;">
+      <div style="float:left;margin-right:10%;margin-left:27%;">
         <div style="text-align:center;">
           <el-progress type="circle"
                       :percentage="utilizationRate"
@@ -23,7 +12,7 @@
           </h3>
         </div>
       </div>
-      <div style="float:left;margin-right:200px;margin-left:50px;">
+      <div style="float:left;margin-right:25%;margin-left:10%;">
         <div style="text-align:center;">
           <el-progress type="circle"
                       :percentage="approvedRate"
