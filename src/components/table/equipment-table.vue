@@ -84,7 +84,7 @@ export default {
       equipmentList: [],
       options: [
         { value: 'search', label: '全部搜索' },
-        { value: 'equipment', label: '筛选：设备名' },
+        { value: 'name', label: '筛选：设备名' },
         { value: 'address', label: '筛选：地址' },
         { value: 'email', label: '筛选：邮箱' },
         { value: 'phone', label: '筛选：电话' }

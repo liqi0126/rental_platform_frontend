@@ -86,7 +86,7 @@
         </el-form-item>
         <el-form-item label='属性'>
           <el-checkbox v-model="data.is_renter"
-                       :disabled="!isAdmin">是租借者</el-checkbox>
+                       :disabled="!isAdmin">是出租者</el-checkbox>
           <el-checkbox v-model="data.is_staff"
                        :disabled="!isAdmin">是工作人员</el-checkbox>
           <el-checkbox v-model="data.is_active"
