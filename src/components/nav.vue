@@ -25,7 +25,7 @@
       <el-submenu index="6"
                   v-if="hasLogin === true && isAdmin === true">
         <template slot="title">申请列表</template>
-        <el-menu-item index="6-1">租借者申请</el-menu-item>
+        <el-menu-item index="6-1">成为出租者申请</el-menu-item>
         <el-menu-item index="6-2">租借申请</el-menu-item>
         <el-menu-item index="6-3">上架申请</el-menu-item>
       </el-submenu>
@@ -49,7 +49,7 @@
                   v-if="hasLogin">
         <template slot="title">发布申请</template>
         <el-menu-item index="5-1">申请添加设备</el-menu-item>
-        <el-menu-item index="5-4">申请成为租赁者</el-menu-item>
+        <el-menu-item index="5-4">申请成为出租者</el-menu-item>
       </el-submenu>
       <el-menu-item style="margin-right:100px;float:right;font-size:19px;"
                     v-if="!hasLogin"><a href="/login">未登录</a></el-menu-item>
