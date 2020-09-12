@@ -5,13 +5,20 @@
              style="font-size:24px;">
       用户详情页
     </el-card>
-
+    <chat-dialog ref="dialog"
+                 :myId="this.$store.getters.getCurrentUser.id"
+                 :opposite="id"
+                 :name="data.last_name+' '+data.first_name"
+                 :dialogVisible.sync="dialogVisible"></chat-dialog>
     <el-card class='card'>
       <el-form class="form"
                label-width="100px">
         <el-form-item label='ID'>
           <el-input v-model="id"
-                    :disabled="true"></el-input>
+                    :disabled="true"
+                    style="width:70%;"></el-input>
+          <el-button type="primary"
+                     @click="openDialog">和他对话</el-button>
         </el-form-item>
         <el-form-item label='姓名'>
           姓
@@ -28,39 +35,39 @@
             <el-collapse-item title="设备"
                               name="1">
               <equipment-table :id="id"
-                               pageSize=5
-                               height=400></equipment-table>
+                               :pageSize=5
+                               :height=400></equipment-table>
             </el-collapse-item>
             <el-collapse-item title="租赁请求"
                               name="2">
               <rent-application-table :id="id"
-                                      pageSize=5
-                                      height=400></rent-application-table>
+                                      :pageSize=5
+                                      :height=400></rent-application-table>
             </el-collapse-item>
             <el-collapse-item title="申请成为出租者请求"
                               name="3">
               <renter-application-table :id="id"
-                                        pageSize=5
-                                        height=400></renter-application-table>
+                                        :pageSize=5
+                                        :height=400></renter-application-table>
             </el-collapse-item>
             <el-collapse-item title="上架请求"
                               name="4">
               <release-application-table :id="id"
-                                         pageSize=5
-                                         height=400></release-application-table>
+                                         :pageSize=5
+                                         :height=400></release-application-table>
             </el-collapse-item>
             <el-collapse-item title="收到的租赁请求"
                               name="5">
               <received-rent-application-table :userId="id"
-                                               pageSize=5
-                                               height=400></received-rent-application-table>
+                                               :pageSize=5
+                                               :height=400></received-rent-application-table>
 
             </el-collapse-item>
             <el-collapse-item title="租借的设备"
                               name="6">
               <rented-equipment-table :userId="id"
-                                      pageSize=5
-                                      height=400></rented-equipment-table>
+                                      :pageSize=5
+                                      :height=400></rented-equipment-table>
             </el-collapse-item>
           </el-collapse>
         </el-form-item>
@@ -132,6 +139,7 @@ import receivedRentApplicationTable from '../table/received-rent-application-tab
 import rentedEquipmentTable from '../table/rented-equipment-table'
 import changeButton from '../button/change-button'
 import delButton from '../button/del-button'
+import chat from '../chat'
 export default {
   components: {
     'equipment-table': equipmentTable,
@@ -141,7 +149,8 @@ export default {
     'received-rent-application-table': receivedRentApplicationTable,
     'rented-equipment-table': rentedEquipmentTable,
     'change-button': changeButton,
-    'del-button': delButton
+    'del-button': delButton,
+    'chat-dialog': chat
   },
   props: {
     id: Number
@@ -168,7 +177,8 @@ export default {
         is_renter: false,
         groups: [],
         user_permissions: []
-      }
+      },
+      dialogVisible: false
     }
   },
   created: function () {
@@ -184,6 +194,10 @@ export default {
   methods: {
     enterEquipment: function (row) {
       this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
+    },
+    openDialog: function () {
+      this.dialogVisible = false
+      this.dialogVisible = true
     }
   }
 }

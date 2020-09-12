@@ -107,7 +107,8 @@ export default {
           this.equipmentList = response.data.rented_equipments
           this.data = response.data
         }).catch((error) => {
-          alert('error:' + error)
+          // alert('error:' + error)
+          console.log(error)
         })
     }
   }

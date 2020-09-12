@@ -110,7 +110,8 @@ export default {
           this.rentApplicationList = response.data.received_rent_applications
           this.data = response.data
         }).catch((error) => {
-          alert('error:' + error)
+          // alert('error:' + error)
+          console.log(error)
         })
     }
   }

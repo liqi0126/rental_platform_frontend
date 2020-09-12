@@ -136,7 +136,7 @@ export default {
             this.equipmentList = response.data.results
           }).catch((error) => {
             console.log(error.response)
-            alert('error:' + error)
+            // alert('error:' + error)
           })
       }
     }

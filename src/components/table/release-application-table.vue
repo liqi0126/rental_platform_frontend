@@ -134,7 +134,8 @@ export default {
             this.rentApplicationList = response.data.results
             this.data = response.data
           }).catch((error) => {
-            alert('error:' + error)
+            // alert('error:' + error)
+            console.log(error)
           })
       } else {
         Axios.get('/api/v1/release-application/', {
@@ -150,7 +151,8 @@ export default {
             this.data = response.data
           }).catch((error) => {
             console.log(error.response)
-            alert('error:' + error)
+            // alert('error:' + error)
+            console.log(error)
           })
       }
     }

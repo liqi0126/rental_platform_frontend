@@ -118,7 +118,7 @@ export default {
         })
         .catch((error) => {
           console.log(error.response)
-          alert('error:' + error)
+          // alert('error:' + error)
         })
     }
   }
