@@ -54,7 +54,8 @@
                     style="width:80%;"></el-input>
           <el-button type="primary"
                      style="margin-left:20px;"
-                     @click="enterBorrower(row)">查看租借者</el-button>
+                     @click="enterBorrower(row)"
+                     v-if="borrower!==0">查看租借者</el-button>
         </el-form-item>
         <el-form-item label='租期'>
           <el-input v-model="my_data.lease_term_begin"
@@ -220,8 +221,9 @@ export default {
       }
     })
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         this.my_data = response.data
+        console.log(this.my_data)
         this.rentApplicationList = this.my_data.rent_applications
         this.getRentApp()
         this.getCommentsList()
@@ -234,7 +236,7 @@ export default {
   },
   methods: {
     handleChange (val) {
-      console.log(val)
+      // console.log(val)
     },
     enterUser: function () {
       this.$router.push({ name: 'user', params: { userId: this.my_data.owner } })
@@ -246,7 +248,9 @@ export default {
       this.$router.push({ name: 'create-rent-application', params: { equipmentId: this.id } })
     },
     enterBorrower: function () {
-      this.$router.push({ name: 'user', params: { userId: this.my_data.owner } })
+      if (this.borrower !== 0) {
+        this.$router.push({ name: 'user', params: { userId: this.borrower } })
+      }
     },
     getCommentsList () {
       for (const item of this.rentApplicationList) {
@@ -276,7 +280,7 @@ export default {
         })
         .catch((error) => {
           this.$alert(error.response.data)
-          console.log(error.response)
+          // console.log(error.response)
         })
     }
   }

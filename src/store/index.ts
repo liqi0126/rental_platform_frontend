@@ -10,7 +10,6 @@ export default new Vuex.Store({
     userKey: null, // 用户key
     isAdmin: false,
     user: {
-      id: 3
     }
     // hasLogin: false, // 登录状态
     // showLogin: false, // 显示/隐藏 登录/注册框
@@ -31,7 +30,7 @@ export default new Vuex.Store({
     resetState (state) {
       state.userKey = null // 用户key
       state.isAdmin = false
-      state.user = { id: 3 }
+      state.user = {}
       localStorage.user = JSON.stringify({})
       localStorage.isAdmin = false
       localStorage.userKey = null

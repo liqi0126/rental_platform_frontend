@@ -82,8 +82,8 @@ export default {
             this.logout()
           } else {
             this.$store.commit('setCurrentUser', { user: response.data, isAdmin: true })
-            location.reload()
             this.$router.push('/index')
+            location.reload()
           }
         })
         .catch((error) => {
@@ -123,7 +123,20 @@ export default {
   },
   created () {
     if (this.$store.getters.getUserKey !== 'null') {
-      this.$router.push('/index')
+      Axios({
+        url: 'api/v1/rest-auth/user',
+        method: 'get',
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
+        .then((response) => {
+          this.$router.push('/index')
+        })
+        .catch((error) => {
+          this.$store.commit('resetState')
+          console.log(error.response)
+        })
     }
   }
 }

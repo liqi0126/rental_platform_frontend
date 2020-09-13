@@ -109,6 +109,10 @@ export default {
         .then((response) => {
           this.$router.push('/index')
         })
+        .catch((error) => {
+          this.$store.commit('resetState')
+          console.log(error.response)
+        })
     }
   }
 

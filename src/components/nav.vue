@@ -128,21 +128,25 @@ export default {
       this.$router.go(path)
     },
     logout () {
-      console.log('logout')
-      console.log(this.$store.getters.getUserKey)
+      // console.log('logout')
+      // console.log(this.$store.getters.getUserKey)
       Axios({
         url: '/api/v1/rest-auth/logout/',
-        method: 'post'
+        method: 'post',
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
       })
         .then(() => {
           this.$store.commit('resetState')
-          location.reload()
           this.$router.push('/login')
+          location.reload()
+          // console.log(this.$store.getters.getUserKey)
         })
         .catch((error) => {
           // this.$alert(error.response.statusText, '登出失败！')
           this.$store.commit('resetState')
-          location.reload()
+          // location.reload()
           this.$router.push('/login')
           console.log(error.request)
           this.$alert(error.response.data)
