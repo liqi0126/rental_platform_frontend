@@ -16,7 +16,7 @@ export default {
     change: function () {
       const newData = {}
       for (const key in this.data) {
-        if (this.data[key]) {
+        if (this.data[key] !== '') {
           newData[key] = this.data[key]
         }
       }
@@ -34,6 +34,7 @@ export default {
         .catch((error) => {
           console.log(error.response)
           console.log(error.request.response)
+          this.$alert(error.response.data)
         })
     }
   }

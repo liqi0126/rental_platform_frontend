@@ -134,7 +134,7 @@ export default {
         this.data = response.data
       })
       .catch((error) => {
-        alert(error)
+        this.$alert(error.response.data)
       })
   },
   methods: {

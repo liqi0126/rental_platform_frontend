@@ -179,7 +179,7 @@ export default {
         console.log(this.isborrower)
       })
       .catch((error) => {
-        alert(error)
+        this.$alert(error.response.data)
       })
   },
   methods: {

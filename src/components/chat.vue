@@ -104,6 +104,7 @@ export default {
             })
             .catch((error) => {
               console.log(error.Response)
+              this.$alert(error.response.data)
               // alert(error.Response)
             })
         }
@@ -126,7 +127,8 @@ export default {
           this.scrollToBottom()
         })
         .catch((error) => {
-          this.$message('发送失败')
+          // this.$message('发送失败')
+          this.$alert(error.response.data)
           console.log(error.Response)
           console.log(error)
         })

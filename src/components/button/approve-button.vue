@@ -35,7 +35,7 @@ export default {
         })
         .catch((error) => {
           console.log(error.response)
-          alert('ERROR:' + error)
+          this.$alert(error.response.data)
         })
     }
   }

@@ -142,7 +142,7 @@ export default {
             this.rentApplicationList = response.data.results
             this.data = response.data
           }).catch((error) => {
-            alert('error:' + error)
+            this.$alert(error.response.data)
           })
       } else {
         Axios.get('/api/v1/rent-application/', {
@@ -159,6 +159,7 @@ export default {
           }).catch((error) => {
             console.log(error.response)
             // alert('error:' + error)
+            this.$alert(error.response.data)
             console.log(error)
           })
       }

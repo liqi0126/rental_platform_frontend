@@ -70,7 +70,7 @@ export default {
           this.$message('申请成功，请等待管理员审批。')
         })
         .catch((error) => {
-          alert(error)
+          this.$alert(error.response.data)
           console.log(error.response)
         })
     }

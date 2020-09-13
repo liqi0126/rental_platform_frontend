@@ -126,6 +126,7 @@ export default {
           this.filterEquipment()
         }).catch((error) => {
           console.log(error)
+          this.$alert(error.response.data)
           // alert('error:' + error)
         })
     },

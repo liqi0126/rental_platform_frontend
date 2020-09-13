@@ -114,6 +114,7 @@ export default {
           this.data = response.data
         }).catch((error) => {
           // alert('error:' + error)
+          this.$alert(error.response.data)
           console.log(error)
         })
     }

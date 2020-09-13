@@ -138,6 +138,7 @@ export default {
             this.data = response.data
           }).catch((error) => {
             // alert('error:' + error)
+            this.$alert(error.response.data)
             console.log(error)
           })
       } else {
@@ -158,6 +159,7 @@ export default {
           }).catch((error) => {
             console.log(error.response)
             // alert('error:' + error)
+            this.$alert(error.response.data)
             console.log(error)
           })
       }

@@ -101,6 +101,11 @@ const routes: Array<RouteConfig> = [
     path: '/release-application-list',
     name: 'release-application-list',
     component: () => import('../views/release-application-list.vue')
+  },
+  {
+    path: '/registration-succeed',
+    name: 'registration-succeed',
+    component: () => import('../views/registration-succeed.vue')
   }
 ]
 
@@ -111,3 +116,9 @@ const router = new VueRouter({
 })
 
 export default router
+
+// // 解决跳转同一地址的时候报错的问题
+// const originalPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch(err => err)
+// }

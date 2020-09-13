@@ -145,6 +145,7 @@ export default {
           location.reload()
           this.$router.push('/login')
           console.log(error.request)
+          this.$alert(error.response.data)
         })
     },
     search () {

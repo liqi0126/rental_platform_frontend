@@ -123,7 +123,7 @@ export default {
             this.data = response.data
             this.equipmentList = response.data.results
           }).catch((error) => {
-            alert('error:' + error)
+            this.$alert(error.response.data)
           })
       } else {
         Axios.get('/api/v1/equipment', {
@@ -139,7 +139,7 @@ export default {
             this.equipmentList = response.data.results
           }).catch((error) => {
             console.log(error.response)
-            alert('error:' + error)
+            this.$alert(error.response.data)
           })
       }
     }

@@ -229,7 +229,7 @@ export default {
         this.isBorrower = (this.my_data.borrower === this.$store.getters.getCurrentUser.id)
       })
       .catch((error) => {
-        alert(error)
+        this.$alert(error.response.data)
       })
   },
   methods: {
@@ -275,7 +275,7 @@ export default {
           this.$message('下架成功')
         })
         .catch((error) => {
-          alert('ERROR:' + error)
+          this.$alert(error.response.data)
           console.log(error.response)
         })
     }

@@ -102,7 +102,8 @@
       </el-form>
       <change-button :id="id"
                      :data="data"
-                     target="user"></change-button>
+                     target="user"
+                     v-if="isAdmin||isOwner"></change-button>
       <del-button :id="id"
                   target="user"
                   v-if="isAdmin"></del-button>
@@ -192,7 +193,7 @@ export default {
         this.data = response.data
       })
       .catch((error) => {
-        alert(error)
+        this.$alert(error.response.data)
       })
   },
   methods: {

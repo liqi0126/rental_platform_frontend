@@ -5,8 +5,8 @@
       <div style="float:left;margin-right:10%;margin-left:27%;">
         <div style="text-align:center;">
           <el-progress type="circle"
-                      :percentage="utilizationRate"
-                      :width=126></el-progress>
+                       :percentage="utilizationRate"
+                       :width=126></el-progress>
           <h3>
             设备利用率
           </h3>
@@ -15,9 +15,9 @@
       <div style="float:left;margin-right:25%;margin-left:10%;">
         <div style="text-align:center;">
           <el-progress type="circle"
-                      :percentage="approvedRate"
-                      :width=126
-                      color="#F18E24"></el-progress>
+                       :percentage="approvedRate"
+                       :width=126
+                       color="#F18E24"></el-progress>
           <h3>
             申请通过率
           </h3>
@@ -45,8 +45,7 @@
       </div>
       <div style="margin-left:80px;margin-top:50px;">
         <h3>
-          租赁者数量: <el-tag
-                  style="float:right;margin-right:150px;font-size:20px;">{{users_renter_num}}</el-tag>
+          租赁者数量: <el-tag style="float:right;margin-right:150px;font-size:20px;">{{users_renter_num}}</el-tag>
         </h3>
       </div>
       <div style="margin-left:80px;margin-top:50px;">
@@ -133,8 +132,7 @@
       </div>
       <div style="margin-left:80px;margin-top:50px;">
         <h3>
-          租赁设备申请数量: <el-tag
-                  style="float:right;margin-right:150px;font-size:20px;">{{appli_rent_num}}</el-tag>
+          租赁设备申请数量: <el-tag style="float:right;margin-right:150px;font-size:20px;">{{appli_rent_num}}</el-tag>
         </h3>
       </div>
       <div style="margin-left:80px;margin-top:50px;">
@@ -237,6 +235,7 @@ export default {
         .catch((error) => {
           console.log(error.status)
           console.log(error.response)
+          this.$alert(error.response.data)
         })
       // renter_application
       Axios({
@@ -252,6 +251,7 @@ export default {
         .catch((error) => {
           console.log(error.status)
           console.log(error.response)
+          this.$alert(error.response.data)
         })
       // rent_application
       Axios({
@@ -267,6 +267,7 @@ export default {
         .catch((error) => {
           console.log(error.status)
           console.log(error.response)
+          this.$alert(error.response.data)
         })
     },
     getUsers () {
@@ -282,6 +283,7 @@ export default {
         .catch((error) => {
           console.log(error.status)
           console.log(error.response)
+          this.$alert(error.response.data)
         })
     },
     getEquipments () {
@@ -302,6 +304,7 @@ export default {
         .catch((error) => {
           console.log(error.status)
           console.log(error.response)
+          this.$alert(error.response.data)
         })
     },
     analysisUsers () {

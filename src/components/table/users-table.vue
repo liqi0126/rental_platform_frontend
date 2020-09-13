@@ -118,6 +118,7 @@ export default {
         })
         .catch((error) => {
           console.log(error.response)
+          this.$alert(error.response.data)
           // alert('error:' + error)
         })
     }
