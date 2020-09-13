@@ -1,7 +1,7 @@
 <template>
   <div>
-      <renter-application-table :id="-1"
-                              height="700"
+    <renter-application-table :id="-1"
+                              :height=700
                               :pageSize="10"
                               class="table"></renter-application-table>
   </div>
@@ -13,7 +13,7 @@
   margin-bottom: 200px;
 }
 .eltabs {
-  max-width: 50%
+  max-width: 50%;
 }
 </style>
 

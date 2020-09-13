@@ -1,8 +1,8 @@
 <template>
   <div>
-      <release-application-table :id="-1"
+    <release-application-table :id="-1"
                                class="table"
-                               height="700"
+                               :height=700
                                :pageSize="10"></release-application-table>
   </div>
 </template>
@@ -13,7 +13,7 @@
   margin-bottom: 200px;
 }
 .eltabs {
-  max-width: 50%
+  max-width: 50%;
 }
 </style>
 

@@ -1,11 +1,11 @@
 <template>
   <div>
     <equipment-table class="table"
-                     height="700"
+                     :height=700
                      :pageSize="10"
                      v-if="this.$store.getters.isAdmin"></equipment-table>
     <normal-equipment-table class="table"
-                            height="700"
+                            :height=700
                             :pageSize="10"
                             v-if="!this.$store.getters.isAdmin"></normal-equipment-table>
   </div>

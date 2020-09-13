@@ -122,6 +122,10 @@ export default {
       this.changePage(1)
     },
     changePage: function (page) {
+      if (this.$store.getters.getUserKey === 'null') {
+        return
+      }
+
       if (this.id === -1) {
         Axios.get('api/v1/release-application', {
           params: {

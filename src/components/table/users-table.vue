@@ -110,6 +110,10 @@ export default {
       this.changePage(1)
     },
     changePage: function (page) {
+      if (this.$store.getters.getUserKey === 'null') {
+        return
+      }
+
       Axios.get('/api/v1/user', { params: { [this.select]: this.input, offset: (page - 1) * this.pageSize, limit: this.pageSize }, headers: { Authorization: 'Token ' + this.$store.getters.getUserKey } })
         .then((response) => {
           this.userList = response.data.results

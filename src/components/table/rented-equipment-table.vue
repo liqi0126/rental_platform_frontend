@@ -92,6 +92,7 @@ export default {
     this.changePage()
   },
   methods: {
+
     enterEquipment: function (row) {
       this.$router.push({ name: 'equipment', params: { equipmentId: row.id } })
     },
@@ -101,6 +102,10 @@ export default {
       this.changePage()
     },
     changePage: function () {
+      if (this.$store.getters.getUserKey === 'null') {
+        return
+      }
+
       Axios.get('/api/v1/user/' + this.userId + '/', {
         headers: {
           Authorization: 'Token ' + this.$store.getters.getUserKey

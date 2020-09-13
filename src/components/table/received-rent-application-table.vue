@@ -103,6 +103,10 @@ export default {
       this.changePage(1)
     },
     changePage: function () {
+      if (this.$store.getters.getUserKey === 'null') {
+        return
+      }
+
       Axios.get('/api/v1/user/' + this.userId + '/', {
         headers: {
           Authorization: 'Token ' + this.$store.getters.getUserKey

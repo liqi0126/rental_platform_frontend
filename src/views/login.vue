@@ -98,7 +98,8 @@ export default {
     }
   },
   created () {
-    if (this.$store.getters.getUserKey !== 'null') {
+    // eslint-disable-next-line eqeqeq
+    if (this.$store.getters.getUserKey != 'null') {
       Axios({
         url: 'api/v1/rest-auth/user',
         method: 'get',

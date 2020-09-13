@@ -108,6 +108,10 @@ export default {
       this.changePage(1)
     },
     changePage: function (page) {
+      if (this.$store.getters.getUserKey === 'null') {
+        return
+      }
+
       Axios.get('api/v1/equipment', {
         params: {
           [this.select]: this.input,

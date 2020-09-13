@@ -1,7 +1,7 @@
 <template>
   <div>
-      <user-table class="table"
-                height="700"
+    <user-table class="table"
+                :height=700
                 :pageSize="10"></user-table>
   </div>
 </template>
@@ -12,7 +12,7 @@
   margin-bottom: 200px;
 }
 .eltabs {
-  max-width: 50%
+  max-width: 50%;
 }
 </style>
 
