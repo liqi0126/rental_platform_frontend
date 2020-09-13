@@ -21,7 +21,11 @@ export default {
         }
       }
 
-      Axios.patch('/api/v1/' + this.target + '/' + this.id + '/', newData)
+      Axios.patch('/api/v1/' + this.target + '/' + this.id + '/', newData, {
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
         .then((response) => {
           location.reload()
           this.$message('修改成功')

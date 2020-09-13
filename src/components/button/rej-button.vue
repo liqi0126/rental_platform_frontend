@@ -15,7 +15,11 @@ export default {
   },
   methods: {
     rej: function () {
-      Axios.post('/api/v1/' + this.target + '/' + this.id + '/reject/', qs.stringify({ comments: this.comments }))
+      Axios.post('/api/v1/' + this.target + '/' + this.id + '/reject/', qs.stringify({ comments: this.comments }), {
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
         .then(() => {
           location.reload()
           this.$message('拒绝成功')

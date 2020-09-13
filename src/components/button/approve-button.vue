@@ -20,7 +20,10 @@ export default {
       Axios({
         url: '/api/v1/' + this.target + '/' + this.id + '/approve/',
         method: 'post',
-        data: qs.stringify(data)
+        data: qs.stringify(data),
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
       })
         .then((response) => {
           location.reload()

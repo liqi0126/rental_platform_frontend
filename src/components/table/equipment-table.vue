@@ -114,6 +114,9 @@ export default {
             [this.select]: this.input,
             offset: (page - 1) * this.pageSize,
             limit: this.pageSize
+          },
+          headers: {
+            Authorization: 'Token ' + this.$store.getters.getUserKey
           }
         })
           .then((response) => {

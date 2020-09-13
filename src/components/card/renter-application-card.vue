@@ -125,7 +125,11 @@ export default {
   },
   created: function () {
     if (this.id === -1) return
-    axios.get('/api/v1/renter-application/' + this.id, {})
+    axios.get('/api/v1/renter-application/' + this.id, {
+      headers: {
+        Authorization: 'Token ' + this.$store.getters.getUserKey
+      }
+    })
       .then((response) => {
         this.data = response.data
       })

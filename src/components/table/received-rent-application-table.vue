@@ -104,6 +104,9 @@ export default {
     },
     changePage: function () {
       Axios.get('/api/v1/user/' + this.userId + '/', {
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
       })
         .then((response) => {
           console.log(response)

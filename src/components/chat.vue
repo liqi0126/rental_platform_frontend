@@ -94,7 +94,7 @@ export default {
       setTimeout(() => {
         if (this.dialogVisible === true) {
           // eslint-disable-next-line @typescript-eslint/camelcase
-          Axios.get('/api/v1/message/chats/', { params: { id_one: this.myId, id_two: this.opposite } })
+          Axios.get('/api/v1/message/chats/', { params: { id_one: this.myId, id_two: this.opposite }, headers: { Authorization: this.$store.getters.getUserKey } })
             .then((Response) => {
               this.message = Response.data
               if (this.lastMessageSize !== this.message.length) {
@@ -119,7 +119,7 @@ export default {
         this.$message('消息不能为空')
         return
       }
-      Axios.post('/api/v1/message/', { sender: this.myId, receiver: this.opposite, text: this.input })
+      Axios.post('/api/v1/message/', { sender: this.myId, receiver: this.opposite, text: this.input }, { headers: { Authorization: 'Token ' + this.$store.getters.getUserKey } })
         .then((Response) => {
           this.message.push(Response.data)
           this.input = ''

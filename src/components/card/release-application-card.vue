@@ -136,7 +136,11 @@ export default {
     }
   },
   created: function () {
-    axios.get('/api/v1/release-application/' + this.id)
+    axios.get('/api/v1/release-application/' + this.id, {
+      headers: {
+        Authorization: 'Token ' + this.$store.getters.getUserKey
+      }
+    })
       .then((response) => {
         this.data = response.data
       })

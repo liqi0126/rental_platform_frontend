@@ -13,7 +13,11 @@ export default {
   },
   methods: {
     del: function () {
-      Axios.delete('/api/v1/' + this.target + '/' + this.id)
+      Axios.delete('/api/v1/' + this.target + '/' + this.id, {
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
         .then(() => {
           this.$router.push({ name: 'index' })
           this.$message('删除成功')

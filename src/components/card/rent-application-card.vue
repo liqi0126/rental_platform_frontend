@@ -167,7 +167,11 @@ export default {
     }
   },
   created: function () {
-    axios.get('/api/v1/rent-application/' + this.id, {})
+    axios.get('/api/v1/rent-application/' + this.id, {
+      headers: {
+        Authorization: 'Token ' + this.$store.getters.getUserKey
+      }
+    })
       .then((response) => {
         this.rent_data = response.data
         this.isrenter = this.rent_data.renter === this.$store.getters.getCurrentUser.id

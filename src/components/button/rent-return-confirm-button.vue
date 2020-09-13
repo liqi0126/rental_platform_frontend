@@ -14,7 +14,11 @@ export default {
   },
   methods: {
     confirm: function () {
-      Axios.post('/api/v1/rent-application/' + this.id + '/return/confirm/', qs.stringify({ comments: this.comments }))
+      Axios.post('/api/v1/rent-application/' + this.id + '/return/confirm/', qs.stringify({ comments: this.comments }), {
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
         .then(() => {
           location.reload()
           this.$message('归还确认成功')

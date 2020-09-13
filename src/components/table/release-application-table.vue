@@ -128,6 +128,9 @@ export default {
             [this.select]: this.input,
             offset: (page - 1) * this.pageSize,
             limit: this.pageSize
+          },
+          headers: {
+            Authorization: 'Token ' + this.$store.getters.getUserKey
           }
         })
           .then((response) => {
@@ -144,6 +147,9 @@ export default {
             offset: (page - 1) * this.pageSize,
             limit: this.pageSize,
             owner: this.id
+          },
+          headers: {
+            Authorization: this.$store.getters.getUserKey
           }
         })
           .then((response) => {

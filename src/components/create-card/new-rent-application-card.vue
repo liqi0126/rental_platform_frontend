@@ -75,7 +75,11 @@ export default {
       this.data.lease_term_end = this.date[1]
       console.log(this.date)
       console.log(this.data)
-      axios.post('/api/v1/rent-application/', qs.stringify(this.data))
+      axios.post('/api/v1/rent-application/', qs.stringify(this.data), {
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
         .then((response) => {
           this.$router.push({ name: 'index' })
           console.log(response)

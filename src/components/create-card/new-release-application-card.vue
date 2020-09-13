@@ -58,7 +58,11 @@ export default {
   },
   methods: {
     createReleaseApplication: function () {
-      axios.post('/api/v1/release-application/', qs.stringify(this.data))
+      axios.post('/api/v1/release-application/', qs.stringify(this.data), {
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
         .then((response) => {
           this.$router.push({ name: 'index' })
           console.log(response)

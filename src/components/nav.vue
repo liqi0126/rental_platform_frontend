@@ -132,10 +132,7 @@ export default {
       console.log(this.$store.getters.getUserKey)
       Axios({
         url: '/api/v1/rest-auth/logout/',
-        method: 'post',
-        headers: {
-          Authorization: 'Token ' + this.$store.getters.getUserKey
-        }
+        method: 'post'
       })
         .then(() => {
           this.$store.commit('resetState')

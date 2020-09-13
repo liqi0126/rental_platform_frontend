@@ -78,7 +78,11 @@ export default {
     },
     createEquipment: function () {
       console.log(this.$store.getters.getCurrentUser.id)
-      axios.post('/api/v1/equipment/', this.data)
+      axios.post('/api/v1/equipment/', this.data, {
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
         .then((response) => {
           this.$router.push({ name: 'index' })
           console.log(response)

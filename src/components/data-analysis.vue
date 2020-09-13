@@ -223,7 +223,10 @@ export default {
       // release_application
       Axios({
         url: 'api/v1/release-application',
-        method: 'get'
+        method: 'get',
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
       })
         .then((response) => {
           this.appli_release = response.data.results

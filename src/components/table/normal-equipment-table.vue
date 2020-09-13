@@ -115,6 +115,9 @@ export default {
           limit: this.pageSize,
           // eslint-disable-next-line @typescript-eslint/camelcase
           is_released: true
+        },
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
         }
       })
         .then((response) => {

@@ -61,7 +61,7 @@ export default {
         // data: 'applicant=3&description=123',
         data: qs.stringify(this.data),
         headers: {
-          // 'Content-Type': 'application/x-www-form-urlencoded'
+          Authorization: 'Token ' + this.$store.getters.getUserKey
         }
       })
         .then((response) => {
