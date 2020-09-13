@@ -99,7 +99,16 @@ export default {
   },
   created () {
     if (this.$store.getters.getUserKey !== 'null') {
-      this.$router.push('/index')
+      Axios({
+        url: 'api/v1/rest-auth/user',
+        method: 'get',
+        headers: {
+          Authorization: 'Token ' + this.$store.getters.getUserKey
+        }
+      })
+        .then((response) => {
+          this.$router.push('/index')
+        })
     }
   }
 
