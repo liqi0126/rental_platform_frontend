@@ -90,7 +90,7 @@ export default {
         })
         .catch((error) => {
           console.log(error.response)
-          alert(error)
+          alert(error.response.data[0])
         })
     }
   }

@@ -53,11 +53,11 @@
       <rej-button :id="id"
                   target="renter-application"
                   :comments="data.comments"
-                  v-if="data.status==='UNA'||data.status==='ACC'"></rej-button>
+                  v-if="(data.status==='UNA'||data.status==='ACC')&&isAdmin"></rej-button>
       <approve-button :id="id"
                       :comments="data.comments"
                       target="renter-application"
-                      v-if="data.status==='UNA'||data.status==='REJ'"></approve-button>
+                      v-if="(data.status==='UNA'||data.status==='REJ')&&isAdmin"></approve-button>
       <del-button :id="id"
                   target="renter-application"></del-button>
     </el-card>
